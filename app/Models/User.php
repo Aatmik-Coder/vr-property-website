@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'first_name', 'last_name', 'email', 'nick_name', 'business_name', 'password', 'is_active'
     ];
 
     /**
@@ -32,6 +30,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function getNameAttribute()
+    {
+        $name = $this->first_name;
+        if($this->last_name) {
+            $name .= ' '.$this->last_name;
+        }
+        return $name;
+    }
 
     /**
      * The attributes that should be cast.

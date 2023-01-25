@@ -11,6 +11,14 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function dashboard(Request $request)
+    {
+        return view('front.dashboard', [
+            'title' => "Dashboard",
+            'user' => $request->user(),
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */
