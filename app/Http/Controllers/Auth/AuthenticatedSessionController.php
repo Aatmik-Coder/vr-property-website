@@ -17,7 +17,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        $title = "Sign In";
+        return view('front.auth.login',compact('title'));
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('web');
     }
 
     /**
@@ -26,6 +32,15 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+        $user = auth('web')->user();
+        if(!$user->is_active)
+        {
+            $this->guard()->logout();
+            return redirect()->back()->withInput($request->only('email', 'remember'))
+                ->withErrors([
+                    'email' => 'Your account is inactive. Please contact your administrator to get access!',
+                ]);
+        }
 
         $request->session()->regenerate();
 
@@ -37,12 +52,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        $this->guard()->logout();
 
-        $request->session()->invalidate();
-
+        foreach (array_keys($request->session()->all()) as $key) {
+            //If the key is found in your string, set $found to true
+            if (strpos($key, 'login_web_') !== false) {
+                $request->session($key)->forget();
+                break;
+            }
+        }
         $request->session()->regenerateToken();
-
-        return redirect('/');
+        return redirect()->back()->with(['alert-class' => 'success', 'message' => "You have signed out of your account."]);
     }
 }
