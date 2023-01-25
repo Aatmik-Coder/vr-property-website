@@ -3,21 +3,8 @@
 @section('content')
 <div class="page login-page">
     <div class="container d-flex align-items-center">
-        <div class="form-holder has-shadow">
+        <div class="form-holder">
             <div class="row">
-                <!-- Logo & Information Panel-->
-                <div class="col-lg-6">
-                    <div class="info d-flex align-items-center">
-                        <div class="content text-center logo-content">
-                            <div class="logo">
-                                <div class="logo-inner">
-                                    <img src="{{ asset('assets/common/images/logo.png') }}" class="logo-img">
-                                </div>
-                                <h1>Forgot Password</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- Form Panel    -->
                 <div class="col-lg-6 bg-white">
                     <div class="form d-flex align-items-center">
@@ -27,13 +14,16 @@
                                 {{ session('status') }}
                             </div>
                             @endif
-                            <form id="passwordFrm" name="passwordFrm" method="POST" action="{{ route('admin.password.email') }}">
+                            <h1 class="mb-5">Forgot Password</h1>
+                            <form id="passwordFrm" name="passwordFrm" method="POST"
+                                action="{{ route('admin.password.email') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <input id="email" type="email"
-                                    class="input-material @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" autocomplete="email" data-msg="Please enter email address" autofocus>
                                     <label for="email" class="label-material">{{ __('E-Mail Address') }}</label>
+                                    <input id="email" type="email"
+                                        class="input-material @error('email') is-invalid @enderror" name="email"
+                                        value="{{ old('email') }}" autocomplete="email"
+                                        data-msg="Please enter email address" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,17 +31,31 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-gradient">
                                         {{ __('Send Password Reset Link') }}
                                     </button>
 
-                                    <button type="button" class="btn btn-primary" onclick="location.href='{{ route('admin.login') }}';">
+                                    <button type="button" class="btn btn-dark"
+                                        onclick="location.href='{{ route('admin.login') }}';">
                                         {{ __('Back To Login') }}
                                     </button>
                                 </div>
                                 <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                             </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content text-center logo-content">
+                            <div class="logo">
+                                <div class="logo-inner">
+                                    <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="logo-img">
+                                </div>
+                                <h1>Forgot Password</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
