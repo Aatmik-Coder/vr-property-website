@@ -1,89 +1,20 @@
 /*=========================
-     CUSTOM FONTS
+     GOOGLE FONTS
 =========================*/
-@font-face {
-  font-family: 'Metropolis-Thin';
-  src: url('../../common/fonts/Metropolis-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-ExtraLight';
-  src: url('../../common/fonts/Metropolis-ExtraLight.otf') format('opentype');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-Light';
-  src: url('../../common/fonts/Metropolis-Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-Regular';
-  src: url('../../common/fonts/Metropolis-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-Medium';
-  src: url('../../common/fonts/Metropolis-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-SemiBold';
-  src: url('../../common/fonts/Metropolis-SemiBold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-Bold';
-  src: url('../../common/fonts/Metropolis-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-ExtraBold';
-  src: url('../../common/fonts/Metropolis-ExtraBold.otf') format('opentype');
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Metropolis-Black';
-  src: url('../../common/fonts/Metropolis-Black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 
 :root {
-  --theme-green: #108071;
+  --theme-color: #1d1d1b;
   --theme-yellow: #F6D657;
+  --gradient: linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
   --black: #000000;
   --white: #ffffff;
   --red: #f00;
-  --Font100: 'Metropolis-Thin';
-  --Font200: 'Metropolis-ExtraLight';
-  --Font300: 'Metropolis-Light';
-  --Font400: 'Metropolis-Regular';
-  --Font500: 'Metropolis-Medium';
-  --Font600: 'Metropolis-SemiBold';
-  --Font700: 'Metropolis-Bold';
-  --Font800: 'Metropolis-ExtraBold';
-  --Font900: 'Metropolis-Black';
 }
 
 body {
-  font-family: var(--Font500);
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -674,10 +605,57 @@ nav.side-navbar.shrinked .sidebar-header .title {
   width: 100%;
 }
 
+.navbar-header {
+  background-color: #3c3c3b;
+  padding: 20px 15px;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .logo-img {
-  width: 5em;
+  width: 10em;
   margin-right: 0.3em;
 }
+
+.navbar-header .user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+nav.navbar .menu-btn img {
+  width: 26px;
+  height: 25px;
+  -webkit-transition: all 0.3s cubic-bezier(0.81, -0.33, 0.345, 1.375);
+  transition: all 0.3s cubic-bezier(0.81, -0.33, 0.345, 1.375);
+}
+
+nav.navbar .menu-btn.active img {
+  transform: rotateY(180deg);
+}
+
+nav.navbar .header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+nav.navbar .header-right .btn.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+nav.navbar .header-right .btn-group .btn-right {
+  transform: rotateY(180deg);
+}
+
 
 /* SIDEBAR MEDIAQUERIES ----------------------------------- */
 @media (max-width: 1199px) {
@@ -767,9 +745,9 @@ nav.side-navbar.shrinked .sidebar-header .title {
 * ==========================================================
 */
 nav.navbar {
-  background-image: linear-gradient(to right, var(--theme-green), var(--theme-yellow));
-  padding-top: 5px;
-  padding-bottom: 5px;
+  background-color: #1c1c1a;
+  padding-top: 0;
+  padding-bottom: 0;
   color: #fff;
   position: relative;
   border-radius: 0;
@@ -806,7 +784,7 @@ nav.navbar .container-fluid {
 }
 
 nav.navbar .menu-btn {
-  margin-right: 20px;
+  /* margin-right: 20px; */
   font-size: 1.2em;
   -webkit-transition: all 0.7s;
   transition: all 0.7s;
@@ -1884,8 +1862,8 @@ select.form-control option {
 button,
 input[type='submit'] {
   cursor: pointer;
-  font-family: inherit;
-  font-weight: 300 !important;
+  /* font-family: inherit;
+  font-weight: 300 !important; */
 }
 
 .input-group .dropdown-toggle {
@@ -1977,9 +1955,10 @@ input[type='submit'] {
 
 input.input-material {
   width: 100%;
-  border: none;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
+  border: 1px solid var(--theme-color);
+  padding: 10px;
+  margin: 0;
+  border-radius: 5px;
 }
 
 input.input-material.is-invalid {
@@ -1987,17 +1966,17 @@ input.input-material.is-invalid {
 }
 
 input.input-material:focus {
-  border-color: var(--theme-green);
+  border-color: var(--theme-color);
 }
 
 input.input-material~label {
-  color: #aaa;
-  position: absolute;
-  top: 14px;
-  left: 0;
-  cursor: text;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  color: var(--theme-color);
+  position: relative;
+  /* top: 14px; */
+  /* left: 0; */
+  /* cursor: text; */
+  /* -webkit-transition: all 0.2s; */
+  /* transition: all 0.2s; */
   font-weight: 300;
 }
 
@@ -2050,6 +2029,7 @@ input.input-material.is-invalid~label {
 */
 .login-page {
   position: relative;
+  background-color: #FFF;
 }
 
 .login-page::before {
@@ -2066,6 +2046,7 @@ input.input-material.is-invalid~label {
   position: absolute;
   top: 0;
   right: 0;
+  display: none;
 }
 
 .login-page .container {
@@ -2079,7 +2060,7 @@ input.input-material.is-invalid~label {
   width: 100%;
   border-radius: 5px;
   overflow: hidden;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 
 .login-page .form-holder .info,
@@ -2090,21 +2071,17 @@ input.input-material.is-invalid~label {
 }
 
 .login-page .form-holder div[class*='col-'] {
-  padding: 0;
+  /* padding: 0; */
 }
 
 .login-page .form-holder .info {
-  /* background: rgba(0, 152, 110, 0.9); */
-  /* background-image: linear-gradient(to right, rgb(2, 214, 202) , rgb(0, 133, 219)); */
-  background: var(--theme-green);
-  color: var(--theme-yellow);
-  text-transform: uppercase;
+  color: var(--theme-color);
+  /* text-transform: uppercase; */
 }
 
 .login-page .form-holder .info h1 {
-  font-size: 2.5em;
-  /* font-weight: 600; */
-  font-family: var(--Font600);
+  font-size: 2em;
+  font-weight: 600;
 }
 
 .login-page .form-holder .info p {
@@ -2114,15 +2091,31 @@ input.input-material.is-invalid~label {
 .login-page .form-holder .form .form-group {
   position: relative;
   margin-bottom: 30px;
+  text-align: left;
 }
+
+.login-page .form-holder .form .btn {
+  padding: 10px 20px;
+}
+
+.login-page .form-holder .form .btn-gradient {
+  min-width: 160px;
+}
+
 
 .login-page .form-holder .form .content {
   width: 100%;
+  text-align: center;
+  border: 1px solid var(--theme-color);
+  border-radius: 5px;
+  padding: 50px 10px;
 }
 
 .login-page .form-holder .form form {
   width: 100%;
   max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .login-page .form-holder .form #login,
@@ -2158,7 +2151,7 @@ input.input-material.is-invalid~label {
   position: absolute;
   bottom: 0;
   left: 0;
-  color: #fff;
+  color: var(--theme-color);
 }
 
 @media (max-width: 991px) {
@@ -2317,8 +2310,9 @@ STYLE SWITCHER FOR DEMO
 /*
  * 2. BUTTONS
  */
+
+
 .btn {
-  font-family: 'Metropolis-Medium';
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -2347,21 +2341,32 @@ STYLE SWITCHER FOR DEMO
   background-image: none;
 }
 
+.btn-gradient {
+  background: var(--gradient);
+  border-color: var(--theme-color);
+  color: #fff;
+}
+
+.btn-gradient:hover {
+  color: #fff;
+}
+
 .btn-primary {
-  background-color: var(--theme-green);
-  border-color: var(--theme-green);
+  background-color: var(--theme-color);
+  border-color: var(--theme-color);
 }
 
 .btn-primary:hover {
-  background-color: var(--theme-yellow);
-  border-color: var(--theme-yellow);
-  color: #000;
+  color: var(--white);
+  background-color: #000;
+  border-color: #000;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
-  background-color: var(--theme-green);
-  border-color: var(--theme-green);
+  color: var(--white);
+  background-color: #000;
+  border-color: #000;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -2369,16 +2374,16 @@ STYLE SWITCHER FOR DEMO
 .btn-primary.disabled,
 .btn-primary:disabled {
   color: var(--white);
-  background-color: var(--theme-green);
-  border-color: var(--theme-green);
+  background-color: var(--theme-color);
+  border-color: var(--theme-color);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
 .show>.btn-primary.dropdown-toggle {
-  background-color: var(--theme-yellow);
-  border-color: var(--theme-yellow);
-  color: #000;
+  background-color: var(--theme-color);
+  border-color: var(--theme-color);
+  color: #fff;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
@@ -2389,9 +2394,9 @@ STYLE SWITCHER FOR DEMO
 }
 
 .btn-secondary {
-  color: var(--black);
-  background-color: var(--theme-yellow);
-  border-color: var(--theme-yellow);
+  color: var(--white);
+  background-color: var(--theme-color);
+  border-color: var(--theme-color);
 }
 
 .btn-secondary:hover {
@@ -3999,10 +4004,12 @@ table .img-fluid {
 /* your styles go here */
 span.error {
   color: red;
+  font-size: 14px;
 }
 
 label.error {
   color: red;
+  font-size: 14px;
 }
 
 
