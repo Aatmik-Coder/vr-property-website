@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --theme-color: #1d1d1b;
+    --gradient: linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
+    --inputBorder: #1d1d1b;
+    --black: #000000;
+    --white: #FFFFFF;
+    --red: #F00000;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--theme-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+span.error {
+    color: red;
+    font-size: 12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus,
+a:focus,
+.form-control:focus,
+.btn:focus {
+    border-color: unset;
+    box-shadow: none !important;
+}
+
+a,
+a:hover {
+    color: var(--inputBorder);
+    text-decoration: none;
+}
+
+.form-control {
+    border-color: var(--inputBorder);
+    border-radius: 5px;
+    min-height: 46px;
+}
+
+.form-control.error {
+    border-color: red;
+}
+
+.container {
+    max-width: 1500px;
+}
+
+.btn-gredient {
+    border-color: var(--inputBorder);
+    background: var(--gradient);
+    color: var(--white);
+    border-radius: 5px;
+}
+
+.btn-outline-black {
+    color: var(--inputBorder);
+    border-color: var(--inputBorder);
+    border-radius: 5px;
+}
+
+.btn-outline-black:hover {
+    background-color: var(--inputBorder);
+    color: var(--white);
+}
+
+.btn-black {
+    color: var(--white);
+    border-color: var(--inputBorder);
+    background-color: var(--inputBorder);
+    border-radius: 5px;
+}
+
+.btn-black:hover {
+    color: var(--inputBorder);
+    background-color: transparent;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 10000;
+}
+
+/*---------------------------------------
+        START HEADER
+---------------------------------------*/
+.main-navbar {
+    background-color: var(--white);
+}
+
+.main-navbar .navbar-brand {
+    max-width: 250px;
+}
+
+.main-navbar .navbar-nav .nav-item {
+    margin-right: 10px;
+}
+
+.main-navbar .navbar-nav .nav-item:last-child {
+    margin-right: 0;
+}
+
+.main-navbar .navbar-nav .btn {
+    min-width: 200px;
+}
+
+/*---------------------------------------
+        END HEADER
+---------------------------------------*/
+
+/*--------------------------------------------
+    START LOGIN, SIGN-UP, FORGOT PASSWORD
+--------------------------------------------*/
+.login-sec {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 72px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-sec .form-view,
+.login-sec .logo-view {
+    max-width: 480px;
+    flex: 1;
+    margin: 0 50px;
+}
+
+.login-sec .form-view.singup {
+    max-width: 700px;
+    margin-left: 0;
+}
+
+.form-view {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #1d1d1b;
+    padding: 30px;
+}
+
+.login-form .form-title {
+    font-size: 24px;
+    line-height: 26px;
+    color: #1d1d1b;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.login-form .para {
+    text-align: center;
+    padding: 0 30px;
+    font-size: 15px;
+}
+
+.login-form .forgot-pass {
+    text-align: center;
+    text-decoration: underline;
+    display: block;
+}
+
+.login-sec .btn {
+    width: 200px;
+}
+
+.login-sec .form-check input[type=checkbox] {
+    width: 18px;
+    height: 18px;
+}
+
+.login-sec .form-check label {
+    padding-left: 12px;
+}
+
+.login-sec .form-check label a {
+    text-decoration: underline;
+}
+
+/*--------------------------------------------
+    END LOGIN, SIGN-UP, FORGOT PASSWORD
+--------------------------------------------*/
