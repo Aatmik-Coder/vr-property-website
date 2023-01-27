@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +48,9 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         //Reset Password Routes
         Route::get('/reset-password/{token}', 'NewPasswordController@create')->name('password.reset');
         Route::post('/reset-password', 'NewPasswordController@store')->name('password.update');
+
+        //Change Password Routes
+
     });
 
     Route::middleware('admin')->group(function () {
@@ -57,5 +59,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
 
         Route::get('/profile', 'ProfileController@edit')->name('profile.edit');
         Route::post('/profile', 'ProfileController@update')->name('profile.update');
+
+        Route::get('/change-password', 'Auth\PasswordController@edit')->name('password.edit');
+        Route::post('/change-password', 'Auth\PasswordController@update')->name('password.update');
     });
 });

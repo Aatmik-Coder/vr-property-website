@@ -54,46 +54,29 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="header-right">
-                            <div class="btn-group">
-                                <a href="#" class="btn btn-left">
-                                    <img src="{{ asset('assets/common/images/chevron-left.png') }}" class="btn-icon" />
-                                </a>
-                                <a href="#" class="btn btn-right disabled">
-                                    <img src="{{ asset('assets/common/images/chevron-left.png') }}" class="btn-icon" />
-                                </a>
-                            </div>
-                            <!-- Navbar Menu -->
-                            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                                <!-- Settings dropdown    -->
-                                <li class="nav-item dropdown"><a id="settings" rel="nofollow" data-target="#" href="#"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                        class="nav-link language dropdown-toggle"><i class="fa fa-cog"></i><span
-                                            class="d-none d-sm-inline-block"></span>Settings</a>
-                                    <ul aria-labelledby="settings" class="dropdown-menu">
-                                        <li>
-                                            <a rel="nofollow" href="{{ route('admin.profile.edit') }}"
-                                                class="dropdown-item"> <i class="fa fa-user"></i> Manage Profile</a>
-                                        </li>
-                                        <li>
-                                            <a rel="nofollow" href="{{ route('admin.password.request') }}"
-                                                class="dropdown-item"> <i class="fa fa-key"></i> Change Password</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!-- Logout    -->
-                                <li class="nav-item">
-                                    <!-- <a href="#" onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();" class="nav-link logout"> -->
-                                    <a href="#" onclick="logout()" class="nav-link logout">
-                                        <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a>
-                                </li>
-                                <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-                            </ul>
-                        </div>
-
+                        <!-- Navbar Menu -->
+                        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                            <!-- Settings dropdown    -->
+                            <li class="nav-item dropdown"><a id="settings" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><i class="fa fa-cog"></i><span class="d-none d-sm-inline-block"></span>Settings</a>
+                                <ul aria-labelledby="settings" class="dropdown-menu">
+                                    <li>
+                                        <a rel="nofollow" href="{{ route('admin.profile.edit') }}" class="dropdown-item"> <i class="fa fa-user"></i> Manage Profile</a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="{{ route('admin.password.edit') }}" class="dropdown-item"> <i class="fa fa-key"></i> Change Password</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Logout    -->
+                            <li class="nav-item">
+                                <!-- <a href="#" onclick="event.preventDefault(); document.getElementById('admin-logout-form').submit();" class="nav-link logout"> -->
+                                <a href="#" onclick="logout()" class="nav-link logout">
+                                <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a>
+                            </li>
+                            <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </ul>
                     </div>
                 </div>
             </nav>
