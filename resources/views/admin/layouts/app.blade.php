@@ -63,7 +63,7 @@
                                         <a rel="nofollow" href="{{ route('admin.profile.edit') }}" class="dropdown-item"> <i class="fa fa-user"></i> Manage Profile</a>
                                     </li>
                                     <li>
-                                        <a rel="nofollow" href="{{ route('admin.password.change') }}" class="dropdown-item"> <i class="fa fa-key"></i> Change Password</a>
+                                        <a rel="nofollow" href="{{ route('admin.password.edit') }}" class="dropdown-item"> <i class="fa fa-key"></i> Change Password</a>
                                     </li>
                                 </ul>
                             </li>

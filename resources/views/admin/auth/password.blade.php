@@ -9,7 +9,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form id="changeFrm" name="changeFrm" action="{{ route('admin.password.change') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        <form id="changeFrm" name="changeFrm" action="{{ route('admin.password.update') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label class="col-sm-3 form-control-label">Current Password</label>
@@ -49,8 +49,8 @@
                             <div class="line"> </div>
                             <div class="form-group row">
                                 <div class="col-sm-4 offset-sm-3">
-                                    <button type="button" class="btn btn-secondary" onclick="location.href='{{ route('admin.dashboard') }}';">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" onclick="location.href='{{ route('admin.dashboard') }}';">Cancel</button>
                                 </div>
                             </div>
                         </form>

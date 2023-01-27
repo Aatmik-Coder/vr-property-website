@@ -15,6 +15,7 @@ class PasswordController extends Controller
     /**
      * Update the user's password.
      */
+     /*
     public function update(Request $request): RedirectResponse
     {
         $validated = $request->validateWithBag('updatePassword', [
@@ -27,36 +28,30 @@ class PasswordController extends Controller
         ]);
 
         return back()->with('status', 'password-updated');
-    }
+    }*/
 
-    public function changePassword(Request $request)
+    public function edit(Request $request)
     {
         return view('admin.auth.password', ['title' => 'Change Password','request' => $request]);
     }
 
-    public function updatePassword(Request $request)
-    
+    public function update(Request $request)
     {
-        $input = $request->all();
-        // dd($input);
-        
         $request->validate([
             'current_password' => 'required',
             'password' => 'required|different:current_password|min:8',
             'password_confirmation' => 'required|same:password'
         ]);
-        
-
+        $admin = auth('admin')->user();
         // // Match The Old Password current_password
-        if(!Hash::check($request->current_password, auth('admin')->user()->password)){
-            return back()->with(['message'=>"Current Password does not match", 'alert-class' => 'error']);
+        if(!Hash::check($request->current_password, $admin->password)){
+            return redirect()->back()->withErrors([
+                'current_password' => 'Current Password does not match!',
+            ]);
         }
         //Update password
-    Admin::where('id', auth('admin')->user()->id)->update([
-        'password' => Hash::make($request->password),
-    ]);
-
-    return redirect()->back()->with(["message" => "Password changed successfully!", 'alert-class' => 'success']);
-
+        $admin->password = Hash::make($request->password);
+        $admin->save();
+        return redirect()->back()->with(["message" => "Password changed successfully!", 'alert-class' => 'success']);
     }
-    }
+}

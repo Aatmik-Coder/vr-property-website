@@ -51,8 +51,8 @@
                             <div class="line"> </div>
                             <div class="form-group row">
                                 <div class="col-sm-4 offset-sm-3">
-                                    <button type="button" class="btn btn-secondary" onclick="location.href='{{ URL('/admin') }}';">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" onclick="location.href='{{ URL('/admin') }}';">Cancel</button>
                                 </div>
                             </div>
                         </form>
@@ -63,6 +63,6 @@
     </div>
 </section>
 @section('js')
-{{-- <script src="{{ asset('assets/admin/js/auth.js') }}"></script> --}}
+<script src="{{ asset('assets/admin/js/auth.js') }}"></script>
 @stop
 @endsection
