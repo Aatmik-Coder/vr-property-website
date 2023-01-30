@@ -24,8 +24,7 @@
 </head>
 
 <body>
-    <div class="loader" style="display:none"><span class="loader-image"><i
-                class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
+    <div class="loader" style="display:none"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
     @if(auth('admin')->check())
     <div class="page">
         <!-- Main Navbar-->
@@ -46,10 +45,8 @@
                                 </div>
                             </a>
                             <div>
-                                <img src="{{ asset('assets/common/images/user.png') }}" class="user-img" />
-                                <!-- Toggle Button-->
+                                <img src="{{ auth('admin')->user()->avatar_url }}" class="user-img" />
                                 <a id="toggle-btn" href="#" class="menu-btn">
-                                    <!-- <span></span><span></span><span></span> -->
                                     <img src="{{ asset('assets/common/images/menu-icon.png') }}" class="menu-icon" />
                                 </a>
                             </div>
