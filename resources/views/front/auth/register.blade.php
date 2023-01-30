@@ -42,10 +42,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="nickname" class="form-label">{{ __('Add a nickname*') }}</label>
-                <input id="nickname" type="text" class="form-control @error('nickname') is-invalid @enderror" name="nickname"
-                value="{{ old('nickname') }}">
-                @error('nickname')
+                <label for="nick_name" class="form-label">{{ __('Add a nick_name*') }}</label>
+                <input id="nick_name" type="text" class="form-control @error('nick_name') is-invalid @enderror" name="nick_name"
+                value="{{ old('nick_name') }}">
+                @error('nick_name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
