@@ -56,7 +56,7 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         Route::get('/reset-password/{token}', 'NewPasswordController@create')->name('password.reset');
         Route::post('/reset-password', 'NewPasswordController@store')->name('password.update');
 
-        //Change Password Routes
+        
 
     });
 
@@ -70,4 +70,9 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         Route::get('/change-password', 'Auth\PasswordController@edit')->name('password.edit');
         Route::post('/change-password', 'Auth\PasswordController@update')->name('password.update');
     });
+
+    //Users Routes
+    Route::get('/user','UserController@index')->name('user.list');
+    Route::post('/user/ajax', 'UserController@ajax')->name('user.list.ajax');
+    Route::get('/user/view/{id}', 'UserController@view')->name('user.view');
 });

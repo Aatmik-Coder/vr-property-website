@@ -2,7 +2,7 @@
 @section('content')
 <div class="login-sec">
     <div class="form-view singup">
-        <form class="login-form" id="loginFrm" name="loginFrm" method="POST" action="{{ route('register') }}">
+        <form class="login-form" id="registerFrm" name="registerFrm" method="POST" action="{{ route('register') }}">
             <h3 class="form-title">Sign Up</h3>
             @csrf
             <div class="form-group">
