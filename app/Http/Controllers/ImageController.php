@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Image;
 
 class ImageController extends Controller
 {
@@ -10,7 +11,7 @@ class ImageController extends Controller
     {
         $images = Image::orderByDesc('id')->get();
         return view('front.image.list', [
-            'title' => "My Images",
+            'title' => "Manage Your Gallery",
             'user' => $request->user(),
             'images' => $images,
         ]);
@@ -39,7 +40,7 @@ class ImageController extends Controller
 
     public function edit($id)
     {
-        $image = Image::where(['id'=>$id, 'user_id' => $request->user()->id)])->first();
+        $image = Image::where(['id'=>$id, 'user_id' => $request->user()->id])->first();
         return view('front.image.add', [
             'title' => "Update an Image",
             'user' => $request->user(),

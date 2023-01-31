@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        $title = "Sign In";
+        $title = "Log In";
         return view('front.auth.login',compact('title'));
     }
 
