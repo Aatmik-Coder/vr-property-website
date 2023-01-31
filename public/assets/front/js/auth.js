@@ -46,22 +46,13 @@ $(document).ready(function () {
                 required: true,
                 minlength: 8,
                 equalTo: "#password"
-            }, 
-            exampleCheck1: {
+            },
+            agree: {
                 required: true,
             }
         },
         messages: {
-            password: {
-                required: "Please provide a password",
-                minlength: "Your password must be at least 8 characters long"
-            },
-            password_confirmation: {
-                required: "Please provide a confirm password",
-                minlength: "Your password must be at least 8 characters long",
-                equalTo: "Please enter the same password as above"
-                
-            },
+            email: "Please enter a valid email address",
             first_name: {
                 required: "Please provide a First name"
             },
@@ -71,11 +62,19 @@ $(document).ready(function () {
             nick_name: {
                 required: "Please provide a nickname"
             },
-            exampleCheck1: {
-                required: "Please check the checkbox to agree our terms & conditions.",
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 8 characters long"
             },
-            email: "Please enter a valid email address"
-           
+            password_confirmation: {
+                required: "Please provide a confirm password",
+                minlength: "Your password must be at least 8 characters long",
+                equalTo: "Please enter the same password as above"
+
+            },
+            agree: {
+                required: "Please check the checkbox to agree our terms & conditions.",
+            }
         }
     });
 

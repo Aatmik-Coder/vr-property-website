@@ -61,29 +61,23 @@
                 </span>
                 @enderror
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="password" class="form-label">{{ __('Create Password*') }}</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" data-msg="Please enter your password">
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="password-confirm" class="form-label">{{ __('Re-enter Password*') }}</label>
-                        <input id="password-confirm" name="password_confirmation" type="password" class="form-control @error('password') is-invalid @enderror" autocomplete="current-password-1" data-msg="Please enter your confirm password">
-                    </div>
-                </div>
+            <div class="form-group mt-3">
+                <label for="password" class="form-label">{{ __('Create Password*') }}</label>
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" data-msg="Please enter your password">
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="form-group mt-3">
+                <label for="password-confirm" class="form-label">{{ __('Re-enter Password*') }}</label>
+                <input id="password-confirm" name="password_confirmation" type="password" class="form-control @error('password') is-invalid @enderror" autocomplete="current-password-1" data-msg="Please enter your confirm password">
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label " for="exampleCheck1"> By clicking to create an account I have read and agree to the <a href="#">Terms & Conditions</a> and the <a href="#">Privacy Policy.</a>
+                <label class="form-check-label " for="exampleCheck1"> By clicking to create an account I have read and agree to the <a href="javascript:void(0)">Terms & Conditions</a> and the <a href="javascript:void(0)">Privacy Policy.</a>
                 </label>
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="exampleCheck1">
+                <input type="checkbox" class="form-check-input" id="agree" name="agree">
               </div>
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-gredient">
