@@ -54,13 +54,16 @@
                         <!-- Navbar Menu -->
                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                             <!-- Settings dropdown    -->
-                            <li class="nav-item dropdown"><a id="settings" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><i class="fa fa-cog"></i><span class="d-none d-sm-inline-block"></span>Settings</a>
+                            <li class="nav-item dropdown">
+                                <a id="settings" rel="nofollow" data-target="#" href="#" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link language dropdown-toggle">
+                                    <i class="fa fa-cog"></i><span class="d-none d-sm-inline-block"></span>Settings
+                                </a>
                                 <ul aria-labelledby="settings" class="dropdown-menu">
                                     <li>
-                                        <a rel="nofollow" href="{{ route('admin.profile.edit') }}" class="dropdown-item"> <i class="fa fa-user"></i> Manage Profile</a>
+                                        <a rel="nofollow" href="{{ route('admin.profile.edit') }}" class="dropdown-item">Manage Profile</a>
                                     </li>
                                     <li>
-                                        <a rel="nofollow" href="{{ route('admin.password.edit') }}" class="dropdown-item"> <i class="fa fa-key"></i> Change Password</a>
+                                        <a rel="nofollow" href="{{ route('admin.password.edit') }}" class="dropdown-item">Change Password</a>
                                     </li>
                                 </ul>
                             </li>
@@ -107,8 +110,9 @@
     @else
     @yield('content')
     @endif
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/common/js/all.js') }}"></script>
+    
     <!-- Main File-->
     <script>
     var _token = $("input[name='_token']").val();

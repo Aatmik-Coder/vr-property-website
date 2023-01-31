@@ -34,11 +34,11 @@
             </div>
              @endif
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-gredient mb-3">
+                <button type="submit" class="btn btn-outline-gredient mb-3">
                     {{ __('Log In') }}
                 </button>
                 <br>
-                <a href="{{ route('register') }}" class="btn btn-gredient text-dark">
+                <a href="{{ route('register') }}" class="btn btn-gredient">
                     {{ __('Sing Up') }}
                 </a>
             </div>

@@ -2,7 +2,9 @@
 
 :root {
     --theme-color: #1d1d1b;
-    --gradient: linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
+    /* --gradient: linear-gradient(90deg, #f89f19, #f05334, #c9459c); */
+    --gradient: linear-gradient(90deg, rgba(255, 135, 18, 1) 0%, rgba(244, 60, 77, 1) 100%, rgba(0, 212, 255, 1) 100%);
+    --gradient2: linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
     --inputBorder: #1d1d1b;
     --black: #000000;
     --white: #FFFFFF;
@@ -58,6 +60,31 @@ a:hover {
     background: var(--gradient);
     color: var(--white);
     border-radius: 5px;
+}
+
+.btn-gredient:hover {
+    border-color: var(--inputBorder);
+    color: var(--black);
+}
+
+.btn-outline-gredient {
+    color: var(--black);
+    box-shadow: 0 0 6px 0 var(--gradient2);
+    border: solid 1px transparent;
+    -webkit-background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+        linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+        linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
+    -webkit-background-origin: border-box;
+    background-origin: border-box;
+    -webkit-background-clip: content-box, border-box;
+    background-clip: content-box, border-box;
+    box-shadow: 1px 1000px 1px #fff inset;
+}
+
+.btn-outline-gredient:hover {
+    box-shadow: none;
+    color: var(--white);
 }
 
 .btn-outline-black {
@@ -124,6 +151,43 @@ a:hover {
 /*---------------------------------------
         END HEADER
 ---------------------------------------*/
+/*---------------------------------------
+        START FOOTER
+---------------------------------------*/
+.footer {
+    position: relative;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    background-color: #1c1c1a;
+    color: #fff;
+}
+
+.footer .f-links {
+    display: table;
+    position: relative;
+    color: var(--white);
+    font-weight: 300;
+    line-height: 26px;
+    font-size: 16px;
+}
+
+.footer .f-links:hover {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.footer .copyright-line {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 0;
+    font-weight: 300;
+}
+
+/*---------------------------------------
+        END FOOTER
+---------------------------------------*/
 
 /*--------------------------------------------
     START LOGIN, SIGN-UP, FORGOT PASSWORD
@@ -170,6 +234,10 @@ a:hover {
     text-align: center;
     padding: 0 30px;
     font-size: 15px;
+}
+
+.login-form .form-group {
+    margin-bottom: 1rem;
 }
 
 .login-form .forgot-pass {

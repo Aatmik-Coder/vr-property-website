@@ -27,13 +27,14 @@
     <div class="loader" style="display:none"><span class="loader-image"><i
                 class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
     
+    {{-- START HEADER --}}
     <nav class="main-navbar navbar navbar-expand-lg">
         <div class="container">
         <a class="navbar-brand" href="{{ route('dashboard') }}">
             <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ms-auto">
                 @auth
                 <li class="nav-item active">
                     <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
@@ -61,7 +62,46 @@
         </div>
     </div>
     </nav>
+    {{-- END HEADER --}}
+
     @yield('content')
+
+    {{-- START FOOTER --}}
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <a class="navbar-brand" href="{{ route('dashboard') }}">
+                            <img src="{{ asset('assets/common/images/logo.png') }}" class="img-fluid logo" alt="logo" />
+                        </a>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <a href="#" class="f-links">Cookies</a>
+                                <a href="#" class="f-links">Terms & Conditions</a>
+                                <a href="#" class="f-links">Privacy Policy</a>
+                            </div>
+                            <div class="col-lg-4">
+                                <a href="#" class="f-links">Home</a>
+                                <a href="#" class="f-links">Upload Images</a>
+                                <a href="#" class="f-links">Sign Up</a>
+                                <a href="#" class="f-links">About Us</a>
+                                <a href="#" class="f-links">Contact Us</a>
+                                <a href="#" class="f-links">Pricing</a>
+                            </div>
+                            <div class="col-lg-4">
+                                <h6 class="title">Follow Us</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <p class="copyright-line">Flyer Bureau Company Info</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    {{-- END FOOTER --}}
 
     <script src="{{ asset('assets/common/js/all.js') }}"></script>
     <!-- Main File-->
