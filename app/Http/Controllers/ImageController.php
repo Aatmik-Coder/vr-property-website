@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use App\Models\ImageTag;
+use App\Models\ImagePayment;
 
 class ImageController extends Controller
 {
@@ -34,7 +36,7 @@ class ImageController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'location' => 'required|max:255',
-            'tags' => 'required|array',
+            'tags' => 'required',
         ]);
     }
 

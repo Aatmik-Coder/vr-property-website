@@ -29,7 +29,7 @@ Route::namespace('App\Http\Controllers')->group(function() {
         Route::get('/image/add', 'ImageController@add')->name('image.add');
         Route::post('/image/store', 'ImageController@store')->name('image.store');
         Route::get('/image/edit', 'ImageController@edit')->name('image.edit');
-        Route::post('/image/update', 'ImageController@update')->name('image.store');
+        Route::post('/image/update', 'ImageController@update')->name('image.update');
         Route::post('/image/delete', 'ImageController@delete')->name('image.delete');
     });
 });

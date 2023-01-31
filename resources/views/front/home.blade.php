@@ -51,7 +51,7 @@
           <a href="{{ asset('assets/common/images/g-img8.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img8.png') }}" data-ngdesc="">Berlin 3</a>
           <a href="{{ asset('assets/common/images/g-img9.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img9.png') }}" data-ngdesc="">Berlin 3</a>
           <a href="{{ asset('assets/common/images/g-img10.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img10.png') }}" data-ngdesc="">Berlin 3</a>
-    
+
         </div> --}}
         <div class="gallery-container" id="animated-thumbnails-gallery">
             <a data-lg-size="1600-1067" class="gallery-item" data-src="{{ asset('assets/common/images/g-img1.png') }}">
@@ -91,7 +91,15 @@
 
 <!-- JavaScript files-->
 @section('js')
-<script src="{{ asset('assets/front/js/auth.js') }}"></script>
+{{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script> --}}
+
+{{-- START IMAGE GALLERY JS --}}
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/lightgallery.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/plugins/zoom/lg-zoom.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/plugins/thumbnail/lg-thumbnail.umd.js"></script>
+<script  src="https://cdpn.io/cpe/boomboom/pen.js?key=pen.js-b74d9ab5-00d9-9cf5-a933-7d39452ea19d" crossorigin></script>
+{{-- START IMAGE GALLERY JS --}}
 <script>
     jQuery("#animated-thumbnails-gallery")
   .justifiedGallery({
