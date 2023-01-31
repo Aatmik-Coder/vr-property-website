@@ -60,46 +60,43 @@
             </div>
         </div>
     </nav>
-    {{-- END HEADER --}}
 
     @yield('content')
 
-    {{-- START FOOTER --}}
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <a class="navbar-brand" href="{{ route('dashboard') }}">
-                            <img src="{{ asset('assets/common/images/logo.png') }}" class="img-fluid logo" alt="logo" />
-                        </a>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <a href="#" class="f-links">Cookies</a>
-                                <a href="#" class="f-links">Terms & Conditions</a>
-                                <a href="#" class="f-links">Privacy Policy</a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="#" class="f-links">Home</a>
-                                <a href="#" class="f-links">Upload Images</a>
-                                <a href="#" class="f-links">Sign Up</a>
-                                <a href="#" class="f-links">About Us</a>
-                                <a href="#" class="f-links">Contact Us</a>
-                                <a href="#" class="f-links">Pricing</a>
-                            </div>
-                            <div class="col-lg-4">
-                                <h6 class="title">Follow Us</h3>
-                            </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <a class="navbar-brand" href="{{ route('dashboard') }}">
+                        <img src="{{ asset('assets/common/images/logo.png') }}" class="img-fluid logo" alt="logo" />
+                    </a>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <a href="javascript:void(0)" class="f-links">Cookies</a>
+                            <a href="javascript:void(0)" class="f-links">Terms & Conditions</a>
+                            <a href="javascript:void(0)" class="f-links">Privacy Policy</a>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="{!! route('home') !!}" class="f-links">Home</a>
+                            <a href="{!! route('image.add') !!}" class="f-links">Upload Images</a>
+                            <a href="{!! route('register') !!}" class="f-links">Sign Up</a>
+                            <a href="javascript:void(0)" class="f-links">About Us</a>
+                            <a href="javascript:void(0)" class="f-links">Contact Us</a>
+                            <a href="javascript:void(0)" class="f-links">Pricing</a>
+                        </div>
+                        <div class="col-lg-4">
+                            <h6 class="title">Follow Us</h3>
                         </div>
                     </div>
-                    <div class="col-12 mt-5">
-                        <p class="copyright-line">Flyer Bureau Company Info</p>
-                    </div>
+                </div>
+                <div class="col-12 mt-5">
+                    <p class="copyright-line">Flyer Bureau Company Info</p>
                 </div>
             </div>
-        </footer>
-    {{-- END FOOTER --}}
+        </div>
+    </footer>
 
     <script src="{{ asset('assets/common/js/all.js') }}"></script>
     <!-- Main File-->

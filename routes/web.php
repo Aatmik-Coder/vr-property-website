@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::namespace('App\Http\Controllers')->group(function() {
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
 
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', 'ProfileController@dashboard')->name('dashboard');

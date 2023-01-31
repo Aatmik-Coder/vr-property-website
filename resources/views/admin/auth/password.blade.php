@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <form id="changeFrm" name="changeFrm" action="{{ route('admin.password.update') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group row">
+                            <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Current Password</label>
                                 <div class="col-sm-9">
                                     <input id="current_password" name="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror">
@@ -22,8 +22,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="line"></div>
-                            <div class="form-group row">
+                            <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">New Password</label>
                                 <div class="col-sm-9">
                                     <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror">
@@ -34,7 +33,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="line"></div>
                             <div class="form-group row">
                                 <label for="fileInput" class="col-sm-3 form-control-label">Confirm Password</label>
                                 <div class="col-sm-9">
