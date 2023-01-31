@@ -23,7 +23,14 @@ Route::namespace('App\Http\Controllers')->group(function() {
         Route::get('/dashboard', 'ProfileController@dashboard')->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::get('/image/list', 'ImageController@index')->name('image.list');
+        Route::get('/image/add', 'ImageController@add')->name('image.add');
+        Route::post('/image/store', 'ImageController@store')->name('image.store');
+        Route::get('/image/edit', 'ImageController@edit')->name('image.edit');
+        Route::post('/image/update', 'ImageController@update')->name('image.store');
+        Route::post('/image/delete', 'ImageController@delete')->name('image.delete');
     });
 });
 
