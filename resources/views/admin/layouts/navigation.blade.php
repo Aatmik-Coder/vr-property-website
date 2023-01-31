@@ -7,7 +7,7 @@
             </a>
         </li>
         <li class="@if(request()->routeIs('admin.user.*')) active @endif">
-            <a href="javascript:void(0)">
+            <a href="{{ route('admin.user.list') }}">
                 <i class="fa fa-users"></i> Users
             </a>
         </li>
