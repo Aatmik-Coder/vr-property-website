@@ -12,8 +12,18 @@
     <meta name="robots" content="all,follow">
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}?v=1">
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+
+    {{-- START IMAGE GALLERY CSS --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lightgallery.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lg-zoom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lg-thumbnail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    {{-- END IMAGE GALLERY CSS --}}
+
+    {{-- <link href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css"> --}}
+
     <link rel="stylesheet" href="{{ asset('assets/common/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}?v={{time()}}" id="theme-stylesheet">
 
@@ -32,7 +42,7 @@
                 <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ms-auto">
                     @auth
                     <li class="nav-item active">
                         <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
@@ -51,9 +61,10 @@
                         <a href="{{ route('dashboard') }}" class="btn btn-gredient px-4">Back to Home</a>
                     </li>
                     <li class="nav-item menu-btn-item">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                        <button class="btn menu-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </button>
                     </li>
                 </ul>
@@ -90,6 +101,12 @@
                             </div>
                             <div class="col-lg-4">
                                 <h6 class="title">Follow Us</h3>
+                                <div class="social-row">
+                                    <a href="#" class="social-btn-white"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="social-btn-white bottom"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="social-btn-white bottom"><i class="fab fa-pinterest-p"></i></a>
+                                    <a href="#" class="social-btn-white"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -102,6 +119,17 @@
     {{-- END FOOTER --}}
 
     <script src="{{ asset('assets/common/js/all.js') }}"></script>
+    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script> --}}
+
+    {{-- START IMAGE GALLERY JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/lightgallery.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/plugins/zoom/lg-zoom.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/plugins/thumbnail/lg-thumbnail.umd.js"></script>
+    <script  src="https://cdpn.io/cpe/boomboom/pen.js?key=pen.js-b74d9ab5-00d9-9cf5-a933-7d39452ea19d" crossorigin></script>
+    {{-- START IMAGE GALLERY JS --}}
+
+
     <!-- Main File-->
     <script>
     var _token = $("input[name='_token']").val();
