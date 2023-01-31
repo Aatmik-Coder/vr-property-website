@@ -23,13 +23,9 @@ return new class extends Migration
             $table->bigInteger('size')->nullable()->comment('in bytes');
             $table->bigInteger('width')->nullable()->comment('in px');
             $table->bigInteger('height')->nullable()->comment('in px');
-            $table->float('amount',18,2)->nullable();
-            $table->float('final_amount',18,2)->default(0);
-            $table->float('discount',18,2)->default(0);
-            $table->string('discount_code')->nullable();
-            $table->float('discount_per',18,2)->default(0);
-            $table->string('payment_id')->nullable();
             $table->enum('status',['Approve','Decline'])->nullable();
+            $table->date('paid_start_date')->nullable();
+            $table->date('paid_end_date')->nullable();
             $table->boolean('is_paid')->default(0);
             $table->boolean('is_active')->default(1);
             $table->timestamps();

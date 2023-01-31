@@ -39,7 +39,7 @@
                 </button>
                 <br>
                 <a href="{{ route('register') }}" class="btn btn-gredient">
-                    {{ __('Sing Up') }}
+                    {{ __('Sign Up') }}
                 </a>
             </div>
         </form>

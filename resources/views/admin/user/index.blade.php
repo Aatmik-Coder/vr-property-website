@@ -25,7 +25,7 @@
     </div>
 </section>
 @section('js')
-<script src="{{asset('assets/common/js/pages/common.js')}}"></script>
+
 <script src="{{ asset('assets/admin/js/user.js') }}"></script>
 @stop
 @endsection

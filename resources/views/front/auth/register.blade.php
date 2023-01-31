@@ -74,12 +74,11 @@
                 <label for="password-confirm" class="form-label">{{ __('Re-enter Password*') }}</label>
                 <input id="password-confirm" name="password_confirmation" type="password" class="form-control @error('password') is-invalid @enderror" autocomplete="current-password-1" data-msg="Please enter your confirm password">
             </div>
-            <div class="form-group form-check mt-3 mb-5">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">
-                    By clicking to create an account I have read and agree to the <a href="#">Terms & Conditions</a> and the <a href="#">Privacy Policy.</a>
+            <div class="form-group form-check">
+                <label class="form-check-label " for="exampleCheck1"> By clicking to create an account I have read and agree to the <a href="javascript:void(0)">Terms & Conditions</a> and the <a href="javascript:void(0)">Privacy Policy.</a>
                 </label>
-            </div>
+                <input type="checkbox" class="form-check-input" id="agree" name="agree">
+              </div>
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-gredient">
                     {{ __('Sign Up') }}

@@ -35,7 +35,7 @@ $(document).ready(function () {
             last_name: {
                 required: true
             },
-            nickname: {
+            nick_name: {
                 required: true
             },
             password: {
@@ -46,9 +46,22 @@ $(document).ready(function () {
                 required: true,
                 minlength: 8,
                 equalTo: "#password"
-            }  
+            },
+            agree: {
+                required: true,
+            }
         },
         messages: {
+            email: "Please enter a valid email address",
+            first_name: {
+                required: "Please provide a First name"
+            },
+            last_name: {
+                required: "Please provide a Last name"
+            },
+            nick_name: {
+                required: "Please provide a nickname"
+            },
             password: {
                 required: "Please provide a password",
                 minlength: "Your password must be at least 8 characters long"
@@ -57,19 +70,11 @@ $(document).ready(function () {
                 required: "Please provide a confirm password",
                 minlength: "Your password must be at least 8 characters long",
                 equalTo: "Please enter the same password as above"
-                
+
             },
-            first_name: {
-                required: "Please provide a First name"
-            },
-            last_name: {
-                required: "Please provide a Last name"
-            },
-            nickname: {
-                required: "Please provide a nickname"
-            },
-            email: "Please enter a valid email address"
-           
+            agree: {
+                required: "Please check the checkbox to agree our terms & conditions.",
+            }
         }
     });
 
