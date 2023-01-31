@@ -35,7 +35,7 @@ $(document).ready(function () {
             last_name: {
                 required: true
             },
-            nickname: {
+            nick_name: {
                 required: true
             },
             password: {
@@ -46,7 +46,10 @@ $(document).ready(function () {
                 required: true,
                 minlength: 8,
                 equalTo: "#password"
-            }  
+            }, 
+            exampleCheck1: {
+                required: true,
+            }
         },
         messages: {
             password: {
@@ -65,8 +68,11 @@ $(document).ready(function () {
             last_name: {
                 required: "Please provide a Last name"
             },
-            nickname: {
+            nick_name: {
                 required: "Please provide a nickname"
+            },
+            exampleCheck1: {
+                required: "Please check the checkbox to agree our terms & conditions.",
             },
             email: "Please enter a valid email address"
            
