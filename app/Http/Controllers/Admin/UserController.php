@@ -12,15 +12,12 @@ class UserController extends Controller
     var $module;
     public function __construct()
     {
-        $this->middleware('auth:admin');
         $this->module = request()->segment(2);
     }
     public function index()
     {
-        $title = "User";
-        $user = User::all();
-        
-        return view('admin.'.$this->module.'.index', compact('title','user'));
+        $title = "Users";
+        return view('admin.'.$this->module.'.index', compact('title'));
     }
 
     public function ajax(Request $request)
@@ -75,15 +72,15 @@ class UserController extends Controller
                 $action = '<a href="'.route("admin.user.view",$user->id).'" class="btn action-btn" role="button" aria-pressed="true" title="View">';
                     $action .= '<i class="fa fa-eye green" aria-hidden="true"></i>';
                 $action .= '</a>';
-                
+
                 // $action .= '<a href="users/edit/'.$user->id.'" class="btn action-btn" role="button" aria-pressed="true" title="Edit">';
                 //     $action .= '<i class="fa fa-pen green" aria-hidden="true"></i>';
                 // $action .= '</a>';
-                
+
                 $action .= '<a href="javascript:void(0);" onclick="deleteData('.$user->id.')" class="btn action-btn" title="Delete" role="button" aria-pressed="true">';
                     $action .= '<i class="fa fa-trash red" aria-hidden="true"></i>';
                 $action .= '</a>';
-                
+
                 $nestedData['action'] = $action;
 
                 $data[] = $nestedData;
