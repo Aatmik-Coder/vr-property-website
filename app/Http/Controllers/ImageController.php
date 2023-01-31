@@ -8,7 +8,7 @@ class ImageController extends Controller
 {
     public function index(Request $request)
     {
-        $images = Image::orferByDesc('id')->get();
+        $images = Image::orderByDesc('id')->get();
         return view('front.image.list', [
             'title' => "My Images",
             'user' => $request->user(),
