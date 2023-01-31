@@ -17,14 +17,17 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name')->nullable();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('nick_name')->nullable();
-            $table->string('business_name');
+            $table->string('business_name')->nullable();
+            $table->string('stripe_customer_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_active')->default(1);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+            $table->unique(['email', 'deleted_at']);
         });
     }
 

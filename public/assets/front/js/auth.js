@@ -22,6 +22,57 @@ $(document).ready(function () {
         }
     });
 
+    $("#registerFrm").validate({
+        errorElement: 'span',
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            first_name: {
+                required: true
+            },
+            last_name: {
+                required: true
+            },
+            nickname: {
+                required: true
+            },
+            password: {
+                required: true,
+                minlength: 8
+            },
+            password_confirmation: {
+                required: true,
+                minlength: 8,
+                equalTo: "#password"
+            }  
+        },
+        messages: {
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 8 characters long"
+            },
+            password_confirmation: {
+                required: "Please provide a confirm password",
+                minlength: "Your password must be at least 8 characters long",
+                equalTo: "Please enter the same password as above"
+                
+            },
+            first_name: {
+                required: "Please provide a First name"
+            },
+            last_name: {
+                required: "Please provide a Last name"
+            },
+            nickname: {
+                required: "Please provide a nickname"
+            },
+            email: "Please enter a valid email address"
+           
+        }
+    });
+
     $("#changeFrm").validate({
         errorElement: 'span',
         rules: {

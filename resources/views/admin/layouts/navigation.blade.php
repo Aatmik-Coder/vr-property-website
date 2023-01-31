@@ -5,7 +5,7 @@
             <a href="{{ route('admin.dashboard') }}">Dashboard</a>
         </li>
         <li class="@if(request()->routeIs('admin.user.*')) active @endif">
-            <a href="javascript:void(0)">Users</a>
+            <a href="{{ route('admin.user.list') }}">Users</a>
         </li>
         <li class="@if(request()->routeIs('admin.image.*')) active @endif">
             <a href="javascript:void(0)">Images</a>

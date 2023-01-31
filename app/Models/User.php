@@ -6,11 +6,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordNotification;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+
+    protected $softCascade = [
+        'images@update',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'nick_name', 'business_name', 'password', 'is_active'
+        'first_name', 'last_name', 'email', 'nick_name', 'business_name', 'stripe_customer_id', 'password', 'is_active'
     ];
 
     /**
@@ -30,6 +37,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->reset_url = route('password.reset', ['token' => $token, 'email' => $this->email]);
+        $this->notify(new ResetPasswordNotification($this));
+    }
 
     public function getNameAttribute()
     {
@@ -47,5 +60,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' =>  'date'
     ];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

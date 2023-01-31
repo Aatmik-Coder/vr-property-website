@@ -18,15 +18,10 @@
                 @enderror
             </div>
             <div class="form-group text-center mt-4">
-                <button type="submit" class="btn btn-gredient">
+                <button type="submit" class="btn btn-outline-black">
                     {{ __('Reset Password') }}
                 </button>
             </div>
-            {{-- <div class="text-center mt-3">
-                <a class="forgot-pass" href="{{ route('login') }}">
-                    {{ __('Back to Login?') }}
-                </a>
-            </div> --}}
         </form>
     </div>
     <div class="logo-view">

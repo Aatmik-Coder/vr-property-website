@@ -24,43 +24,41 @@
 </head>
 
 <body>
-    <div class="loader" style="display:none"><span class="loader-image"><i
-                class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
-    
-    {{-- START HEADER --}}
+    <div class="loader" style="display:none"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
+
     <nav class="main-navbar navbar navbar-expand-lg">
         <div class="container">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-                @auth
-                <li class="nav-item active">
-                    <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
-                </li>
-                @else
-                <li class="nav-item">
-                    <a href="{{ route('login') }}" class="btn btn-outline-black">Log in</a>
-                </li>
-                {{-- @if (Route::has('register'))
-                <li class="nav-item">
-                    <a href="{{ route('register') }}" class="nav-link">Register</a>
-                </li>
-                @endif --}}
-                @endauth
-                <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="btn btn-gredient px-4">Back to Home</a>
-                </li>
-                <li class="nav-item menu-btn-item">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </li>
-            </ul>
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    @auth
+                    <li class="nav-item active">
+                        <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="btn btn-outline-black">Log in</a>
+                    </li>
+                    {{-- @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link">Register</a>
+                    </li>
+                    @endif --}}
+                    @endauth
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard') }}" class="btn btn-gredient px-4">Back to Home</a>
+                    </li>
+                    <li class="nav-item menu-btn-item">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
     </nav>
     {{-- END HEADER --}}
 
