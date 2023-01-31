@@ -2,10 +2,8 @@
 
 :root {
     --theme-color: #1d1d1b;
-    /* --gradient: linear-gradient(90deg, #f89f19, #f05334, #c9459c); */
     --gradient: linear-gradient(90deg, rgba(255, 135, 18, 1) 0%, rgba(244, 60, 77, 1) 100%, rgba(0, 212, 255, 1) 100%);
     --gradient2: linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
-    --inputBorder: #1d1d1b;
     --black: #000000;
     --white: #FFFFFF;
     --red: #F00000;
@@ -37,12 +35,12 @@ a:focus,
 
 a,
 a:hover {
-    color: var(--inputBorder);
+    color: var(--theme-color);
     text-decoration: none;
 }
 
 .form-control {
-    border-color: var(--inputBorder);
+    border-color: var(--theme-color);
     border-radius: 5px;
     min-height: 46px;
 }
@@ -56,14 +54,14 @@ a:hover {
 }
 
 .btn-gredient {
-    border-color: var(--inputBorder);
+    border-color: var(--theme-color);
     background: var(--gradient);
     color: var(--white);
     border-radius: 5px;
 }
 
 .btn-gredient:hover {
-    border-color: var(--inputBorder);
+    border-color: var(--theme-color);
     color: var(--black);
 }
 
@@ -88,25 +86,25 @@ a:hover {
 }
 
 .btn-outline-black {
-    color: var(--inputBorder);
-    border-color: var(--inputBorder);
+    color: var(--theme-color);
+    border-color: var(--theme-color);
     border-radius: 5px;
 }
 
 .btn-outline-black:hover {
-    background-color: var(--inputBorder);
+    background-color: var(--theme-color);
     color: var(--white);
 }
 
 .btn-black {
     color: var(--white);
-    border-color: var(--inputBorder);
-    background-color: var(--inputBorder);
+    border-color: var(--theme-color);
+    background-color: var(--theme-color);
     border-radius: 5px;
 }
 
 .btn-black:hover {
-    color: var(--inputBorder);
+    color: var(--theme-color);
     background-color: transparent;
 }
 
@@ -148,6 +146,56 @@ a:hover {
     min-width: 200px;
 }
 
+
+.menu-btn {
+    display: flex;
+    flex-direction: column;
+    width: 38px;
+    height: 38px;
+    background-color: var(--black);
+    min-width: inherit !important;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.menu-btn span {
+    position: relative;
+    width: 65%;
+    height: 1px;
+    background-color: var(--white);
+    border-radius: 2px;
+    margin: 3px 0;
+    transition: 0.5s;
+}
+
+.menu-btn:hover,
+.menu-btn:active,
+.menu-btn.active {
+    border-color: var(--black);
+    background-color: transparent;
+}
+
+.menu-btn:hover span,
+.menu-btn.active span {
+    background-color: var(--black);
+}
+
+.menu-btn.active span:nth-child(2) {
+    left: 100%;
+}
+
+.menu-btn.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-btn.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 /*---------------------------------------
         END HEADER
 ---------------------------------------*/
@@ -160,6 +208,14 @@ a:hover {
     padding-bottom: 20px;
     background-color: #1c1c1a;
     color: #fff;
+}
+
+.footer .title {
+    position: relative;
+    color: var(--white);
+    font-weight: 300;
+    line-height: 26px;
+    font-size: 16px;
 }
 
 .footer .f-links {
@@ -183,6 +239,39 @@ a:hover {
     font-size: 16px;
     margin-bottom: 0;
     font-weight: 300;
+}
+
+.footer .social-row {
+    margin-top: 35px;
+}
+
+.social-row {
+    display: flex;
+    align-items: center;
+}
+
+.social-btn-white {
+    display: block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 24px;
+    border: 1px solid var(--white);
+    background-color: var(--white);
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.social-btn-white.bottom {
+    line-height: 43px;
+    font-size: 28px;
+}
+
+.social-btn-white:hover {
+    background-color: transparent;
+    color: var(--white)
 }
 
 /*---------------------------------------
@@ -265,4 +354,101 @@ a:hover {
 
 /*--------------------------------------------
     END LOGIN, SIGN-UP, FORGOT PASSWORD
+--------------------------------------------*/
+
+/*--------------------------------------------
+            START HOME PAGE
+--------------------------------------------*/
+.search-sec {
+    margin: 50px 15px;
+}
+
+.search-sec .input-group {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-sec .input-group input {
+    border-width: 2px;
+    color: var(--black);
+}
+
+.search-sec .input-group input::placeholder {
+    color: var(--black);
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.search-sec .input-group .btn {
+    width: 138px;
+    background-color: var(--theme-color);
+    border-color: var(--theme-color);
+}
+
+.ad-black {
+    margin-bottom: 30px;
+}
+
+.ad-black .ad-box {
+    position: relative;
+    display: block;
+    max-width: 1500px;
+    height: 201px;
+    background-color: #ededed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ad-black .ad-box h5 {
+    margin-top: 50px;
+}
+
+.sort-view {
+    margin: 30px 0;
+}
+
+.sort-view .sort-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.sort-view .sort-group label {
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.sort-view .sort-group select {
+    position: relative;
+    /* min-width: 170px; */
+    width: auto;
+    max-width: 100%;
+    background: var(--gradient);
+    color: var(--white);
+    font-weight: 400;
+}
+
+.select-wrap {
+    position: relative;
+}
+
+.select-wrap::after {
+    content: "\f078";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 8px;
+    z-index: 20;
+    color: var(--white);
+    top: 49%;
+    transform: translateY(-50%);
+}
+
+.image-gallery-sec {
+    margin-bottom: 50px;
+}
+
+/*--------------------------------------------
+            END HOME PAGE
 --------------------------------------------*/
