@@ -80,7 +80,7 @@
                 <input type="checkbox" class="form-check-input" id="agree" name="agree">
               </div>
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-gredient">
+                <button type="submit" class="btn btn-gradient">
                     {{ __('Sign Up') }}
                 </button>
             </div>
@@ -94,11 +94,10 @@
     <div class="logo-view">
         <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
         <div class="text-center mt-5">
-            <a href="{!! route('payment-info') !!}" class="btn btn-gredient mb-3">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3">
                 {{ __('Why Sign Up?') }}
             </a>
-            <br>
-            <a href="{!! route('payment-info') !!}" class="btn btn-gredient">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black">
                 {{ __('Learn More') }}
             </a>
         </div>

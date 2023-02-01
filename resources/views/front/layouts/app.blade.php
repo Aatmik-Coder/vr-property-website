@@ -49,7 +49,7 @@
                     </li>
                     @else
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="btn btn-outline-black">Log in</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-gradient">Log in</a>
                     </li>
                     {{-- @if (Route::has('register'))
                     <li class="nav-item">
@@ -58,7 +58,7 @@
                     @endif --}}
                     @endauth
                     <li class="nav-item">
-                        <a href="{{ route('dashboard') }}" class="btn btn-gredient px-4">Back to Home</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-black px-4">Back to Home</a>
                     </li>
                     <li class="nav-item menu-btn-item">
                         <button class="btn menu-btn">

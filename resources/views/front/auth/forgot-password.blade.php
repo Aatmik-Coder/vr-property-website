@@ -18,7 +18,7 @@
                 @enderror
             </div>
             <div class="form-group text-center mt-4">
-                <button type="submit" class="btn btn-outline-black">
+                <button type="submit" class="btn btn-outline-gradient">
                     {{ __('Reset Password') }}
                 </button>
             </div>
@@ -27,11 +27,11 @@
     <div class="logo-view">
         <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
         <div class="text-center mt-5">
-            <a href="{!! route('payment-info') !!}" class="btn btn-gredient mb-3">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3">
                 {{ __('Why Sign Up?') }}
             </button>
             <br>
-            <a href="{!! route('payment-info') !!}" class="btn btn-gredient">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black">
                 {{ __('Learn More') }}
             </a>
         </div>
