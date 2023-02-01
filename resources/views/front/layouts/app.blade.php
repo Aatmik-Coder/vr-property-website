@@ -62,28 +62,20 @@
                 </ul>
             </div>
             @else
-            <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     @auth
-                    <li class="nav-item active">
-                        <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard') }}" class="btn btn-outline-black">Dashboard</a>
                     </li>
                     @else
                     <li class="nav-item">
                         <a href="{{ route('login') }}" class="btn btn-outline-black">Log in</a>
                     </li>
-                    {{-- @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a href="{{ route('register') }}" class="nav-link">Register</a>
-                    </li>
-                    @endif --}}
                     @endauth
-                    <li class="nav-item">
-                        <a href="{{ route('dashboard') }}" class="btn btn-gredient px-4">Back to Home</a>
-                    </li>
                     <li class="nav-item menu-btn-item">
                         <button class="btn menu-btn">
                             <span></span>
@@ -117,10 +109,12 @@
                         <div class="col-lg-4">
                             <a href="{!! route('home') !!}" class="f-links">Home</a>
                             <a href="{!! route('image.add') !!}" class="f-links">Upload Images</a>
+                            @guest
                             <a href="{!! route('register') !!}" class="f-links">Sign Up</a>
+                            @endguest
                             <a href="javascript:void(0)" class="f-links">About Us</a>
                             <a href="javascript:void(0)" class="f-links">Contact Us</a>
-                            <a href="javascript:void(0)" class="f-links">Pricing</a>
+                            <a href="{!! route('payment-info') !!}" class="f-links">Pricing</a>
                         </div>
                         <div class="col-lg-4">
                             <h6 class="title">Follow Us</h3>
