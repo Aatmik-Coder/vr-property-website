@@ -26,6 +26,8 @@ Route::namespace('App\Http\Controllers')->group(function() {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+        Route::put('/change-password', 'Auth\PasswordController@update')->name('password.update');
+
         Route::get('/image/list', 'ImageController@index')->name('image.list');
         Route::get('/image/add', 'ImageController@add')->name('image.add');
         Route::post('/image/store', 'ImageController@store')->name('image.store');
