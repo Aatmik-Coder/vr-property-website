@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --theme-color: #1d1d1b;
+    --gray: #3c3c3b;
+    --gradient: linear-gradient(90deg, rgba(255, 135, 18, 1) 0%, rgba(244, 60, 77, 1) 100%, rgba(0, 212, 255, 1) 100%);
+    --gradient2: linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
+    --black: #000000;
+    --white: #FFFFFF;
+    --red: #F00000;
+    --red2: #be1622;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--theme-color);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+span.error {
+    color: red;
+    font-size: 12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus,
+a:focus,
+.form-control:focus,
+.btn:focus {
+    border-color: unset;
+    box-shadow: none !important;
+}
+
+a,
+a:hover {
+    color: var(--theme-color);
+    text-decoration: none;
+}
+
+.form-control {
+    border-color: var(--theme-color);
+    border-radius: 5px;
+    min-height: 46px;
+}
+
+.form-control.error {
+    border-color: red;
+}
+
+.container {
+    max-width: 1500px;
+}
+
+/*---------------------------------------
+        START THEME BUTTONS
+---------------------------------------*/
+.btn-gradient {
+    border-color: transparent;
+    background: var(--gradient);
+    color: var(--white);
+    border-radius: 5px;
+}
+
+.btn-gradient:hover {
+    color: var(--black);
+}
+
+.btn-outline-gradient {
+    color: var(--black);
+    box-shadow: 0 0 6px 0 var(--gradient2);
+    border: solid 1px transparent;
+    -webkit-background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+        linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+        linear-gradient(90deg, #f79c29 0%, #f89f19 26%, #f05334 45%, #c9459c 74%, #754fa1 100%);
+    -webkit-background-origin: border-box;
+    background-origin: border-box;
+    -webkit-background-clip: content-box, border-box;
+    background-clip: content-box, border-box;
+    box-shadow: 1px 1000px 1px #fff inset;
+}
+
+.btn-outline-gradient:hover {
+    box-shadow: none;
+    color: var(--white);
+}
+
+.btn-outline-black {
+    color: var(--theme-color);
+    border-color: var(--theme-color);
+    border-radius: 5px;
+}
+
+.btn-outline-black:hover {
+    background-color: var(--theme-color);
+    color: var(--white);
+}
+
+.btn-black {
+    position: relative;
+    color: var(--white);
+    border-color: transparent;
+    background-color: var(--theme-color);
+    border-radius: 5px;
+    background: var(--gradient2);
+    z-index: 15;
+}
+
+.btn-black::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    background-color: var(--black);
+    z-index: -1;
+    border-radius: 5px;
+    transition: .15s;
+}
+
+.btn-black:hover {
+    color: var(--black);
+}
+
+.btn-black:hover::after {
+    background-color: var(--white);
+}
+
+/*---------------------------------------
+        START THEME BUTTONS
+---------------------------------------*/
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 10000;
+}
+
+/*---------------------------------------
+        START HEADER
+---------------------------------------*/
+.user-header {
+    background-color: var(--theme-color);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.user-header .navbar-brand {
+    max-width: 200px;
+}
+
+.user-header .header-logo-sec {
+    background-color: var(--gray);
+    padding: 0 15px;
+    height: 100%;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-header .header-logo-sec .user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.user-header .menu-btn img {
+    width: 26px;
+    height: 25px;
+    -webkit-transition: all 0.3s cubic-bezier(0.81, -0.33, 0.345, 1.375);
+    transition: all 0.3s cubic-bezier(0.81, -0.33, 0.345, 1.375);
+}
+
+.user-header .menu-btn.active img {
+    transform: rotateY(180deg);
+}
+
+.user-header .nav .nav-link {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--white);
+}
+
+.user-header .nav .nav-link span {
+    display: inline-block;
+    background-color: #2eac66;
+    padding: 0px 10px;
+    border-radius: 50px;
+    font-size: 14px;
+}
+
+.users-body {
+    position: relative;
+    display: flex;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+}
+
+.users-body .ubody-content {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.siderbar {
+    width: 350px;
+    height: 100%;
+    background-color: #f6f6f6;
+}
+
+.siderbar .nav {
+    height: 100%;
+    overflow: auto;
+}
+
+.siderbar .nav .nav-link {
+    font-size: 16px;
+    color: var(--gray);
+}
+
+.siderbar .nav .nav-link:hover,
+.siderbar .nav .nav-link:active,
+.siderbar .nav .nav-link.active {
+    color: var(--white);
+    background-color: var(--gray);
+}
+
+.siderbar .nav .logout-item {
+    margin-top: auto;
+}
+
+.siderbar .nav .logout-item .nav-link {
+    color: var(--red2);
+}
+
+.siderbar .nav .logout-item .nav-link:hover {
+    color: var(--white);
+    background-color: var(--red2);
+
+}
+
+.page-title {
+    position: relative;
+    padding: 30px;
+    background-color: #f6f6f6;
+}
+
+.page-title h4 {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--theme-color);
+    margin-bottom: 0;
+}
+
+
+
+/*---------------------------------------
+        END HEADER
+---------------------------------------*/
+
+
+/*--------------------------------------------
+            START UPLOAD IMAGE PAGE
+--------------------------------------------*/
+.upload-img-form {
+    height: calc(100% - 80px);
+}
+
+.upload-img-container {
+    position: relative;
+    display: flex;
+    height: 100%;
+}
+
+.upload-img-container .upload-view {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-view .img-box {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #b9b9b9;
+    border: 1px solid #b9b9b9;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.upload-view .img-box .profile-pic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-view .img-box .file-upload {
+    display: none;
+}
+
+.upload-view .img-box .p-image {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    left: 0;
+    color: var(--white);
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.upload-view .img-box .upload-button {
+    font-size: 16px;
+    font-weight: 300;
+    text-shadow: 0 0 3px rgb(0 0 0 / 50%);
+    cursor: pointer;
+}
+
+.upload-img-container .form-view {
+    position: relative;
+    width: 500px;
+    height: 100%;
+    padding: 50px;
+    box-shadow: -7px 0 7px rgba(0, 0, 0, 0.1);
+}
+
+.upload-img-container .form-view .form-group {
+    margin-bottom: 20px;
+}
+
+.upload-img-container .form-view .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.upload-img-container .form-view input::placeholder {
+    color: #9d9d9c;
+    font-weight: 300;
+}
+
+.upload-img-container .form-view .form-control.one-line {
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 0;
+    padding-left: 0;
+}
+
+.upload-img-container .form-view textarea.form-control {
+    min-height: 130px;
+}
+
+.upload-img-container .form-view .bootstrap-tagsinput .tag {
+    margin-right: 2px;
+    color: white;
+    background-color: var(--black);
+    padding: 2px 9px;
+    border-radius: 30px;
+    font-weight: 300;
+}
+
+.upload-img-container .form-view .bootstrap-tagsinput .tag [data-role="remove"] {
+    margin-left: 4px;
+}
+
+.upload-img-container .form-view .bootstrap-tagsinput {
+    border-color: var(--theme-color);
+    width: 100%;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 0;
+    padding-bottom: 10px;
+    padding-left: 0;
+    box-shadow: none;
+}
+
+.upload-img-container .form-view .input-info {
+    font-size: 16px;
+    color: #9d9d9c;
+    font-weight: 400;
+    margin-bottom: 0;
+    line-height: inherit;
+}
+
+.upload-img-container .form-view .btn {
+    width: 100%;
+    height: 46px;
+}
+
+
+
+/*--------------------------------------------
+            START UPLOAD IMAGE PAGE
+--------------------------------------------*/
