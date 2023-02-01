@@ -43,7 +43,7 @@
         <div class="text-center mt-5">
             <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3">
                 {{ __('Why Sign Up?') }}
-            </button>
+            </a>
             <br>
             <a href="{!! route('payment-info') !!}" class="btn btn-black">
                 {{ __('Learn More') }}

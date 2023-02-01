@@ -27,9 +27,9 @@
     <div class="logo-view">
         <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
         <div class="text-center mt-5">
-            <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3 border-gradient">
                 {{ __('Why Sign Up?') }}
-            </button>
+            </a>
             <br>
             <a href="{!! route('payment-info') !!}" class="btn btn-black">
                 {{ __('Learn More') }}

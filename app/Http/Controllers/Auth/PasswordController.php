@@ -10,20 +10,28 @@ use Illuminate\Validation\Rules\Password;
 
 class PasswordController extends Controller
 {
-    /**
-     * Update the user's password.
-     */
-    public function update(Request $request): RedirectResponse
+   
+    public function update(Request $request)
     {
-        $validated = $request->validateWithBag('updatePassword', [
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
+        
+        $user = auth()->user();
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|different:current_password|min:8',
+            'password_confirmation' => 'required|same:password'
         ]);
+       
+        // // Match The Old Password current_password
+        if(!Hash::check($request->current_password, $user->password)){
+            return redirect()->back()->withErrors([
+                'current_password' => 'Current Password does not match!',
+            ]);
+        }
+        //Update password
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return back()->with(["message" => "Password Updated Successfully", 'alert-class' => 'success']);
 
-        $request->user()->update([
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        return back()->with('status', 'password-updated');
+        
     }
 }

@@ -14,19 +14,9 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
 
-    {{-- START IMAGE GALLERY CSS --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lightgallery.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lg-zoom.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lg-thumbnail.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    {{-- END IMAGE GALLERY CSS --}}
-
-    {{-- <link href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css"> --}}
-
+    @yield('css')
     <link rel="stylesheet" href="{{ asset('assets/common/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}?v={{time()}}" id="theme-stylesheet">
-
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -38,6 +28,40 @@
 
     <nav class="main-navbar navbar navbar-expand-lg">
         <div class="container">
+            @if(request()->routeIs('login'))
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="btn btn-black px-4 border-gradient">Back to Home</a>
+                    </li>
+                </ul>
+            </div>
+            @elseif(request()->routeIs('password.request') || request()->routeIs('password.reset'))
+            <div class="navbar-brand">
+                <a href="{{ route('home') }}" class="btn btn-black px-4 border-gradient">Back to Home</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="btn btn-outline-gradient">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="btn btn-black border-gradient">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+            @elseif(request()->routeIs('register'))
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="btn btn-outline-gradient">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="btn btn-black px-4 border-gradient">Back to Home</a>
+                    </li>
+                </ul>
+            </div>
+            @else
             <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
             </a>
@@ -69,6 +93,7 @@
                     </li>
                 </ul>
             </div>
+            @endif
         </div>
     </nav>
 
