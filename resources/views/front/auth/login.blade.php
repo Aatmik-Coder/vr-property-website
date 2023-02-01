@@ -34,11 +34,10 @@
             </div>
             @endif
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-outline-gredient mb-3">
+                <button type="submit" class="btn btn-outline-gradient mb-3">
                     {{ __('Log In') }}
                 </button>
-                <br>
-                <a href="{{ route('register') }}" class="btn btn-gredient">
+                <a href="{{ route('register') }}" class="btn btn-gradient">
                     {{ __('Sign Up') }}
                 </a>
             </div>
@@ -47,11 +46,10 @@
     <div class="logo-view">
         <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
         <div class="text-center mt-5">
-            <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3 border-gradient">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3">
                 {{ __('Why Sign Up?') }}
             </a>
-            <br>
-            <a href="{!! route('payment-info') !!}" class="btn btn-black border-gradient">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black">
                 {{ __('Learn More') }}
             </a>
         </div>

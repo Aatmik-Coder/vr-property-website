@@ -18,7 +18,7 @@
                 @enderror
             </div>
             <div class="form-group text-center mt-4">
-                <button type="submit" class="btn btn-outline-gredient">
+                <button type="submit" class="btn btn-outline-gradient">
                     {{ __('Reset Password') }}
                 </button>
             </div>
@@ -31,7 +31,7 @@
                 {{ __('Why Sign Up?') }}
             </a>
             <br>
-            <a href="{!! route('payment-info') !!}" class="btn btn-black border-gradient">
+            <a href="{!! route('payment-info') !!}" class="btn btn-black">
                 {{ __('Learn More') }}
             </a>
         </div>

@@ -43,7 +43,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="btn btn-outline-gredient">Log In</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-gradient">Log In</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('login') }}" class="btn btn-black border-gradient">Sign Up</a>
@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="btn btn-outline-gredient">Log In</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-gradient">Log In</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('home') }}" class="btn btn-black px-4 border-gradient">Back to Home</a>
@@ -73,7 +73,7 @@
                     </li>
                     @else
                     <li class="nav-item">
-                        <a href="{{ route('login') }}" class="btn btn-outline-black">Log in</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-gradient">Log in</a>
                     </li>
                     @endauth
                     <li class="nav-item menu-btn-item">
