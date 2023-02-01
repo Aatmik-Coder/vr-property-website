@@ -16,7 +16,12 @@
 
     @yield('css')
     <link rel="stylesheet" href="{{ asset('assets/common/css/all.css') }}">
+
+    @if(auth('web')->check())
+    <link rel="stylesheet" href="{{ asset('assets/front/css/user.css') }}?v={{time()}}" id="theme-stylesheet">
+    @else
     <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}?v={{time()}}" id="theme-stylesheet">
+    @endif
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
