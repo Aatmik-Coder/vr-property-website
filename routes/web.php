@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('App\Http\Controllers')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('payment-info', 'HomeController@paymentinfo')->name('payment-info');
 
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', 'ProfileController@dashboard')->name('dashboard');

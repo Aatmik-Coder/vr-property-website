@@ -47,11 +47,11 @@
     <div class="logo-view">
         <img src="{{ asset('assets/common/images/logo-colored.png') }}" class="img-fluid logo" alt="logo-colored" />
         <div class="text-center mt-5">
-            <a href="javascript:void(0)" class="btn btn-gredient mb-3">
+            <a href="{!! route('payment-info') !!}" class="btn btn-gredient mb-3">
                 {{ __('Why Sign Up?') }}
             </a>
             <br>
-            <a href="javascript:void(0)" class="btn btn-gredient">
+            <a href="{!! route('payment-info') !!}" class="btn btn-gredient">
                 {{ __('Learn More') }}
             </a>
         </div>
