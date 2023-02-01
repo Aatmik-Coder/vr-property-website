@@ -4,6 +4,7 @@ return [
     'TEMP_IMAGES' => 'temp_images/',
     'ADMIN_PATH' => "admin/",
 
+    'CURRENCY_SYMBOL' => '£',
     'IMAGE_UPLOAD_PRICE' => 4.99,
 
     'STRIPE_MODE' => env('STRIPE_MODE', 'live'),

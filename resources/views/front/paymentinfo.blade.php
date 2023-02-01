@@ -4,12 +4,22 @@
 <div class="login-sec payment-sec">
     <div class="container">
         <div class="payment-card">
-            <h3 class="title">Sign Up for Free</h3>
-            <h2>£4.99</h2>
+            <h3 class="title">
+                @if(auth('web')->check())
+                Upload an Image
+                @else
+                Sign Up for Free
+                @endif
+            </h3>
+            <h2>{!! config('constants.CURRENCY_SYMBOL').config('constants.IMAGE_UPLOAD_PRICE') !!}</h2>
             <span>per upload</span>
-            <a href="#" class="btn btn-gradient">Sign Up</a>
+            @if(auth('web')->check())
+            <a href="{!! route('image.add') !!}" class="btn btn-gradient">Upload an Image</a>
+            @else
+            <a href="{!! route('register') !!}" class="btn btn-gradient">Sign Up</a>
+            @endif
             <ul>
-                <li>Each upload just £4.99</li>
+                <li>Each upload just {!! config('constants.CURRENCY_SYMBOL').config('constants.IMAGE_UPLOAD_PRICE') !!}</li>
                 <li>Powerful organisation tools for your images.</li>
                 <li>Add image keywords.</li>
                 <li>Tag your images so that they come up first in search.</li>

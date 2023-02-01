@@ -30,7 +30,6 @@
             <a href="{!! route('payment-info') !!}" class="btn btn-black mb-3 border-gradient">
                 {{ __('Why Sign Up?') }}
             </a>
-            <br>
             <a href="{!! route('payment-info') !!}" class="btn btn-black">
                 {{ __('Learn More') }}
             </a>
