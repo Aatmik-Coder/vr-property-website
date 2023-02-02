@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use Illuminate\Validation\Rule;
+use File, Storage, Image;
 
 class ProfileController extends Controller
 {
@@ -45,7 +46,29 @@ class ProfileController extends Controller
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
             'nick_name' => ['string', 'max:255'],
             'business_name' => ['string', 'max:255'],
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+       if($request->hasFile('image'))
+       {
+        $image = $request->file('image');
+        $ext = $image->getClientOriginalExtension();
+        $quality = 70;
+        $filename = uniqid().".".$ext;
+        if(!$ext == 'png')
+        {
+            $destination = public_path(config('constants.TEMP_IMAGES')).$filename;
+            File::ensureDirectoryExists(public_path(config('constants.TEMP_IMAGES')));
+            $compressed_png_content = shell_exec("pngquant --quality=".$quality." - < ".escapeshellarg($image));
+                if (!$compressed_png_content) {
+                    die("Conversion to compressed PNG failed. Is pngquant 1.8+ installed on the server?");
+                }
+                Storage::put(config('constants.USER_PATH') .$filename, $compressed_png_content, 'public');
+            } else {
+                $resizedImage = Image::make($image)->encode($ext, $quality);
+                Storage::put(config('constants.USER_PATH') .$filename, $resizedImage->__toString(), 'public');
+            }
+            $user->avatar = $filename;
+        }
        
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
