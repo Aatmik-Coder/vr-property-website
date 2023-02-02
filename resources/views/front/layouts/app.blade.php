@@ -1,6 +1,6 @@
 @php
 $isLoggedInSection = 0;
-$isLoggedInSectionRoutes = ['image*', 'profile*'];
+$isLoggedInSectionRoutes = ['dashboard', 'image*', 'profile*'];
 foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
     if(request()->routeIs($isLoggedInSectionRoute)) {
         $isLoggedInSection = 1;
@@ -56,10 +56,10 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
         </div>
         <ul class="nav ms-auto">
             <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">Images Uploaded: 12</a>
+                <a href="javascript:void(0)" class="nav-link">Images Uploaded: {!! \App\Models\Image::where('user_id',auth('web')->user()->id)->count() !!}</a>
             </li>
             <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">Images Active: <span>4</span></a>
+                <a href="javascript:void(0)" class="nav-link">Images Active: <span>{!! \App\Models\Image::where('user_id',auth('web')->user()->id)->where('is_paid',1)->count() !!}</span></a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('home') }}" class="btn btn-gradient px-4">Back to Home</a>
@@ -137,7 +137,7 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
                 <ul class="navbar-nav ms-auto">
                     @if(auth('web')->check())
                     <li class="nav-item">
-                        <a href="{{ route('dashboard') }}" class="btn btn-outline-black">Dashboard</a>
+                        <a href="{{ route('image.list') }}" class="btn btn-outline-black">Dashboard</a>
                     </li>
                     @else
                     <li class="nav-item">
