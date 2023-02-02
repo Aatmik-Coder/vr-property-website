@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'nick_name', 'business_name', 'stripe_customer_id', 'password', 'is_active'
+        'first_name', 'last_name', 'email', 'nick_name', 'business_name', 'avatar', 'stripe_customer_id', 'password', 'is_active'
     ];
 
     /**
@@ -51,6 +51,15 @@ class User extends Authenticatable
             $name .= ' '.$this->last_name;
         }
         return $name;
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        $url = asset("assets/common/images/default-avatar.png");
+        if($this->avatar) {
+            $url = Storage::url(config('constants.USER_PATH').$this->avatar);
+        }
+        return $url;
     }
 
     /**

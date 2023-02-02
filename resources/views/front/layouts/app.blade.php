@@ -1,6 +1,15 @@
+@php
+$isLoggedInSection = 0;
+$isLoggedInSectionRoutes = ['image*', 'profile*'];
+foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
+    if(request()->routeIs($isLoggedInSectionRoute)) {
+        $isLoggedInSection = 1;
+        break;
+    }
+}
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +26,7 @@
     @yield('css')
     <link rel="stylesheet" href="{{ asset('assets/common/css/all.css') }}">
 
-    @if(auth('web')->check())
+    @if($isLoggedInSection)
     <link rel="stylesheet" href="{{ asset('assets/front/css/user.css') }}?v={{time()}}" id="theme-stylesheet">
     @else
     <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}?v={{time()}}" id="theme-stylesheet">
@@ -31,6 +40,60 @@
 <body>
     <div class="loader" style="display:none"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
 
+
+    @if($isLoggedInSection)
+    <header class="user-header">
+        <div class="header-logo-sec">
+            <a href="{{ route('home') }}" class="navbar-brand">
+                <img src="{{ asset('assets/common/images/logo.png') }}" class="img-fluid logo" alt="logo" />
+            </a>
+            <div class="content">
+                <img src="{{ auth('web')->user()->avatar_url }}" class="user-img" />
+                <a id="toggle-btn" href="javascript:void(0)" class="menu-btn">
+                    <img src="{{ asset('assets/common/images/menu-icon.png') }}" class="menu-icon" />
+                </a>
+            </div>
+        </div>
+        <ul class="nav ms-auto">
+            <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link">Images Uploaded: 12</a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link">Images Active: <span>4</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('home') }}" class="btn btn-gradient px-4">Back to Home</a>
+            </li>
+        </ul>
+    </header>
+    <div class="users-body">
+        <div class="siderbar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->routeIs('image.list')) active @endif" aria-current="page" href="{!! route('image.list') !!}">My Images</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->routeIs('image.add')) active @endif" href="{!! route('image.add') !!}">Upload Images</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{!! route('profile.edit') !!}">Your Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Profile Preview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Help & How To</a>
+                </li>
+                <li class="nav-item logout-item">
+                    <a class="nav-link" href="javascript:void(0)">Log Out</a>
+                </li>
+            </ul>
+        </div>
+        <div class="ubody-content">
+            @yield('content')
+        </div>
+    </div>
+    @else
     <nav class="main-navbar navbar navbar-expand-lg">
         <div class="container">
             @if(request()->routeIs('login'))
@@ -138,6 +201,7 @@
             </div>
         </div>
     </footer>
+    @endif
 
     <script src="{{ asset('assets/common/js/all.js') }}"></script>
     <!-- Main File-->

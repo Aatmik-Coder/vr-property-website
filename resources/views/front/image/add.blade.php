@@ -1,4 +1,4 @@
-@extends('front.layouts.user-app')
+@extends('front.layouts.app')
 @section('content')
 
 <div class="page-title">
@@ -9,7 +9,7 @@
         <div class="upload-view">
             <div class="img-box">
                 <div class="circle">
-                    <img class="profile-pic" src="{{ asset('assets/common/images/no-img.png') }}"  alt="uploaded-img"/>
+                    <img class="profile-pic" src="{{ asset('assets/common/images/no-img.png') }}" alt="uploaded-img"/>
                 </div>
                 <div class="p-image">
                     <div class="upload-button">Choose an asset to upload <i class="fas fa-pen"></i></div>

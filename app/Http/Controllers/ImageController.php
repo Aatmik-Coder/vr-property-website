@@ -32,12 +32,45 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required',
+            'image' => 'required|image',
             'title' => 'required|max:255',
             'description' => 'required',
             'location' => 'required|max:255',
             'tags' => 'required',
+            'status' => NULL,
+            'is_paid' => 0,
+            'is_active' => 0,
         ]);
+        dd($request->all());
+        $imageData = [
+            'user_id' => auth('web')->user()->id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'location' => $request->location,
+            'tags' => $request->tags,
+        ];
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $quality = 70;
+            $fileName = uniqid() . "." . $ext;
+            if($ext == "png") {
+                $destination = public_path(config('constants.TEMP_IMAGES')).$fileName;
+                File::ensureDirectoryExists(public_path(config('constants.TEMP_IMAGES')));
+                $compressed_png_content = shell_exec("pngquant --quality=".$quality." - < ".escapeshellarg($image));
+                if (!$compressed_png_content) {
+                    die("Conversion to compressed PNG failed. Is pngquant 1.8+ installed on the server?");
+                }
+                Storage::put(config('constants.IMAGE_PATH') .$fileName, $compressed_png_content, 'public');
+            } else {
+                $resizedImage = Image::make($image)->encode($ext, $quality);
+                Storage::put(config('constants.IMAGE_PATH') .$fileName, $resizedImage->__toString(), 'public');
+            }
+            $imageData['file_name'] = $fileName;
+            $imageData['width'] = Image::make($media)->width();
+            $imageData['height'] = Image::make($media)->height();
+            $imageData['size'] = Storage::size(config('constants.MEDIA_PATH').$fileName);
+        }
     }
 
     public function edit($id)

@@ -20,6 +20,15 @@ class Image extends Model
         'user_id', 'title', 'description', 'location', 'file_name', 'height', 'width', 'size', 'paid_start_date', 'paid_end_date', 'status', 'is_paid', 'is_active'
     ];
 
+    public function getImageUrlAttribute()
+    {
+        $url = asset("assets/common/images/no-img.png");
+        if($this->avatar) {
+            $url = Storage::url(config('constants.ADMIN_PATH').$this->avatar);
+        }
+        return $url;
+    }
+
     public function tags()
     {
         return $this->hasMany(ImageTag::class);
