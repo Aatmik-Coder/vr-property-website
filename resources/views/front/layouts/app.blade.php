@@ -85,7 +85,10 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
                     <a class="nav-link" href="javascript:void(0)">Help & How To</a>
                 </li>
                 <li class="nav-item logout-item">
-                    <a class="nav-link" href="javascript:void(0)">Log Out</a>
+                    <a class="nav-link" href="javascript:void(0)" onclick="javascript:$('#logout-form').submit()">Log Out</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </div>
