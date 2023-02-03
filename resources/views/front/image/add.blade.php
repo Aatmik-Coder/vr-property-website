@@ -4,20 +4,20 @@
 <div class="page-title">
     <h4>{!! $title !!}</h3>
 </div>
-<form class="upload-img-form" id="loginFrm" name="loginFrm" method="POST" action="{{ route('image.store') }}">
+<form class="upload-img-form" id="frmImage" name="frmImage" method="POST" action="{{ route('image.store') }}" enctype="multipart/form-data">
     <div class="upload-img-container">
         <div class="upload-view">
             <div class="img-box">
                 <div class="circle">
-                    <img class="profile-pic" src="{{ asset('assets/common/images/no-img.png') }}" alt="uploaded-img"/>
+                    <img class="profile-pic" src="{{ asset('assets/common/images/no-img.png') }}" alt="uploaded-img" id="image_preview">
                 </div>
                 <div class="p-image">
                     <div class="upload-button">Choose an asset to upload <i class="fas fa-pen"></i></div>
                     <input id="image" class="file-upload @error('image') is-invalid @enderror" name="image" type="file" accept="image/*" />
                     @error('image')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                 </div>
             </div>
@@ -84,36 +84,8 @@
 </form>
 @endsection
 @section('js')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-<script src="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-<script>
-$('#tags').tagsinput({
-    maxTags: 10
-});
-</script>
-<script>
-    $(document).ready(function () {
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $(".profile-pic").attr("src", e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-            }
-        };
-
-        $(".file-upload").on("change", function () {
-            readURL(this);
-        });
-
-        $(".upload-button").on("click", function () {
-            $(".file-upload").click();
-        });
-    });
-
-</script>
+<link href="{{ asset('assets/common/css/bootstrap-tagsinput.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/common/js/typeahead.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/common/js/bootstrap-tagsinput.min.js') }}"></script>
+<script src="{{ asset('assets/front/js/image.js') }}"></script>
 @stop
