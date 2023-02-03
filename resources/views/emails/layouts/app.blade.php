@@ -10,7 +10,7 @@
     <!-- <table align="center" cellspacing="0" cellpadding="0" width="600" border="0" style="background:-webkit-linear-gradient(left, #7730b4 0%,#8f32b0 25%,#bb36a8 68%,#cf37a4 100%); padding:0; background-size:100% 100%; background-color:#fff; font-family:Arial, Helvetica, sans-serif;"></table> -->
     <table align="center" cellspacing="0" cellpadding="0" width="600" border="0" style="padding:0; background-size:100% 100%; background-color:#1e449b; font-family:Arial, Helvetica, sans-serif;">
         <tr>
-            <td align="center" style="padding:20px 0;width:100px;"><img src="{!! asset('assets/admin/images/logo.png') !!}?v=1" style="width:100px"></td>
+            <td align="center" style="padding:20px 0;width:100px;"><img src="{!! asset('assets/common/images/logo.png') !!}?v=1" style="width:100px"></td>
         </tr>
         <tr>
             <td width="540px;" style="padding:0px 30px 20px;">

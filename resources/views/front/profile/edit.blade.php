@@ -80,7 +80,7 @@
                     </span>
                     @enderror
                 </div>
-    
+
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-dark">
                         {{ __('Update Profile') }}
@@ -122,7 +122,7 @@
                 </div>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-dark">
-                        {{ __('Save Changes') }}
+                        {{ __('Update Password') }}
                     </button>
                 </div>
             </form>
@@ -133,4 +133,4 @@
 @endsection
 @section('js')
 <script src="{{ asset('assets/front/js/auth.js') }}"></script>
-@stop   
+@stop

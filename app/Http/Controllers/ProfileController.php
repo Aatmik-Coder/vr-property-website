@@ -28,7 +28,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         return view('front.profile.edit', [
-            'title' => "My Profile",
+            'title' => "Your Account",
             'user' => $request->user(),
         ]);
     }
@@ -48,17 +48,17 @@ class ProfileController extends Controller
             'business_name' => ['string', 'max:255'],
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-       if($request->hasFile('image'))
-       {
-        $image = $request->file('image');
-        $ext = $image->getClientOriginalExtension();
-        $quality = 70;
-        $filename = uniqid().".".$ext;
-        if(!$ext == 'png')
+        if($request->hasFile('image'))
         {
-            $destination = public_path(config('constants.TEMP_IMAGES')).$filename;
-            File::ensureDirectoryExists(public_path(config('constants.TEMP_IMAGES')));
-            $compressed_png_content = shell_exec("pngquant --quality=".$quality." - < ".escapeshellarg($image));
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $quality = 70;
+            $filename = uniqid().".".$ext;
+            if(!$ext == 'png')
+            {
+                $destination = public_path(config('constants.TEMP_IMAGES')).$filename;
+                File::ensureDirectoryExists(public_path(config('constants.TEMP_IMAGES')));
+                $compressed_png_content = shell_exec("pngquant --quality=".$quality." - < ".escapeshellarg($image));
                 if (!$compressed_png_content) {
                     die("Conversion to compressed PNG failed. Is pngquant 1.8+ installed on the server?");
                 }
@@ -69,7 +69,7 @@ class ProfileController extends Controller
             }
             $user->avatar = $filename;
         }
-       
+
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
@@ -78,26 +78,5 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'Profile Updated Successfully');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current-password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
     }
 }
