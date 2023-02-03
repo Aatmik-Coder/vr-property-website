@@ -35,7 +35,7 @@
                             <div class="form-group row mb-3">
                                 <label for="fileInput" class="col-sm-3 form-control-label">Photo</label>
                                 <div class="col-sm-3">
-                                    <input id="image" name="image" type="file" class="form-control-file @error('image') is-invalid @enderror" accept="image/*">
+                                    <input id="image" name="image" type="file" class="form-control-file @error('image') is-invalid @enderror" accept="image/*" value="upload">
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

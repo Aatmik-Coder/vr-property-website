@@ -79,12 +79,13 @@ $(document).ready(function () {
             },
             name: {
                 required: true
+            },
+            image: {
+                filesize: 5,
             }
         },
         messages: {
-            name: {
-                required: "Please provide a name"
-            },
+            name: "Please provide a name",
             email: "Please enter a valid email address"
         }
     });

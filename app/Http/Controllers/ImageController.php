@@ -37,9 +37,6 @@ class ImageController extends Controller
             'description' => 'required',
             'location' => 'required|max:255',
             'tags' => 'required',
-            'status' => NULL,
-            'is_paid' => 0,
-            'is_active' => 0,
         ]);
         dd($request->all());
         $imageData = [
@@ -48,6 +45,9 @@ class ImageController extends Controller
             'description' => $request->description,
             'location' => $request->location,
             'tags' => $request->tags,
+            'status' => NULL,
+            'is_paid' => 0,
+            'is_active' => 0,
         ];
         if ($request->hasFile('image')) {
             $image = $request->file('image');
