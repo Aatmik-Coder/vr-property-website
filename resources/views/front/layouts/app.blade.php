@@ -40,7 +40,7 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
 <body>
     <div class="loader" style="display:none"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
 
-
+    {{-- START USERS HEADER & SIDEBAR --}}
     @if($isLoggedInSection)
     <header class="user-header">
         <div class="header-logo-sec">
@@ -96,7 +96,9 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
             @yield('content')
         </div>
     </div>
+    {{-- END USERS HEADER & SIDEBAR --}}
     @else
+    {{-- START FRONT HEADER --}}
     <nav class="main-navbar navbar navbar-expand-lg">
         <div class="container">
             @if(request()->routeIs('login'))
@@ -159,9 +161,11 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
             @endif
         </div>
     </nav>
-
+    {{-- START FRONT HEADER --}}
+    
     @yield('content')
 
+    {{-- START FRONT FOOTER --}}
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -204,6 +208,7 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
             </div>
         </div>
     </footer>
+    {{-- END FRONT FOOTER --}}
     @endif
 
     <script src="{{ asset('assets/common/js/all.js') }}"></script>
