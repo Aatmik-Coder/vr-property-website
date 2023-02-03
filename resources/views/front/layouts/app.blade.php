@@ -140,7 +140,7 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
                 <ul class="navbar-nav ms-auto">
                     @if(auth('web')->check())
                     <li class="nav-item">
-                        <a href="{{ route('image.list') }}" class="btn btn-outline-black">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-outline-black">Dashboard</a>
                     </li>
                     @else
                     <li class="nav-item">
