@@ -16,7 +16,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                
+
                 <div class="col-md-3">
                     <img src="{{ $user->avatar_url }}" class="img-thumbnail" width="70" height='70' id='image_preview'>
                 </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
                 <label for="email" class="form-label">{{ __('Email address*') }}</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" 
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                 value="{{ old('email', $user->email) }}" autocomplete="new-email" data-msg="Please enter email address" autofocus>
                 @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -119,7 +119,7 @@
                     </span>
                     @enderror
             </div>
-            
+
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-gredient">
                     {{ __('Save Changes') }}
@@ -127,12 +127,9 @@
             </div>
         </form>
     </div>
-    
+
 </div>
 @endsection
 @section('js')
 <script src="{{ asset('assets/front/js/auth.js') }}"></script>
-@stop
-
-
-    
+@stop   
