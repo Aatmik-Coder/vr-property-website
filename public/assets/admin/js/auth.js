@@ -79,11 +79,17 @@ $(document).ready(function () {
             },
             name: {
                 required: true
+            },
+            image: {
+                filesize: 5,
             }
         },
         messages: {
             name: {
                 required: "Please provide a name"
+            },
+            image: {
+                filesize: "File size is greater than 5MB"
             },
             email: "Please enter a valid email address"
         }
