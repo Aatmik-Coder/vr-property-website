@@ -32,27 +32,6 @@
 
 <div class="image-gallery-sec">
     <div class="container">
-        {{-- <div ID="ngy2p" data-nanogallery2='{
-            "itemsBaseURL": "http://nanogallery2.nanostudio.org/samples/",
-            "thumbnailWidth": "200",
-            "thumbnailLabel": {
-              "position": "overImageOnBottom"
-            },
-            "thumbnailAlignment": "center",
-            "thumbnailOpenImage": true
-          }'>
-          <a href="{{ asset('assets/common/images/g-img1.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img1.png') }}" data-ngdesc="">Berlin 1</a>
-          <a href="{{ asset('assets/common/images/g-img2.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img2.png') }}" data-ngdesc="">Berlin 2</a>
-          <a href="{{ asset('assets/common/images/g-img3.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img3.png') }}" data-ngdesc="">Berlin 3</a>
-          <a href="{{ asset('assets/common/images/g-img4.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img4.png') }}" data-ngdesc="">Berlin 3</a>
-          <a href="{{ asset('assets/common/images/g-img5.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img5.png') }}" data-ngdesc="">Berlin 3</a>
-          <a href="{{ asset('assets/common/images/g-img6.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img6.png') }}" data-ngdesc="">Berlin 3</a>
-          <a href="{{ asset('assets/common/images/g-img7.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img7.png') }}" data-ngdesc="">Berlin 3</a>
-          <a href="{{ asset('assets/common/images/g-img8.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img8.png') }}" data-ngdesc="">Berlin 3</a>
-          <a href="{{ asset('assets/common/images/g-img9.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img9.png') }}" data-ngdesc="">Berlin 3</a>
-          <a href="{{ asset('assets/common/images/g-img10.png') }}" data-ngthumb="{{ asset('assets/common/images/g-img10.png') }}" data-ngdesc="">Berlin 3</a>
-
-        </div> --}}
         <div class="gallery-container" id="animated-thumbnails-gallery">
             <a data-lg-size="1600-1067" class="gallery-item" data-src="{{ asset('assets/common/images/g-img1.png') }}">
                 <img alt="layers of blue." class="img-responsive" src="{{ asset('assets/common/images/g-img1.png') }}" />
@@ -97,7 +76,6 @@
 @stop
 <!-- JavaScript files-->
 @section('js')
-{{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script> --}}
 
 {{-- START IMAGE GALLERY JS --}}
 <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/lightgallery.umd.js"></script>
