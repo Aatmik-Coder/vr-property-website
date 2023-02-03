@@ -78,6 +78,7 @@ $(document).ready(function () {
             }
         }
     });
+
     $("#profileFrm").validate({
         errorElement: 'span',
         rules: {
@@ -128,9 +129,6 @@ $(document).ready(function () {
                 equalTo: "Please enter the same password as above"
 
             },
-            image: {
-                filesize: "File size is greater than 5MB",
-            },
         }
     });
 
@@ -178,25 +176,6 @@ $(document).ready(function () {
             }
         },
         messages: {
-            email: "Please enter a valid email address"
-        }
-    });
-
-    $("#profileFrm").validate({
-        errorElement: 'span',
-        rules: {
-            email: {
-                required: true,
-                email: true
-            },
-            name: {
-                required: true
-            }
-        },
-        messages: {
-            name: {
-                required: "Please provide a name"
-            },
             email: "Please enter a valid email address"
         }
     });
