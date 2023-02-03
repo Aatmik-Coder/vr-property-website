@@ -76,7 +76,7 @@ foreach($isLoggedInSectionRoutes as $isLoggedInSectionRoute) {
                     <a class="nav-link @if(request()->routeIs('image.add')) active @endif" href="{!! route('image.add') !!}">Upload Images</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{!! route('profile.edit') !!}">Your Account</a>
+                    <a class="nav-link @if(request()->routeIs('profile.edit')) active @endif" href="{!! route('profile.edit') !!}">Your Account</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0)">Profile Preview</a>
