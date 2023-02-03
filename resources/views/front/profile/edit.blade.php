@@ -4,13 +4,13 @@
 
 <div class="login-sec">
     <div class="form-view singup">
-        <form class="login-form" id="registerFrm" name="registerFrm" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+        <form class="login-form" id="profileFrm" name="profileFrm" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
             <h3 class="form-title">{!! $title !!}</h3>
             @csrf
             @method('patch')
             <div class="form-group row mb-3">
                 <label for="fileInput" class="col-sm-3 form-control-label">Photo</label>
-                    <input id="image" name="image" type="file" class="form-control-file @error('image') is-invalid @enderror" accept="image/*">
+                    <input id="image" name="image" type="file" class="form-control-file @error('image') is-invalid @enderror" accept="image/*" value="upload">
                     @error('image')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
