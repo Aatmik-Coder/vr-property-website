@@ -9,6 +9,7 @@
     --white: #FFFFFF;
     --red: #F00000;
     --red2: #be1622;
+    --green: #
 }
 
 body {
@@ -20,7 +21,7 @@ body {
 }
 
 span.error {
-    color: red;
+    color: var(--red);
     font-size: 12px;
 }
 
@@ -30,6 +31,7 @@ textarea:focus,
 button:focus,
 a:focus,
 .form-control:focus,
+.form-select:focus,
 .btn:focus {
     border-color: unset;
     box-shadow: none !important;
@@ -227,6 +229,7 @@ a:hover {
     width: 350px;
     height: 100%;
     background-color: #f6f6f6;
+    padding-top: 20px;
 }
 
 .siderbar .nav {
@@ -411,8 +414,102 @@ a:hover {
     height: 46px;
 }
 
-
-
 /*--------------------------------------------
             START UPLOAD IMAGE PAGE
+--------------------------------------------*/
+
+/*--------------------------------------------
+            START MY IMAGE PAGE
+--------------------------------------------*/
+.page-title select {
+    width: auto;
+    max-width: 100%;
+}
+
+.sort-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.sort-group label {
+    margin-right: 20px;
+    font-size: 16px;
+}
+
+.sort-group select {
+    position: relative;
+    /* min-width: 170px; */
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+    color: var(--theme-color);
+    border-color: var(--theme-color);
+    font-weight: 400;
+}
+
+.my-imgs-container {
+    position: relative;
+    padding: 30px;
+}
+
+.my-imgs-container .my-imgs-label {
+    font-size: 16px;
+    color: var(--theme-color);
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.my-imgs-container .my-imgs-label span {
+    color: var(--red2);
+}
+
+.my-imgs-container .gallery-container {
+    margin-bottom: 60px;
+}
+
+.my-imgs-container .gallery-container:last-child {
+    margin-bottom: 0;
+}
+
+.my-imgs-container .gallery-container .myImgsBox {
+    position: relative;
+    /* height: 250px; */
+}
+
+.my-imgs-container .gallery-container .myImgsBox input {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    z-index: 150;
+}
+
+.my-imgs-container .gallery-container .myImgsBox .content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: #fff;
+    padding: 10px;
+    padding-top: 0;
+    width: 100%;
+}
+
+.my-imgs-container .gallery-container .myImgsBox .content h6 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+
+.my-imgs-container .gallery-container .myImgsBox .content p {
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+/*--------------------------------------------
+            START MY IMAGE PAGE
 --------------------------------------------*/
