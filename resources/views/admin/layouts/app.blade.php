@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title }} | {{ config('app.name') }}</title>
+    <title>{!! request()->segment(2) !!}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -16,11 +16,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <link rel="stylesheet" href="{{ asset('assets/common/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css') }}?v={{time()}}" id="theme-stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css') }}" --}}
 
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--> 
 </head>
 
 <body>
@@ -87,7 +88,7 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">{{ $title }}</h2>
+                        <h2 class="no-margin-bottom">{{ strtoupper(request()->segment(2))}}</h2>
                     </div>
                 </header>
                 @yield('content')

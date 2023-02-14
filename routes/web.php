@@ -1,7 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PropertiesController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\DeveloperController;
+use App\Http\Controllers\Admin\AgencyController;
+use App\Helper;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,9 +81,30 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         Route::post('/change-password', 'Auth\PasswordController@update')->name('password.update');
 
         //Users Routes
-        Route::get('/user','UserController@index')->name('user.list');
-        Route::post('/user/ajax', 'UserController@ajax')->name('user.list.ajax');
-        Route::get('/user/view/{id}', 'UserController@view')->name('user.view');
-    });
+        Route::resource('users', UserController::class);
+        // Route::resource('users')
+        // Route::get('/user/index','UserController@index')->name('users.index');
+        // Route::get('/user/create','UserController@create')->name('users.create');
+        Route::resource('roles', RoleController::class);
+        Route::post('/roles/ajax', 'RoleController@ajax')->name('roles.list.ajax');
+        Route::get('/roles/view/{id}', 'RoleController@view')->name('roles.view');
+        Route::delete('delete_data/role/{id}', 'RoleController@destroy');
 
+        //Properties Routes
+        Route::resource('properties',PropertiesController::class);
+        
+        //Permissinos Routes 
+        Route::resource('permissions', PermissionController::class);
+        Route::post('/permissions/ajax', 'PermissionController@ajax')->name('permissions.list.ajax');
+        Route::get('/permissions/view/{id}', 'PermissionController@view')->name('permissions.view');
+        Route::delete('delete_data/permission/{id}', 'PermissionController@destroy');
+
+        Route::resource('developers', DeveloperController::class);
+
+        Route::resource('agencies', AgencyController::class);
+
+    });
 });
+Route::post('fetch-states',[Helper::class,'fetch_states'])->name('fetch-states');
+
+Route::post('fetch-cities', [Helper::class, 'fetch_cities'])->name('fetch-cities');

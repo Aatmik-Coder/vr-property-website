@@ -1,0 +1,15 @@
+input[type='checkbox']{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #123;
+    opacity: 1;
+    top: 3px;
+}
+
+.form-check {
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: 0.125rem;
+    position: relative;
+}
