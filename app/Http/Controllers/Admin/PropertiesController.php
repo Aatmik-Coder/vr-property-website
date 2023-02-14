@@ -35,7 +35,7 @@ class PropertiesController extends Controller
 
         $image = $request->file('image_name');
         $image_name = time().'-'.$image->getClientOriginalName();
-        move_uploaded_file($_FILES["image_name"]["tmp_name"],public_path().'/assets/admin/properties_images'.$image_name);
+        move_uploaded_file($_FILES["image_name"]["tmp_name"],public_path().'/assets/admin/property_image/'.$image_name);
         $property = new Property;
         $property->developer_id = $developer_id;
         $property->country_id = $request->input('country_id');
