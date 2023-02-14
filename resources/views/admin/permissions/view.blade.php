@@ -14,9 +14,9 @@
                         <form id="profileFrm" name="profileFrm" action="" class="form-horizontal">
                             @csrf
                             <div class="form-group row mb-3">
-                                <label class="col-sm-3 form-control-label">create new permission</label>
+                                <label class="col-sm-3 form-control-label">View permission</label>
                                 <div class="col-sm-9">
-                                    <input id="name" name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{!! $permission->name !!}" readonly>
+                                    <p>{!! $permission->name !!}</p>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

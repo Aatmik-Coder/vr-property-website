@@ -48,11 +48,11 @@ class PermissionController extends Controller{
 
                 // $status = '<a href="javascript:void(0);" onclick="changeStatus('.$permission->id.')" class="btn action-btn" role="button" aria-pressed="true">';
 
-                $action = '<a href="'.route("admin.permissions.view",$permission->id).'" class="btn action-btn" role="button" aria-pressed="true" title="View">';
-                    $action .= '<i class="fa fa-eye green" aria-hidden="true"></i>';
-                $action .= '</a>';
+                // $action = '<a href="'.route("admin.permissions.view",$permission->id).'" class="btn action-btn" role="button" aria-pressed="true" title="View">';
+                //     $action .= '<i class="fa fa-eye green" aria-hidden="true"></i>';
+                // $action .= '</a>';
 
-                $action .= '<a href="permissions/'.$permission->id.'/edit" class="btn action-btn" role="button" aria-pressed="true" title="Edit">';
+                $action = '<a href="permissions/'.$permission->id.'/edit" class="btn action-btn" role="button" aria-pressed="true" title="Edit">';
                     $action .= '<i class="fa fa-pen green" aria-hidden="true"></i>';
                 $action .= '</a>';
 

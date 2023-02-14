@@ -13,8 +13,8 @@
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label" for="roles">Role</label>
                                 <div class="col-sm-9">
-                                    <select name="role_id" id="roles" class="form-control">
-                                        <option value="#">Select</option>
+                                    <select name="role_id" id="role_id" class="form-control">
+                                        <option value="">Select</option>
                                         <option value="Super Admin">Super Admin</option>
                                         <option value="Developer">Developer</option>
                                         <option value="Employee">Employee</option>

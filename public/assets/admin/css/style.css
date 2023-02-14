@@ -3828,6 +3828,21 @@ a>code {
   display: inline-block;
 }
 
+input[type='checkbox'].role-checkbox {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  display: block;
+  cursor: pointer;
+  background: #464C4A;
+  border-radius: 5px;
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #123;
+  opacity: 1;
+  top: 20px;
+}
+
 input[type='checkbox'] {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
@@ -3846,6 +3861,14 @@ input[type='checkbox'] {
   z-index: 2;
   width: 100%;
   height: 100%;
+}
+
+.form-check-label{
+  display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: 0.125rem;
+    position: relative;
 }
 
 input[type='checkbox']:checked+span::after {

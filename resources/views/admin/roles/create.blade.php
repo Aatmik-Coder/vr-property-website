@@ -25,7 +25,7 @@
                                 <label class="col-sm-3 form-control-label">add permissions</label>
                                 <div class="col-sm-9">
                                     @foreach ($permissions as $permission)
-                                        <input type="checkbox" id="{!! $permission->id !!}" name="{!! $permission->name !!}" value="{!! $permission->id !!}"><label class="form-check-label" for="{!! $permission->id !!}">{!! $permission->name !!}</label><br>
+                                        <input type="checkbox" id="{!! $permission->id !!}" class="role-checkbox" name="{!! $permission->name !!}" value="{!! $permission->id !!}"><label class="form-check-label" for="{!! $permission->id !!}">{!! $permission->name !!}</label>
                                     @endforeach
                                     {{-- <input type="checkbox" id="property-edit" name="property-edit"><label class="form-check-label" for="property-edit">Property-Edit</label><br>
                                     <input type="checkbox" id="property-delete" name="property-delete"><label class="form-check-label" for="property-delete">Property-Delete</label><br> --}}

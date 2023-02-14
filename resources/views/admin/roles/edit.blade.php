@@ -29,7 +29,7 @@
                                 <label class="col-sm-3 form-control-label">edit roles</label>
                                 <div class="col-sm-9">
                                     @foreach ($permissions as $permission)
-                                        <input type="checkbox" id="{!! $permission->id !!}" name="{!! $permission->name !!}" value="{!! $permission->id !!}" @if($role_permissions->contains('id',strval($permission->id))) checked @endif><label class="form-check-label" for="{!! $permission->id !!}">{!! $permission->name !!}</label><br>
+                                        <input type="checkbox" id="{!! $permission->id !!}" class="role-checkbox" name="{!! $permission->name !!}" value="{!! $permission->id !!}" @if($role_permissions->contains('id',strval($permission->id))) checked @endif><label class="form-check-label" for="{!! $permission->id !!}">{!! $permission->name !!}</label>
                                     @endforeach
                                 </div>
                             </div>
