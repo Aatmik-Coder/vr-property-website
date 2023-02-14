@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Developer;
+use App\Models\Country;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
@@ -35,7 +37,9 @@ class UserController extends Controller
      */
     public function create()
     {
-       return view('admin.users.create');
+        $roles = Role::get();
+        $countries = Country::get();
+        return view('admin.users.create', compact('roles','countries'));
     }
     
     /**
@@ -46,7 +50,53 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $avatar = $request->file('avatar');
+        $avatar_name = time().'-'.$avatar->getClientOriginalName();
+        move_uploaded_file($_FILES['avatar']['tmp_name'],public_path().'/assets/admin/avatar/'.$avatar_name);
+
+        $role_name = Role::where('id',$request->role_id)->first();
+        if($role_name->name == 'Developer') {
+            $role = new Developer();
+            $role->developer_name = $request->input($role_name->name . "_name");
+        }
+        if($role_name->name == 'Agency') {
+            $role = new Agency();
+            $role->agency_name = $request->input($role_name->name . "_name");
+        }
+        if($role_name->name == 'Employee') {
+            $role = new Employee();
+            $role->employee_name = $request->input($role_name->name . "_name");
+        }
+        $role->person_name = $request->input('person_name');
+        $role->person_email = $request->input('person_email');
+        $role->person_mobile_number = $request->input('person_mobile_number');
+        $role->country_id = $request->input('country_id');
+        $role->state_id = $request->input('state_id');
+        $role->city_id = $request->input('city_id');
+        $role->address = $request->input('address');
+        $role->save();
+
+        $user = new User;
+        $user->role_id = $request->input('role_id');
+        $user->avatar = $avatar_name;
+        if($role_name->name == 'Developer'){
+            $user->is_developer = '1';
+        } else {
+            $user->is_developer = '0';
+        }
+
+        if($role_name->name == 'Employee') {
+            $user->is_employee = '1';
+        } else {
+            $user->is_employee = '0';
+        }
+
+        if($role_name->name == 'Agency') {
+            $user->is_agency = '1';
+        } else {
+            $user->is_agency = '0';
+        }
+        $user->save();
     }
     
     /**

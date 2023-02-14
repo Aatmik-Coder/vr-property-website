@@ -1,6 +1,23 @@
 $(document).ready(function(){
     data_table();
     'use strict';
+
+    $('#role_id').on('change', function() {
+        let roleName = $(this).find(':selected').text();
+        if(roleName != 'Super Admin' && roleName != 'Select') {
+            $('#type_name').children('label').remove();
+            $('#type_name').children('div').remove();
+            $('#type_name').append(`
+            <label class="col-sm-3 form-control-label">${roleName} name</label>
+            <div class="col-sm-9">
+                <input id="${roleName}_name" name="${roleName}_name" type="text" class="form-control" placeholder="enter developer name">
+            </div>
+            `);
+        } else {
+            $('#type_name').children('label').remove();
+            $('#type_name').children('div').remove();
+        }
+    });
 });
 
 var dtTable;

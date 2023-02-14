@@ -82,6 +82,7 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
 
         //Users Routes
         Route::resource('users', UserController::class);
+        Route::post('/users/ajax', 'UserController@ajax')->name('users.list.ajax');
         // Route::resource('users')
         // Route::get('/user/index','UserController@index')->name('users.index');
         // Route::get('/user/create','UserController@create')->name('users.create');

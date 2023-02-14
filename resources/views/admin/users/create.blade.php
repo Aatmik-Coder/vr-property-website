@@ -14,11 +14,10 @@
                                 <label class="col-sm-3 form-control-label" for="roles">Role</label>
                                 <div class="col-sm-9">
                                     <select name="role_id" id="role_id" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="Super Admin">Super Admin</option>
-                                        <option value="Developer">Developer</option>
-                                        <option value="Employee">Employee</option>
-                                        <option value="Agency">Agency</option>
+                                        <option value="" selected>Select</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{!! $role->id !!}">{!! $role->name !!}</option>
+                                        @endforeach
                                     </select>
                                     {{-- <input id="name" name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') ?? $admin->name }}"> --}}
                                     @error('name')
@@ -28,10 +27,12 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row mb-3" id="type_name">
+                            </div>
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Name</label>
                                 <div class="col-sm-9">
-                                    <input id="name" name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="enter name">
+                                    <input id="person_name" name="person_name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="enter name">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -42,7 +43,7 @@
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="enter email">
+                                    <input id="person_email" name="person_email" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="enter email">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -53,7 +54,7 @@
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Mobile</label>
                                 <div class="col-sm-9">
-                                    <input id="mobile" name="mobile" type="number" class="form-control @error('mobile') is-invalid @enderror" placeholder="enter mobile number" min="1">
+                                    <input id="person_mobile_number" name="person_mobile_number" type="number" class="form-control @error('mobile') is-invalid @enderror" placeholder="enter mobile number" min="1">
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -62,10 +63,15 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-3">
-                                <label class="col-sm-3 form-control-label">Password</label>
+                                <label class="col-sm-3 form-control-label">Country</label>
                                 <div class="col-sm-9">
-                                    <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="enter password">
-                                    @error('password')
+                                    <select name="country_id" id="country_id" class="form-control @error('country') is-invalid @enderror">
+                                        <option value="">Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{!! $country->id !!}">{!! $country->name !!}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('country')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -73,9 +79,44 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-3">
-                                <label for="fileInput" class="col-sm-3 form-control-label">Photo</label>
+                                <label class="col-sm-3 form-control-label">State</label>
+                                <div class="col-sm-9">
+                                    <select name="state_id" id="state_id" class="form-control @error('state') is-invalid @enderror">
+                                    </select>
+                                    @error('state')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 form-control-label">City</label>
+                                <div class="col-sm-9">
+                                    <select name="city_id" id="city_id" class="form-control @error('city') is-invalid @enderror">
+                                    </select>
+                                    @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 form-control-label">Address</label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" placeholder="enter address"></textarea>
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label for="fileInput" class="col-sm-3 form-control-label">Avatar</label>
                                 <div class="col-sm-3">
-                                    <input id="image" name="image" type="file" class="form-control-file @error('image') is-invalid @enderror" accept="image/*" value="upload">
+                                    <input id="avatar" name="avatar" type="file" class="form-control-file @error('image') is-invalid @enderror" accept="image/*" value="upload">
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -102,5 +143,7 @@
 </section>
 @section('js')
 <script src="{{ asset('assets/admin/js/auth.js') }}"></script>
+<script src="{{ asset('assets/admin/js/common.js') }}"></script>
+<script src="{{ asset('assets/admin/js/user.js') }}"></script>
 @stop
 @endsection
