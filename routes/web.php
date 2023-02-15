@@ -83,6 +83,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         //Users Routes
         Route::resource('users', UserController::class);
         Route::post('/users/ajax', 'UserController@ajax')->name('users.list.ajax');
+        // Route::get('/users/view/{id}', 'UserController@view')->name('users.view');
+        // Route::delete('delete_data/user/{id}', 'UserController@destroy');
         // Route::resource('users')
         // Route::get('/user/index','UserController@index')->name('users.index');
         // Route::get('/user/create','UserController@create')->name('users.create');

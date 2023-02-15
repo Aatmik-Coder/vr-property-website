@@ -39,13 +39,12 @@ function data_table()
         },
         "order": [],
         columns: [
-            {data: 'first_name',name: 'first_name'},
-            {data: 'last_name',name: 'last_name'},
-            {data: 'email',name: 'email'},
-            {data: 'nick_name',name: 'nick_name'},
-            {data: 'business_name',name: 'business_name'},
-            {data: 'is_active',name: 'is_active',orderable: false},
-            {data: 'action',name: 'action',orderable: false},
+            {data: 'id',name: 'id'},
+            {data: 'role_id', name:'role_id'},
+            // {data: 'person_name',name: 'person_name'},
+            // {data: 'person_email',name: 'person_email'},
+            // {data: 'person_mobile_number',name: 'person_mobile_number'},
+            // {data: 'action',name: 'action',orderable: false},
         ],
         
 

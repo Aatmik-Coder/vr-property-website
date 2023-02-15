@@ -30,6 +30,72 @@ class UserController extends Controller
         return view('admin.users.index');
     }
     
+    public function ajax(Request $request)
+    {
+        $columns = array('id','name');
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = "created_at";
+        $dir = "desc";
+        if($request->input('order.0.column') != "" && $request->input('order.0.dir') != "")
+        {
+            $order = $columns[$request->input('order.0.column')];
+            $dir = $request->input('order.0.dir');
+        }
+
+        $users = new User;
+        $total_data = $users->count();
+        $total_filter = $total_data;
+        if($request->input('search.value') != "")
+        {
+            $search = $request->input('search.value');
+            $users = $users->where('id','LIKE',"%{$search}%")
+                            ->orWhere('role_id','LIKE',"%{$search}%");
+                            // ->orWhere('person_name','LIKE',"%{$search}%")
+                            // ->orWhere('person_email','LIKE',"%{$search}%")
+                            // ->orWhere('person_mobile_number','LIKE',"%{$search}%");
+            $total_filter = $users->count();
+        }
+        $users = $users->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+
+        $data = array();
+        if(!empty($users))
+        {
+            foreach ($users as $user)
+            {
+                $nestedData['id'] = $user->id;
+                $nestedData['role_id'] = $user->role_id;
+
+                // $status = '<a href="javascript:void(0);" onclick="changeStatus('.$permission->id.')" class="btn action-btn" role="button" aria-pressed="true">';
+
+                // $action = '<a href="'.route("admin.roles.view",$user->id).'" class="btn action-btn" role="button" aria-pressed="true" title="View">';
+                //     $action .= '<i class="fa fa-eye green" aria-hidden="true"></i>';
+                // $action .= '</a>';
+
+                // $action .= '<a href="roles/'.$user->id.'/edit" class="btn action-btn" role="button" aria-pressed="true" title="Edit">';
+                //     $action .= '<i class="fa fa-pen green" aria-hidden="true"></i>';
+                // $action .= '</a>';
+
+                // $action .= '<a href="javascript:void(0);" onclick="deleteData('.$user->id.')" class="btn action-btn" title="Delete" role="button" aria-pressed="true">';
+                //     $action .= '<i class="fa fa-trash red" aria-hidden="true"></i>';
+                // $action .= '</a>';
+
+                // $nestedData['action'] = $action;
+
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($total_data),
+            "recordsFiltered" => intval($total_filter),
+            "data"            => $data
+        );
+        echo json_encode($json_data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -81,20 +147,26 @@ class UserController extends Controller
         $user->avatar = $avatar_name;
         if($role_name->name == 'Developer'){
             $user->is_developer = '1';
+            $user->developer_id = $role->id;
         } else {
             $user->is_developer = '0';
+            $user->developer_id = NULL;
         }
 
         if($role_name->name == 'Employee') {
             $user->is_employee = '1';
+            $user->employee_id = $role->id;
         } else {
             $user->is_employee = '0';
+            $user->employee_id = NULL;
         }
-
+        
         if($role_name->name == 'Agency') {
             $user->is_agency = '1';
+            $user->agency_id = $role->id;
         } else {
             $user->is_agency = '0';
+            $user->agency_id = NULL;
         }
         $user->save();
     }

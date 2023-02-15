@@ -13,7 +13,7 @@ use Storage;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    // use \Illuminate\Database\Eloquent\SoftDeletes;
     use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
     protected $softCascade = [
@@ -26,7 +26,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'nick_name', 'business_name', 'avatar', 'stripe_customer_id', 'password', 'is_active'
+        'role_id', 
+        'is_developer', 
+        'is_agency', 
+        'is_employee', 
+        'developer_id', 
+        'agency_id', 
+        'employee_id', 
+        'avatar'
     ];
 
     /**

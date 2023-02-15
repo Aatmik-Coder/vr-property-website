@@ -8,15 +8,13 @@
                     <div class="card-body">
                         <table class="table text-center" id="data-table">
                             <thead>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>id</th>
+                                <th>Roles</th>
+                                {{-- <th>Name</th>
                                 <th>Email</th>
-                                <th>Nickname</th>
-                                <th>Buisness Name</th>
-                                <th>Is Active?</th>
-                                <th>Action</th>
+                                <th>Mobile Number</th> --}}
+                                {{-- <th>Action</th> --}}
                             </thead>
-                            
                         </table>
                     </div>
                 </div>
