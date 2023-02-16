@@ -45,16 +45,20 @@ class UserController extends Controller
         }
 
         $users = new User;
+        // $roles = new Role;
         $total_data = $users->count();
         $total_filter = $total_data;
         if($request->input('search.value') != "")
         {
             $search = $request->input('search.value');
-            $users = $users->where('id','LIKE',"%{$search}%")
-                            ->orWhere('role_id','LIKE',"%{$search}%");
-                            // ->orWhere('person_name','LIKE',"%{$search}%")
-                            // ->orWhere('person_email','LIKE',"%{$search}%")
-                            // ->orWhere('person_mobile_number','LIKE',"%{$search}%");
+            $users = $users->where('id','LIKE',"%{$search}%")->orWhereHas('roles', function ($q) use ($search) {
+                $q->where('name','like',"%{$search}%");
+            })->orWhereHas('developers', function ($q) use ($search) {
+                $q->where('person_name','LIKE',"%{$search}%")
+                    ->orWhere('person_email','like',"%{$search}%")
+                    ->orWhere('person_mobile_number','like',"%{$search}%");
+            });
+            
             $total_filter = $users->count();
         }
         $users = $users->offset($start)->limit($limit)->orderBy($order,$dir)->get();
@@ -65,7 +69,10 @@ class UserController extends Controller
             foreach ($users as $user)
             {
                 $nestedData['id'] = $user->id;
-                $nestedData['role_id'] = $user->role_id;
+                $nestedData['name'] = $user->roles->name;
+                $nestedData['person_name']=$user->developers->person_name;
+                $nestedData['person_email']=$user->developers->person_email;
+                $nestedData['person_mobile_number']=$user->developers->person_mobile_number;
 
                 // $status = '<a href="javascript:void(0);" onclick="changeStatus('.$permission->id.')" class="btn action-btn" role="button" aria-pressed="true">';
 

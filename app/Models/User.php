@@ -13,18 +13,25 @@ use Storage;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    // use \Illuminate\Database\Eloquent\SoftDeletes;
-    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
-
-    protected $softCascade = [
-        'images@update',
-    ];
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
+
+    public function developers() {
+        return $this->hasOne(Developer::class, 'id','developer_id');
+    }
+
+    public function roles() {
+        return $this->hasOne(Role::class, 'id','role_id');
+    }
+
+    protected $tables = 'users';
+
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'role_id', 
         'is_developer', 
@@ -35,53 +42,4 @@ class User extends Authenticatable
         'employee_id', 
         'avatar'
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    public function sendPasswordResetNotification($token)
-    {
-        $this->reset_url = route('password.reset', ['token' => $token, 'email' => $this->email]);
-        $this->notify(new ResetPasswordNotification($this));
-    }
-
-    public function getNameAttribute()
-    {
-        $name = $this->first_name;
-        if($this->last_name) {
-            $name .= ' '.$this->last_name;
-        }
-        return $name;
-    }
-
-    public function getAvatarUrlAttribute()
-    {
-        $url = asset("assets/common/images/default-avatar.png");
-        if($this->avatar) {
-            $url = Storage::url(config('constants.USER_PATH').$this->avatar);
-        }
-        return $url;
-    }
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'created_at' =>  'date'
-    ];
-
-    public function images()
-    {
-        return $this->hasMany(Image::class);
-    }
 }

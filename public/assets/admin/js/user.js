@@ -40,10 +40,10 @@ function data_table()
         "order": [],
         columns: [
             {data: 'id',name: 'id'},
-            {data: 'role_id', name:'role_id'},
-            // {data: 'person_name',name: 'person_name'},
-            // {data: 'person_email',name: 'person_email'},
-            // {data: 'person_mobile_number',name: 'person_mobile_number'},
+            {data: 'name', name:'name'},
+            {data: 'person_name',name: 'person_name'},
+            {data: 'person_email',name: 'person_email'},
+            {data: 'person_mobile_number',name: 'person_mobile_number'},
             // {data: 'action',name: 'action',orderable: false},
         ],
         

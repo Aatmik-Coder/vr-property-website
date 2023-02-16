@@ -9,10 +9,10 @@
                         <table class="table text-center" id="data-table">
                             <thead>
                                 <th>id</th>
-                                <th>Roles</th>
-                                {{-- <th>Name</th>
+                                <th>name</th>
+                                <th>Name</th>
                                 <th>Email</th>
-                                <th>Mobile Number</th> --}}
+                                <th>Mobile Number</th>
                                 {{-- <th>Action</th> --}}
                             </thead>
                         </table>
