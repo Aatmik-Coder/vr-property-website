@@ -33,12 +33,12 @@
             <a href="/admin/permissions/create">add permission</a>
         </li>
         
-        {{-- <li>
+        <li>
             <a href="/admin/developers/create">add developer</a>
         </li>
         
         <li>
             <a href="/admin/agencies/create">add agencies</a>
-        </li> --}}
+        </li>
     </ul>
 </nav>
