@@ -91,7 +91,7 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         Route::resource('roles', RoleController::class);
         Route::post('/roles/ajax', 'RoleController@ajax')->name('roles.list.ajax');
         Route::get('/roles/view/{id}', 'RoleController@view')->name('roles.view');
-        Route::delete('delete_data/role/{id}', 'RoleController@destroy');
+        Route::delete('/roles/delete/{id}', 'RoleController@destroy')->name('roles.destroy');
 
         //Properties Routes
         Route::resource('properties',PropertiesController::class);
@@ -100,7 +100,7 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         Route::resource('permissions', PermissionController::class);
         Route::post('/permissions/ajax', 'PermissionController@ajax')->name('permissions.list.ajax');
         Route::get('/permissions/view/{id}', 'PermissionController@view')->name('permissions.view');
-        Route::delete('delete_data/permission/{id}', 'PermissionController@destroy');
+        Route::delete('/permissions/delete/{id}', 'PermissionController@destroy')->name('permissions.destroy');
 
         Route::resource('developers', DeveloperController::class);
 

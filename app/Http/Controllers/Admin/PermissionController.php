@@ -56,7 +56,7 @@ class PermissionController extends Controller{
                     $action .= '<i class="fa fa-pen green" aria-hidden="true"></i>';
                 $action .= '</a>';
 
-                $action .= '<a href="javascript:void(0);" onclick="deleteData('.$permission->id.')" class="btn action-btn" title="Delete" role="button" aria-pressed="true">';
+                $action .= '<a href="javascript:void(0);" onclick="deleteData(\''.route("admin.permissions.destroy",$permission->id).'\')" class="btn action-btn" title="Delete" role="button" aria-pressed="true">';
                     $action .= '<i class="fa fa-trash red" aria-hidden="true"></i>';
                 $action .= '</a>';
 

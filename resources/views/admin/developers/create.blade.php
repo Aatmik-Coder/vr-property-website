@@ -44,9 +44,9 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-3">
-                                <label class="col-sm-3 form-control-label">Person Phone Number</label>
+                                <label class="col-sm-3 form-control-label">Person Mobile Number</label>
                                 <div class="col-sm-9">
-                                    <input id="person_phone_number" name="person_phone_number" type="number" class="form-control @error('person_phone_number') is-invalid @enderror" placeholder="enter person phone number" minlength="10" min="1">
+                                    <input id="person_mobile_number" name="person_mobile_number" type="number" class="form-control @error('person_mobile_number') is-invalid @enderror" placeholder="enter person mobile number" minlength="10" min="1">
                                     @error('person_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

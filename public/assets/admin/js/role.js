@@ -3,6 +3,24 @@ $(document).ready(function(){
     'use strict';
 });
 
+function deleteData(url) {
+    alert(url);
+    if(confirm('Are you sure want to delete?'))
+    {
+        $.ajax({
+            headers:{
+                'X-CSRF-Token':_token
+            },
+            url:url,
+            type:'DELETE',
+            dataType:'json',
+            success:function (result) {
+                location.reload();
+            }
+        });
+    }
+}
+
 var dtTable;
 function data_table()
 {

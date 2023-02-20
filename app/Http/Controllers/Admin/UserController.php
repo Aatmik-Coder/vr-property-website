@@ -9,8 +9,11 @@ use App\Models\Role;
 use App\Models\Developer;
 use App\Models\Country;
 use DB;
-use Hash;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
     
 class UserController extends Controller
 {
@@ -123,6 +126,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $password = Str::random(10);
+        $hashed_password = Hash::make($password);
+
         $avatar = $request->file('avatar');
         $avatar_name = time().'-'.$avatar->getClientOriginalName();
         move_uploaded_file($_FILES['avatar']['tmp_name'],public_path().'/assets/admin/avatar/'.$avatar_name);
@@ -142,6 +148,7 @@ class UserController extends Controller
         }
         $role->person_name = $request->input('person_name');
         $role->person_email = $request->input('person_email');
+        $role->person_password = $hashed_password;
         $role->person_mobile_number = $request->input('person_mobile_number');
         $role->country_id = $request->input('country_id');
         $role->state_id = $request->input('state_id');
@@ -176,6 +183,8 @@ class UserController extends Controller
             $user->agency_id = NULL;
         }
         $user->save();
+
+        Mail::to($request->person_email)->send(new TestMail($request,$password));
     }
     
     /**
