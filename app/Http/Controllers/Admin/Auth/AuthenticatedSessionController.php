@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AdminLoginRequest;
+use App\Http\Requests\Auth\DeveloperLoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard('admin') ?? Auth::guard('developer');
     }
 
     /**
@@ -55,7 +56,25 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
     }
-    
+
+    public function developerStore(DeveloperLoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        $developer = auth('developer')->user();
+        if(!$developer->is_active)
+        {
+            $this->guard()->logout();
+            return redirect()->back()->withInput($request->only('person_email', 'remember'))
+                ->withErrors([
+                    'person_email' => 'Your account is inactive. Please contact your administrator to get access!',
+                ]);
+        }
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::DEVELOPER_HOME);
+    }
+
     /**
      * Destroy an authenticated session.
      */

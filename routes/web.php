@@ -108,6 +108,28 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
 
     });
 });
+
+Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('developer.')->group(function() {
+    Route::get('/',function () {
+        return redirect(route('developer.dashboard'));
+    })->name('home');
+
+    Route::namespace('Auth')->middleware('guest:developer')->group(function(){
+        Route::get('/login','AuthenticatedSessionController@developerCreate')->name('login');
+        Route::post('/login','AuthenticatedSessionController@developerStore');
+    });
+
+    Route::middleware('developer')->group(function () {
+        Route::get('/dashboard','DeveloperController@dashboard')->name('dashboard');
+        Route::post('/logout', 'AuthenticatedSessionController@destroy')->name('logout');
+
+        Route::get('/profile', 'ProfileController@edit')->name('profile.edit');
+        Route::post('/profile', 'ProfileController@update')->name('profile.update');
+
+        Route::get('/change-password', 'Auth\PasswordController@edit')->name('password.edit');
+        Route::post('/change-password', 'Auth\PasswordController@update')->name('password.update');
+    });
+});
 Route::post('fetch-states',[Helper::class,'fetch_states'])->name('fetch-states');
 
 Route::post('fetch-cities', [Helper::class, 'fetch_cities'])->name('fetch-cities');

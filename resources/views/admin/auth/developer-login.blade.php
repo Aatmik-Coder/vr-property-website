@@ -10,26 +10,26 @@
                     <div class="form d-flex align-items-center">
                         <div class="content">
                             <h1 class="mb-5">Developer Login</h1>
-                            <form id="loginFrm" name="loginFrm" method="POST" action="{{ route('developer.login') }}">
+                            <form id="devloginFrm" name="devloginFrm" method="POST" action="{{ route('developer.login') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="email" class="label-material">{{ __('E-Mail Address') }}</label>
-                                    <input id="email" type="email"
-                                        class="input-material @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" autocomplete="email"
+                                    <label for="person_email" class="label-material">{{ __('E-Mail Address') }}</label>
+                                    <input id="person_email" type="email"
+                                        class="input-material @error('person_email') is-invalid @enderror" name="person_email"
+                                        value="{{ old('person_email') }}" autocomplete="person_email"
                                         data-msg="Please enter email address" autofocus>
-                                    @error('email')
+                                    @error('person_email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="password" class="label-material">{{ __('Password') }}</label>
-                                    <input id="password" type="password"
-                                        class="input-material @error('password') is-invalid @enderror" name="password"
+                                    <label for="person_password" class="label-material">{{ __('Password') }}</label>
+                                    <input id="person_password" type="password"
+                                        class="input-material @error('person_password') is-invalid @enderror" name="person_password"
                                         autocomplete="current-password" data-msg="Please enter your password">
-                                    @error('password')
+                                    @error('person_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -43,8 +43,8 @@
                                 <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                             </form>
 
-                            @if (Route::has('admin.password.request'))
-                            <a class="forgot-pass" href="{{ route('admin.password.request') }}">
+                            @if (Route::has('developer.password.request'))
+                            <a class="forgot-pass" href="{{ route('developer.password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                             @endif
@@ -73,6 +73,6 @@
 </div>
 <!-- JavaScript files-->
 @section('js')
-<script src="{{ asset('assets/admin/js/auth.js') }}"></script>
+<script src="{{ asset('assets/admin/js/developer_auth.js') }}"></script>
 @stop
 @endsection

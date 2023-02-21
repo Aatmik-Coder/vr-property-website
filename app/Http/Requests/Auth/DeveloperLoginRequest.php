@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-class AdminLoginRequest extends FormRequest
+class DeveloperLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +29,8 @@ class AdminLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'person_email' => ['required', 'string', 'email'],
+            'person_password' => ['required', 'string'],
         ];
     }
 
@@ -43,23 +43,16 @@ class AdminLoginRequest extends FormRequest
      */
     public function authenticate()
     {
+
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::guard('admin')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if(! Auth::guard('developer')->attempt(['person_email'=>$this->input('person_email'), 'password'=>$this->input('person_password')],$this->boolean('remember'))){
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                'person_email' => __('auth.failed'),
             ]);
         }
-
-        // if(! Auth::guard('developer')->attempt($this->only('person_email', 'person_password'), $this->boolean('remember'))){
-        //     RateLimiter::hit($this->throttleKey());
-
-        //     throw ValidationException::withMessages([
-        //         'person_email' => __('auth.failed'),
-        //     ]);
-        // }
 
         RateLimiter::clear($this->throttleKey());
     }
@@ -82,7 +75,7 @@ class AdminLoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'person_email' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -96,6 +89,6 @@ class AdminLoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('person_email')).'|'.$this->ip();
     }
 }

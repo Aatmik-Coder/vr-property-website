@@ -356,6 +356,7 @@ function setErrorPlacement(error, element)
 }
 
 function logout() {
+    alert();
     $.prompt(" ", {
         title: "Do you really want to logout?",
         buttons: { "Yes": true, "No": false },
@@ -373,7 +374,7 @@ function logout() {
                         console.log(data);
                         if (data.success == "1") {
                             event.preventDefault();
-                            document.getElementById('admin-logout-form').submit();
+                            document.getElementById('logout-form').submit();
                             location.reload();
                         } else {
                             location.reload();

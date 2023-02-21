@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Hi {!! $developer->name !!}, You're logged in! HRRRRR</h1>
+<h1>Hi {!! $developer->name !!}, You're logged in!</h1>
 <!-- JavaScript files-->
 @section('js')
 
