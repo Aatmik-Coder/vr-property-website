@@ -26,7 +26,7 @@
 
 <body>
     <div class="loader" style="display:none"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
-    @if(auth('admin')->check())
+    @if(auth(Request::segment(1))->check())
     <div class="page">
         <!-- Main Navbar-->
         <header class="header">
@@ -46,7 +46,7 @@
                                 </div>
                             </a>
                             <div>
-                                <img src="{{ auth('admin')->user()->avatar_url }}" class="user-img" />
+                                {{-- <img src="{{ auth('admin')->user()->avatar_url }}" class="user-img" /> --}}
                                 <a id="toggle-btn" href="#" class="menu-btn">
                                     <img src="{{ asset('assets/common/images/menu-icon.png') }}" class="menu-icon" />
                                 </a>
@@ -74,7 +74,7 @@
                                 <a href="#" onclick="logout()" class="nav-link logout">
                                 <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a>
                             </li>
-                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route(Request::segment(1).'.logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                         </ul>
@@ -117,7 +117,7 @@
     <!-- Main File-->
     <script>
     var _token = $("input[name='_token']").val();
-    var baseUrl = "{{ url('admin').'/' }}";
+    var baseUrl = "{{ url(Request::segment(1)).'/' }}";
     var emsg = "";
     var ecls = "success";
     @if(session('message') || session('status'))

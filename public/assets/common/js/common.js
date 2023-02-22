@@ -356,7 +356,6 @@ function setErrorPlacement(error, element)
 }
 
 function logout() {
-    alert();
     $.prompt(" ", {
         title: "Do you really want to logout?",
         buttons: { "Yes": true, "No": false },

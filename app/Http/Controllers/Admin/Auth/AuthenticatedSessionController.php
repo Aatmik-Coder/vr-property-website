@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthenticatedSessionController extends Controller
 {
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
     /**
      * Display the login view.
      */
@@ -31,7 +34,11 @@ class AuthenticatedSessionController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('admin') ?? Auth::guard('developer');
+        if($this->request->segment(1) == 'admin') {
+            return Auth::guard('admin');
+        } else if($this->request->segment(1) == 'developer'){
+            return Auth::guard('developer');
+        }
     }
 
     /**
@@ -61,14 +68,14 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $developer = auth('developer')->user();
-        if(!$developer->is_active)
-        {
-            $this->guard()->logout();
-            return redirect()->back()->withInput($request->only('person_email', 'remember'))
-                ->withErrors([
-                    'person_email' => 'Your account is inactive. Please contact your administrator to get access!',
-                ]);
-        }
+        // if(!$developer->is_active)
+        // {
+        //     $this->guard()->logout();
+        //     return redirect()->back()->withInput($request->only('person_email', 'remember'))
+        //         ->withErrors([
+        //             'person_email' => 'Your account is inactive. Please contact your administrator to get access!',
+        //         ]);
+        // }
 
         $request->session()->regenerate();
 
@@ -81,10 +88,10 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $this->guard()->logout();
-
         foreach (array_keys($request->session()->all()) as $key) {
+            
             //If the key is found in your string, set $found to true
-            if (strpos($key, 'login_admin_') !== false) {
+            if (strpos($key, 'login_$request->segment(1)_') !== false) {
                 $request->session($key)->forget();
                 break;
             }

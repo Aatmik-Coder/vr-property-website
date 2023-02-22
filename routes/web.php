@@ -121,7 +121,7 @@ Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('devel
 
     Route::middleware('developer')->group(function () {
         Route::get('/dashboard','DeveloperController@dashboard')->name('dashboard');
-        Route::post('/logout', 'AuthenticatedSessionController@destroy')->name('logout');
+        Route::post('/logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
 
         Route::get('/profile', 'ProfileController@edit')->name('profile.edit');
         Route::post('/profile', 'ProfileController@update')->name('profile.update');
