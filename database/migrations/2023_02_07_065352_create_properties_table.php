@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('size');
             $table->string('price');
             $table->string('description');
-            $table->string('image_name')->nullable();
             $table->timestamps();
         });
     }

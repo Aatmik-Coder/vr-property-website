@@ -2,16 +2,64 @@
 @section('content')
 <!-- Dashboard Counts Section-->
 <section class="forms">
+    <link rel="stylesheet" href="{!! asset('assets/admin/css/my.css') !!}">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <style>
+                        {{-- <style>
                             .rad{
                                 margin-right: 5px;
                             }
-                        </style>
+                            .image_gallery{
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: wrap;
+                                justify-content: space-between;
+                                gap: 10px; 
+                            }
+                            .test {
+                                position: relative;
+                                flex: 0 0 calc(33.33% - 10px);
+                            max-width: calc(33.33% - 10px);
+                            }
+                            .test img {
+                                width: 100%;
+                            }
+                            span.del {
+                                position: absolute;
+                                top: 10px;
+                                left: auto;
+                                right: 10px;
+                                width: 30px;
+                                height: 30px;
+                                line-height: 30px;
+                                /* border-radius: 50%; */
+                                /* background: #fe6aa9; */
+                                text-align: center;
+                                /* color: #ffffff; */
+                                /* font-weight: bold; */
+                                opacity: 0;
+                            }
+                            span.view {
+                                position: absolute;
+                                top: 10px;
+                                left: 10px;
+                                right: auto;
+                                width: 30px;
+                                height: 30px;
+                                line-height: 30px;
+                                text-align: center;
+                                opacity: 0;
+                            }
+                            .test:hover .del {
+                                opacity: 1;
+                            }
+                            .test:hover .view {
+                                opacity: 1;
+                            }
+                        </style> --}}
                         <form action="{!! route(Request::segment(1).'.properties.update',$property->id) !!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -115,12 +163,21 @@
                             </div>
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Image</label>
-                                <div class="col-sm-5">
-                                    @if ($property->image_name == null)
-                                        <input type="file" name="image_name" class="form-control">
+                                <div class="col-sm-9">
+                                    @if ($properties_image == null)
+                                        <input type="file" name="image_name[]" class="form-control" multiple>
                                     @else
-                                        <a href="{!! urldecode('/assets/admin/property_image/'.$property->image_name) !!}" target="_blank"><i class="fa-solid fa-2xl fa-eye" style="color: purple;"></i></a>
-                                        <a href="" onclick="Delete('{!! $property->image_name !!}','{!! $property->id  !!}')"><i class="fa-solid fa-2xl fa-trash" style="color: red;"></i></a>
+                                    <div class="image_gallery">
+                                    @foreach ($properties_image as $image)
+                                    <div class="test">
+                                            <img src="/assets/admin/property_image/{!! $image->image_name !!}" width="auto" height="auto">
+                                            <span class="view"><a href="{!! urldecode('/assets/admin/property_image/'.$image->image_name) !!}" target="_blank"><i class="fa-solid fa-2xl fa-eye" style="color: purple;"></i></a></span>
+                                            <span class="del"><a href="" onclick="Delete('{!! $image->image_name !!}','{!! $image->id  !!}')"><i class="fa-solid fa-2xl fa-trash" style="color: red;"></i></a></span>
+                                        </div>                                            
+                                            @endforeach
+                                        </div>
+                                        {{-- <a href="{!! urldecode('/assets/admin/property_image/'.$property->image_name) !!}" target="_blank"><i class="fa-solid fa-2xl fa-eye" style="color: purple;"></i></a>
+                                        <a href="" onclick="Delete('{!! $property->image_name !!}','{!! $property->id  !!}')"><i class="fa-solid fa-2xl fa-trash" style="color: red;"></i></a> --}}
                                     @endif
                                 </div>
                             </div>

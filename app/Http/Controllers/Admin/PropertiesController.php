@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Property;
+use App\Models\Properties_image;
 // use App\Models\Developer;
 use App\Models\Country;
 use App\Models\State;
@@ -104,9 +105,6 @@ class PropertiesController extends Controller
     }
 
     public function store(Request $request) {
-        $image = $request->file('image_name');
-        $image_name = time().'-'.$image->getClientOriginalName();
-        move_uploaded_file($_FILES["image_name"]["tmp_name"],public_path().'/assets/admin/property_image/'.$image_name);
         $property = new Property;
 
         $property->type_of_login = $request->segment(1);
@@ -121,9 +119,18 @@ class PropertiesController extends Controller
         $property->size = $request->input('size');
         $property->price = $request->input('price');
         $property->description = $request->input('description');
-        $property->image_name = $image_name;
         $property->save();
         
+        $images = $request->file('image_name');
+        foreach($request->file('image_name') as $image) {
+            $new_name = time().'-'.$image->getClientOriginalName();
+            move_uploaded_file($image->getPathName(),public_path().'/assets/admin/property_image/'.$new_name);            
+            $add_image = new Properties_image;
+            $add_image->property_id = $property->id;
+            $add_image->image_name = $new_name;
+            $add_image->save();
+        }
+
         return redirect()->route('developer.properties.index');
     }
 
@@ -132,7 +139,8 @@ class PropertiesController extends Controller
         $country = Country::where('id',$property->country_id)->first();
         $state = State::where('id',$property->state_id)->first();
         $city = City::where('id',$property->city_id)->first();
-        return view('admin.properties.view', compact(['property','country','state','city']));
+        $properties_image = Properties_image::where('property_id',$property->id)->get();
+        return view('admin.properties.view', compact('property','country','state','city','properties_image'));
     }
 
     public function edit($id) {
@@ -140,7 +148,9 @@ class PropertiesController extends Controller
         $countries = Country::get();
         $states = State::where('country_id',$property->country_id)->get();
         $cities = City::where('state_id',$property->state_id)->get();
-        return view('admin.properties.edit',compact('property','countries','states','cities'));
+        $properties_image = Properties_image::where('property_id',$property->id)->get();
+        // dd($properties_image);
+        return view('admin.properties.edit',compact('property','countries','states','cities','properties_image'));
     }
 
     public function delete_files(Request $request) {

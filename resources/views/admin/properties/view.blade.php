@@ -2,16 +2,12 @@
 @section('content')
 <!-- Dashboard Counts Section-->
 <section class="forms">
+    <link rel="stylesheet" href="{!! asset('assets/admin/css/my.css') !!}">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <style>
-                            .rad{
-                                margin-right: 5px;
-                            }
-                        </style>
                         <div class="d-flex justify-content-end mb-3">
                             <a href="{!! route(Request::segment(1).'.properties.index') !!}" class="btn btn-primary">Back</a>
                         </div>
@@ -81,8 +77,14 @@
                             </div>
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Image</label>
-                                <div class="col-sm-5">
-                                    <img src="{!! urldecode('/assets/admin/property_image/'.$property->image_name) !!}" alt="property image" width="100px" height="100px">
+                                <div class="col-sm-9">
+                                    <div class="image_gallery">
+                                        @foreach ($properties_image as $image)
+                                            <div class="test">
+                                                <img src="/assets/admin/property_image/{!! $image->image_name !!}" alt="property image">
+                                            </div>                                            
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <div class="line"> </div>
