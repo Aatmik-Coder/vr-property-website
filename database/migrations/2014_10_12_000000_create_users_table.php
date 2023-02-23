@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('developer_id')->nullable();
             $table->unsignedInteger('agency_id')->nullable();
             $table->unsignedInteger('employee_id')->nullable();
-            $table->string('avatar')->nullable();
+            $table->enum('gender',['Male','Female'])->nullable();
             $table->timestamps();
         });
     }

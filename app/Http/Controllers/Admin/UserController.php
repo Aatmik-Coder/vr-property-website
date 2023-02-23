@@ -129,9 +129,9 @@ class UserController extends Controller
         $password = Str::random(10);
         $hashed_password = Hash::make($password);
 
-        $avatar = $request->file('avatar');
-        $avatar_name = time().'-'.$avatar->getClientOriginalName();
-        move_uploaded_file($_FILES['avatar']['tmp_name'],public_path().'/assets/admin/avatar/'.$avatar_name);
+        // $avatar = $request->file('avatar');
+        // $avatar_name = time().'-'.$avatar->getClientOriginalName();
+        // move_uploaded_file($_FILES['avatar']['tmp_name'],public_path().'/assets/admin/avatar/'.$avatar_name);
 
         $role_name = Role::where('id',$request->role_id)->first();
         if($role_name->name == 'Developer') {
@@ -158,7 +158,7 @@ class UserController extends Controller
 
         $user = new User;
         $user->role_id = $request->input('role_id');
-        $user->avatar = $avatar_name;
+        $user->gender = $request->input('gender');
         if($role_name->name == 'Developer'){
             $user->is_developer = '1';
             $user->developer_id = $role->id;
@@ -185,6 +185,8 @@ class UserController extends Controller
         $user->save();
 
         Mail::to($request->person_email)->send(new TestMail($request,$password));
+
+        return redirect()->route('admin.users.index');
     }
     
     /**

@@ -12,7 +12,7 @@
                                 margin-right: 5px;
                             }
                         </style>
-                        <form action="{!! route('admin.properties.store') !!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        <form action="{!! route(Request::segment(1).'.properties.store') !!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Country</label>

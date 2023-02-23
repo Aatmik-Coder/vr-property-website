@@ -8,6 +8,11 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
+                        <style>
+                            .rad{
+                                margin-right: 5px;
+                            }
+                        </style>
                         <form id="profileFrm" name="profileFrm" action="{!! route('admin.users.store') !!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row mb-3">
@@ -56,6 +61,18 @@
                                 <div class="col-sm-9">
                                     <input id="person_mobile_number" name="person_mobile_number" type="number" class="form-control @error('mobile') is-invalid @enderror" placeholder="enter mobile number" min="1">
                                     @error('mobile')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-3 form-control-label">Gender</label>
+                                <div class="col-sm-9">
+                                    <input id="gender" name="gender" type="radio" class="form-check-input rad gender @error('gender') is-invalid @enderror" value="Male">Male
+                                    <input id="gender" name="gender" type="radio" class="form-check-input rad gender @error('gender') is-invalid @enderror" value="Female">Female
+                                    @error('gender')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -113,25 +130,11 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row mb-3">
-                                <label for="fileInput" class="col-sm-3 form-control-label">Avatar</label>
-                                <div class="col-sm-3">
-                                    <input id="avatar" name="avatar" type="file" class="form-control-file @error('image') is-invalid @enderror" accept="image/*" value="upload">
-                                    @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-3">
-                                    {{-- <img src="{{ $admin->avatar_url }}" class="img-thumbnail" width="70" height='70' id='image_preview'> --}}
-                                </div>
-                            </div>
                             <div class="line"> </div>
                             <div class="form-group row">
                                 <div class="col-sm-4 offset-sm-3">
                                     <button type="submit" class="btn btn-primary">Save changes</button>
-                                    <button type="button" class="btn btn-secondary" onclick="location.href='{{ URL('/admin') }}';">Cancel</button>
+                                    <button type="button" class="btn btn-secondary" onclick="location.href='{{ URL('/'.Request::segment(1).'/users') }}';">Cancel</button>
                                 </div>
                             </div>
                         </form>

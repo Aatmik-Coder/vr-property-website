@@ -28,6 +28,10 @@
             <li>
                 <a href="/admin/permissions/create">add permission</a>
             </li>
+            
+            <li>
+                <a href="{{ route('admin.properties.index') }}">All properties</a>
+            </li>
 
             <li>
                 <a href="{!! route('admin.properties.create') !!}">Properties</a>
@@ -36,7 +40,13 @@
 
         @if(auth('developer')->check())
             <li>
-                <a href="{!! route('admin.properties.create') !!}">Properties</a>
+                <a href="{{ route('developer.dashboard') }}">Dashboard</a>
+            </li>
+            <li>
+                <a href="{{ route('developer.properties.index') }}">All properties</a>
+            </li>
+            <li>
+                <a href="{!! route('developer.properties.create') !!}">Properties</a>
             </li>
         @endif
 

@@ -95,6 +95,9 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
 
         //Properties Routes
         Route::resource('properties',PropertiesController::class);
+        Route::post('/properties/ajax', 'PropertiesController@ajax')->name('properties.list.ajax');
+        Route::get('/properties/view/{id}', 'PropertiesController@view')->name('properties.view');
+        Route::delete('/properties/delete/{id}', 'PropertiesController@destroy')->name('properties.destroy');
         
         //Permissinos Routes 
         Route::resource('permissions', PermissionController::class);
@@ -128,6 +131,13 @@ Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('devel
 
         Route::get('/change-password', 'Auth\PasswordController@edit')->name('password.edit');
         Route::post('/change-password', 'Auth\PasswordController@update')->name('password.update');
+
+        Route::resource('properties',PropertiesController::class);
+        Route::post('/properties/ajax', 'PropertiesController@ajax')->name('properties.list.ajax');
+        Route::get('/properties/view/{id}', 'PropertiesController@view')->name('properties.view');
+        Route::delete('/properties/delete/{id}', 'PropertiesController@destroy')->name('properties.destroy');
+        
+        Route::post('/properties/delete-files',[PropertiesController::class, 'delete_files']);
     });
 });
 Route::post('fetch-states',[Helper::class,'fetch_states'])->name('fetch-states');
