@@ -149,15 +149,11 @@ class PropertiesController extends Controller
         $states = State::where('country_id',$property->country_id)->get();
         $cities = City::where('state_id',$property->state_id)->get();
         $properties_image = Properties_image::where('property_id',$property->id)->get();
-        // dd($properties_image);
         return view('admin.properties.edit',compact('property','countries','states','cities','properties_image'));
     }
 
     public function delete_files(Request $request) {
-        $data['files'] = Property::where('id',$request->id)->first();
-        $data['files']->image_name = null;
-        $data['files']->save();
-
+        $data['files'] = Properties_image::find($request->id)->delete($request->id);
         $path = public_path().'/assets/admin/property_image/'.$request->file_name;
         unlink($path);
     }

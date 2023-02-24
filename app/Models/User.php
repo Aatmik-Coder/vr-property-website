@@ -24,6 +24,14 @@ class User extends Authenticatable
         return $this->hasOne(Developer::class, 'id','developer_id');
     }
 
+    public function agencies(){
+        return $this->hasOne(Agency::class, 'id','agency_id');
+    }
+
+    public function employees() {
+        return $this->hasOne(Employee::class, 'id','employee_id');
+    }
+
     public function roles() {
         return $this->hasOne(Role::class, 'id','role_id');
     }

@@ -82,11 +82,12 @@ function data_table()
 }
 
 function Delete(param1, param2) {
+    alert(baseUrl+segments[2]+"/delete-files");
     var valu = confirm('Are you sure you want to delete!');
-    if(valu == true) {
+    if(valu) {
       $.ajax({
         headers: {
-            'X-CSRF-Token': _token
+            'X-CSRF-Token':_token
         },
         url:baseUrl+segments[2]+"/delete-files",
         type: 'POST',
@@ -96,11 +97,7 @@ function Delete(param1, param2) {
         },
         dataType:'json',
         success: function () {
-            $('#message').append('<div class="alert alert-danger">successfully deleted</div>');
-            window.setInterval(window.location.reload(),2000);
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr.responseText);
+            location.reload();
         }
       })
     }

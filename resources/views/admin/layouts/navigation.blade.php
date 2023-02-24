@@ -42,11 +42,21 @@
             <li>
                 <a href="{{ route('developer.dashboard') }}">Dashboard</a>
             </li>
+            
             <li>
                 <a href="{{ route('developer.properties.index') }}">All properties</a>
             </li>
+
             <li>
                 <a href="{!! route('developer.properties.create') !!}">Properties</a>
+            </li>
+
+            <li>
+                <a href="{{ route('developer.assign-agency.index') }}">All Assigned properties</a>
+            </li>
+
+            <li>
+                <a href="{!! route('developer.assign-agency.create') !!}">Assgin Properties</a>
             </li>
         @endif
 

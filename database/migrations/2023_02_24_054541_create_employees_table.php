@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('agencies', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('agency_name');
+            $table->string('employee_name');
             $table->string('person_name');
             $table->string('person_email')->unique();
             $table->string('person_mobile_number');
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agencies');
+        Schema::dropIfExists('employees');
     }
 };

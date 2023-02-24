@@ -6,14 +6,10 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table text-center" id="data-table">
+                       <table class="table text-center" id="data-table">
                             <thead>
-                                <th>id</th>
-                                <th>Role name</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Mobile Number</th>
-                                {{-- <th>Action</th> --}}
+                                <th>Property Name</th>
+                                <th>Agency Name</th>
                             </thead>
                         </table>
                     </div>
@@ -24,6 +20,6 @@
 </section>
 @section('js')
 
-<script src="{{ asset('assets/admin/js/user.js') }}"></script>
+<script src="{{ asset('assets/admin/js/developer.js') }}"></script>
 @stop
 @endsection

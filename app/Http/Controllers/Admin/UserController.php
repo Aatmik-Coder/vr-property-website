@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Developer;
+use App\Models\Agency;
+use App\Models\Employee;
 use App\Models\Country;
 use DB;
 use Illuminate\Support\Arr;
@@ -35,7 +37,7 @@ class UserController extends Controller
     
     public function ajax(Request $request)
     {
-        $columns = array('id','name');
+        $columns = array('role_name','person_name','person_email','person_number');
 
         $limit = $request->input('length');
         $start = $request->input('start');
@@ -60,8 +62,15 @@ class UserController extends Controller
                 $q->where('person_name','LIKE',"%{$search}%")
                     ->orWhere('person_email','like',"%{$search}%")
                     ->orWhere('person_mobile_number','like',"%{$search}%");
+            })->orWhereHas('agencies', function ($q) use ($search) {
+                $q->where('person_name','LIKE',"%{$search}%")
+                    ->orWhere('person_email','like',"%{$search}%")
+                    ->orWhere('person_mobile_number','like',"%{$search}%");
+            })->orWhereHas('employees', function ($q) use ($search) {
+                $q->where('person_name','LIKE',"%{$search}%")
+                    ->orWhere('person_email','like',"%{$search}%")
+                    ->orWhere('person_mobile_number','like',"%{$search}%");
             });
-            
             $total_filter = $users->count();
         }
         $users = $users->offset($start)->limit($limit)->orderBy($order,$dir)->get();
@@ -71,11 +80,22 @@ class UserController extends Controller
         {
             foreach ($users as $user)
             {
+                // dd($user->developers->person_name);
                 $nestedData['id'] = $user->id;
                 $nestedData['name'] = $user->roles->name;
-                $nestedData['person_name']=$user->developers->person_name;
-                $nestedData['person_email']=$user->developers->person_email;
-                $nestedData['person_mobile_number']=$user->developers->person_mobile_number;
+                if($user->is_developer){
+                    $nestedData['person_name']=$user->developers->person_name;
+                    $nestedData['person_email']=$user->developers->person_email;
+                    $nestedData['person_mobile_number']=$user->developers->person_mobile_number;
+                } else if($user->is_agency) {
+                    $nestedData['person_name']=$user->agencies->person_name;
+                    $nestedData['person_email']=$user->agencies->person_email;
+                    $nestedData['person_mobile_number']=$user->agencies->person_mobile_number;
+                } else if($user->is_employee){
+                    $nestedData['person_name']=$user->employees->person_name;
+                    $nestedData['person_email']=$user->employees->person_email;
+                    $nestedData['person_mobile_number']=$user->employees->person_mobile_number;
+                }
 
                 // $status = '<a href="javascript:void(0);" onclick="changeStatus('.$permission->id.')" class="btn action-btn" role="button" aria-pressed="true">';
 

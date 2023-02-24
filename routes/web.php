@@ -98,12 +98,18 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         Route::post('/properties/ajax', 'PropertiesController@ajax')->name('properties.list.ajax');
         Route::get('/properties/view/{id}', 'PropertiesController@view')->name('properties.view');
         Route::delete('/properties/delete/{id}', 'PropertiesController@destroy')->name('properties.destroy');
+    
+        Route::post('/properties/delete-files',[PropertiesController::class, 'delete_files'])->name('delete-files');
+
+        // Assign Routes
+        // Route::get('/')
         
         //Permissinos Routes 
         Route::resource('permissions', PermissionController::class);
         Route::post('/permissions/ajax', 'PermissionController@ajax')->name('permissions.list.ajax');
         Route::get('/permissions/view/{id}', 'PermissionController@view')->name('permissions.view');
         Route::delete('/permissions/delete/{id}', 'PermissionController@destroy')->name('permissions.destroy');
+    
 
         Route::resource('developers', DeveloperController::class);
 
@@ -137,7 +143,13 @@ Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('devel
         Route::get('/properties/view/{id}', 'PropertiesController@view')->name('properties.view');
         Route::delete('/properties/delete/{id}', 'PropertiesController@destroy')->name('properties.destroy');
         
-        Route::post('/properties/delete-files',[PropertiesController::class, 'delete_files']);
+        Route::post('/properties/delete-files',[PropertiesController::class, 'delete_files'])->name('delete-files');
+
+        // ASSIGNED PROPERTIES
+        Route::get('/assign-agency/index',[DeveloperController::class,'assigned_agency_index'])->name('assign-agency.index');
+        Route::post('/assign-agency/ajax', 'DeveloperController@ajax')->name('assign-agency.ajax');
+        Route::get('/assign-agency/create', [DeveloperController::class,'assign_agency_create'])->name('assign-agency.create');
+        Route::post('/assign-agency/store',[DeveloperController::class,'assigned_agency_store'])->name('assign-agency.store');
     });
 });
 Route::post('fetch-states',[Helper::class,'fetch_states'])->name('fetch-states');
