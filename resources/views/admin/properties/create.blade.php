@@ -12,6 +12,7 @@
                                 margin-right: 5px;
                             }
                         </style>
+                        {{-- <p>{!! Request::segment(1) !!}</p> --}}
                         <form action="{!! route(Request::segment(1).'.properties.store') !!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row mb-3">

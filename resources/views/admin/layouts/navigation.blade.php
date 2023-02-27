@@ -60,6 +60,11 @@
             </li>
         @endif
 
+        @if(auth('agency')->check())
+            <li>
+                <a href="{{ route('agency.dashboard') }}">Dashboard</a>
+            </li>
+        @endif
         
         {{-- <li>
             <a href="/admin/developers/create">add developer</a>

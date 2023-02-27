@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AdminLoginRequest;
 use App\Http\Requests\Auth\DeveloperLoginRequest;
+use App\Http\Requests\Auth\AgencyLoginRequest;
+use App\Http\Requests\Auth\EmployeeLoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,12 +34,28 @@ class AuthenticatedSessionController extends Controller
         return view('admin.auth.developer-login',compact('title'));
     }
 
+    public function agencyCreate(): View
+    {
+        $title = "Admin Agency Login";
+        return view('admin.auth.agency-login', compact('title'));
+    }
+
+    public function employeeCreate(): View
+    {
+        $title = 'Admin Employee Login';
+        return view('admin.auth.employee-login', compact('title'));
+    }
+
     protected function guard()
     {
         if($this->request->segment(1) == 'admin') {
             return Auth::guard('admin');
         } else if($this->request->segment(1) == 'developer'){
             return Auth::guard('developer');
+        } else if($this->request->segment(1) == 'agency') {
+            return Auth::guard('agency');
+        } else if($this->request->segment(1) == 'employee') {
+            return Auth::guard('employee');
         }
     }
 
@@ -80,6 +98,24 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::DEVELOPER_HOME);
+    }
+
+    public function agencyStore(AgencyLoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        $agency = auth('agency')->user();
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::AGENCY_HOME);
+    }
+
+    public function employeeStore(EmployeeLoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        $employee = auth('employee')->user();
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::EMPLOYEE_HOME);
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\DeveloperController;
 use App\Http\Controllers\Admin\AgencyController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Helper;
 /*
 |--------------------------------------------------------------------------
@@ -152,6 +153,39 @@ Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('devel
         Route::post('/assign-agency/store',[DeveloperController::class,'assigned_agency_store'])->name('assign-agency.store');
     });
 });
+
+Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.')->group(function() {
+    Route::get('/',function () {
+        return redirect(route('agency.dashboard'));
+    })->name('home');
+
+    Route::namespace('Auth')->middleware('guest:agency')->group(function(){
+        Route::get('/login','AuthenticatedSessionController@agencyCreate')->name('login');
+        Route::post('/login','AuthenticatedSessionController@agencyStore');
+    });
+
+    Route::middleware('agency')->group(function () {
+        Route::get('/dashboard','AgencyController@dashboard')->name('dashboard');
+        Route::post('/logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
+    });
+});
+
+Route::prefix('employee')->namespace('App\Http\Controllers\Admin')->name('employee.')->group(function() {
+    Route::get('/',function () {
+        return redirect(route('employee.dashboard'));
+    })->name('home');
+
+    Route::namespace('Auth')->middleware('guest:employee')->group(function(){
+        Route::get('/login','AuthenticatedSessionController@employeeCreate')->name('login');
+        Route::post('/login','AuthenticatedSessionController@employeeStore');
+    });
+
+    Route::middleware('employee')->group(function () {
+        Route::get('/dashboard','EmployeeController@dashboard')->name('dashboard');
+        Route::post('/logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
+    });
+});
+
 Route::post('fetch-states',[Helper::class,'fetch_states'])->name('fetch-states');
 
 Route::post('fetch-cities', [Helper::class, 'fetch_cities'])->name('fetch-cities');

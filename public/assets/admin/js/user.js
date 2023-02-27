@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     $('#role_id').on('change', function() {
         let roleName = $(this).find(':selected').text();
-        if(roleName != 'Super Admin' && roleName != 'Select') {
+        if(roleName != 'Super Admin' && roleName != 'Select' && roleName != 'Employee') {
             $('#type_name').children('label').remove();
             $('#type_name').children('div').remove();
             $('#type_name').append(`

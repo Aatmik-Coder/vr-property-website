@@ -131,7 +131,7 @@ class PropertiesController extends Controller
             $add_image->save();
         }
 
-        return redirect()->route('developer.properties.index');
+        return redirect()->route($request->segment(1).'.properties.index');
     }
 
     public function view($id) {
@@ -144,7 +144,7 @@ class PropertiesController extends Controller
     }
 
     public function edit($id) {
-        $property = Property::find(1);
+        $property = Property::find($id);
         $countries = Country::get();
         $states = State::where('country_id',$property->country_id)->get();
         $cities = City::where('state_id',$property->state_id)->get();

@@ -37,7 +37,7 @@ class UserController extends Controller
     
     public function ajax(Request $request)
     {
-        $columns = array('role_name','person_name','person_email','person_number');
+        $columns = array('id','role_id');
 
         $limit = $request->input('length');
         $start = $request->input('start');
@@ -164,7 +164,7 @@ class UserController extends Controller
         }
         if($role_name->name == 'Employee') {
             $role = new Employee();
-            $role->employee_name = $request->input($role_name->name . "_name");
+            // $role->employee_name = $request->input($role_name->name . "_name");
         }
         $role->person_name = $request->input('person_name');
         $role->person_email = $request->input('person_email');

@@ -28,6 +28,10 @@ class RedirectIfAuthenticated
                 }
                 else if($guard == 'developer') {
                     return redirect(RouteServiceProvider::DEVELOPER_HOME);
+                } else if($guard == 'agency') {
+                    return redirect(RouteServiceProvider::AGENCY_HOME);
+                } else if($guard == 'employee') {
+                    return redirect(RouteServiceProvider::EMPLOYEE_HOME);
                 }
                 return redirect(RouteServiceProvider::HOME);
             }
