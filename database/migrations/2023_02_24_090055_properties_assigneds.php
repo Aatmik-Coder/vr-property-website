@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('properties_agencies', function(Blueprint $table) {
+        Schema::create('properties_assigneds', function(Blueprint $table) {
             $table->unsignedInteger('property_id');
-            $table->unsignedInteger('agency_id');
+            $table->unsignedInteger('agency_id')->nullable();
+            $table->unsignedInteger('employee_id')->nullable();
             $table->timestamps();
         });
     }

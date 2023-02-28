@@ -14,7 +14,7 @@ function data_table()
             headers: {
                 'X-CSRF-Token': _token
             },
-            url: "/developer/assign-agency/ajax",
+            url: "/developer/assign-properties/ajax",
             type: "POST",
             complete: function (data) {
                 $(".loader").hide();
@@ -24,6 +24,7 @@ function data_table()
         columns: [
             {data: 'project_name',name: 'project_name'},
             {data: 'agency_name',name: 'agency_name'},
+            {data: 'person_name',name: 'person_name'},
         ],
         
 

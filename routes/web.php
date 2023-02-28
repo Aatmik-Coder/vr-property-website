@@ -147,10 +147,10 @@ Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('devel
         Route::post('/properties/delete-files',[PropertiesController::class, 'delete_files'])->name('delete-files');
 
         // ASSIGNED PROPERTIES
-        Route::get('/assign-agency/index',[DeveloperController::class,'assigned_agency_index'])->name('assign-agency.index');
-        Route::post('/assign-agency/ajax', 'DeveloperController@ajax')->name('assign-agency.ajax');
-        Route::get('/assign-agency/create', [DeveloperController::class,'assign_agency_create'])->name('assign-agency.create');
-        Route::post('/assign-agency/store',[DeveloperController::class,'assigned_agency_store'])->name('assign-agency.store');
+        Route::get('/assign-properties/index',[DeveloperController::class,'assigned_properties_index'])->name('assign-properties.index');
+        Route::post('/assign-properties/ajax', 'DeveloperController@ajax')->name('assign-properties.ajax');
+        Route::get('/assign-properties/create', [DeveloperController::class,'assign_properties_create'])->name('assign-properties.create');
+        Route::post('/assign-properties/store',[DeveloperController::class,'assigned_properties_store'])->name('assign-properties.store');
     });
 });
 

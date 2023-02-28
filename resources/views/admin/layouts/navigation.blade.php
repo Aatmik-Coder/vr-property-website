@@ -36,9 +36,9 @@
             <li>
                 <a href="{!! route('admin.properties.create') !!}">Properties</a>
             </li>
-        @endif
+        {{-- @endif --}}
 
-        @if(auth('developer')->check())
+        @elseif(auth('developer')->check())
             <li>
                 <a href="{{ route('developer.dashboard') }}">Dashboard</a>
             </li>
@@ -52,17 +52,22 @@
             </li>
 
             <li>
-                <a href="{{ route('developer.assign-agency.index') }}">All Assigned properties</a>
+                <a href="{{ route('developer.assign-properties.index') }}">All Assigned properties</a>
             </li>
 
             <li>
-                <a href="{!! route('developer.assign-agency.create') !!}">Assgin Properties</a>
+                <a href="{!! route('developer.assign-properties.create') !!}">Assign Properties</a>
             </li>
-        @endif
+        {{-- @endif --}}
 
-        @if(auth('agency')->check())
+        @elseif(auth('agency')->check())
             <li>
                 <a href="{{ route('agency.dashboard') }}">Dashboard</a>
+            </li>
+
+        @elseif(auth('employee')->check())
+            <li>
+                <a href="{{ route('employee.dashboard') }}">Dashboard</a>
             </li>
         @endif
         

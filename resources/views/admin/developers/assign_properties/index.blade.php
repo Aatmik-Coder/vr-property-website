@@ -10,6 +10,7 @@
                             <thead>
                                 <th>Property Name</th>
                                 <th>Agency Name</th>
+                                <th>Employee Name</th>
                             </thead>
                         </table>
                     </div>

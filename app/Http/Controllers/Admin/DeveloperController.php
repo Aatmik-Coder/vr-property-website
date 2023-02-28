@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Developer;
 use App\Models\Property;
 use App\Models\Agency;
-use App\Models\Property_Agency;
+use App\Models\Employee;
+use App\Models\Property_Assigned;
 use App\Models\Country;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
@@ -39,13 +40,13 @@ class DeveloperController extends Controller{
         $request->session()->put('developer_id', $developer->id);
     }
 
-    public function assigned_agency_index() {
-        return view('admin.developers.assign_agency.index');
+    public function assigned_properties_index() {
+        return view('admin.developers.assign_properties.index');
     }
 
     public function ajax(Request $request)
     {
-        $columns = array('property_id','agency_id');
+        $columns = array('property_id','agency_id','employee_id');
 
         $limit = $request->input('length');
         $start = $request->input('start');
@@ -57,30 +58,38 @@ class DeveloperController extends Controller{
             $dir = $request->input('order.0.dir');
         }
 
-        $properties_agencies = new Property_Agency;
-        $total_data = $properties_agencies->count();
+        $properties_assigneds = new Property_Assigned;
+        $total_data = $properties_assigneds->count();
         $total_filter = $total_data;
         if($request->input('search.value') != "")
         {
             $search = $request->input('search.value');
-            $properties_agencies = $properties_agencies->orWhereHas('properties',function($q) use ($search){
+            $properties_assigneds = $properties_assigneds->orWhereHas('properties',function($q) use ($search){
                 $q->where('project_name','LIKE',"%{$search}%");
             })->orWhereHas('agencies',function($q) use ($search){
                 $q->where('agency_name','LIKE',"%{$search}%");
+            })->orWhereHas('employees',function($q) use ($search) {
+                $q->where('person_name','LIKE',"%{$search}%");
             });
-            $total_filter = $properties_agencies->count();
+            $total_filter = $properties_assigneds->count();
         }
-        $properties_agencies = $properties_agencies->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        $properties_assigneds = $properties_assigneds->offset($start)->limit($limit)->orderBy($order,$dir)->get();
 
         $data = array();
-        if(!empty($properties_agencies))
+        if(!empty($properties_assigneds))
         {
-            foreach ($properties_agencies as $property_agency)
+            foreach ($properties_assigneds as $property_assign)
             {
                 // dd($property_agency->properties);
                 // if($property_agency->property_id){
-                    $nestedData['project_name'] = $property_agency->properties->project_name;
-                    $nestedData['agency_name'] = $property_agency->agencies->agency_name;
+                    $nestedData['project_name'] = $property_assign->properties->project_name;
+                    $nestedData['agency_name'] = $property_assign->agencies->agency_name;
+                    if(isset($property_assign->employees->person_name)){
+                        $nestedData['person_name'] = $property_assign->employees->person_name;
+                    } else {
+                        $nestedData['person_name'] = NULL;
+                    }
+                    // info($property_assign->employees->person_name);
                 // }
 
                 // $status = '<a href="javascript:void(0);" onclick="changeStatus('.$permission->id.')" class="btn action-btn" role="button" aria-pressed="true">';
@@ -112,19 +121,45 @@ class DeveloperController extends Controller{
         echo json_encode($json_data);
     }
 
-    public function assign_agency_create(){
+    public function assign_properties_create(){
         $developer = auth('developer')->user();
         $properties = Property::where(['type_of_login'=>"developer","login_id"=>$developer->id])->get();
         $agencies = Agency::all();
-        return view('admin.developers.assign_agency.create', compact('properties','agencies'));
+        $employees = Employee::all();
+        return view('admin.developers.assign_properties.create', compact('properties','agencies','employees'));
     }
 
-    public function assigned_agency_store(Request $request) {
-        $store_assigned_agency = new Property_Agency;
-        $store_assigned_agency->property_id = $request->input('property_id');
-        $store_assigned_agency->agency_id = $request->input('agency_id');
-        $store_assigned_agency->save();
+    public function assigned_properties_store(Request $request) {
+        // dd($request->all());
+        $max_length = count($request->input('agency_id')) >= count($request->input('employee_id')) ? count($request->input('agency_id')) : count($request->input('employee_id'));
+        // dd($max_length);
+        // foreach($request->input('agency_id') as $agency_id){
+        //     foreach($request->input('employee_id') as $employee_id){
+        //         $property_agency->property_id = $request->input('property_id');
+        //         $property_agency->agency_id = $agency_id;
+        //         $property_agency->employee_id = $employee_id;
+        //         info($employee_id);
+        //     }
+        // }
+        
+        // dd($request->input('employee_id')[2]);
+        for($i = 0; $i < $max_length; $i++) {
+            $property_agency = new Property_Assigned;
+            $property_agency->property_id = $request->input('property_id');
+            if(isset($request->input('agency_id')[$i])){
+                $property_agency->agency_id = $request->input('agency_id')[$i];
+            } else {
+                $property_agency->agency_id = NULL;
+            }
+            if(isset($request->input('employee_id')[$i])) {
+                $property_agency->employee_id = $request->input('employee_id')[$i];
+            } else {
+                $property_agency->employee_id = NULL;
+            }
+            $property_agency->save();
+        }
+        // Property_Assigned::create($request->all());
 
-        return redirect()->route('developer.assign-agency.index');
+        return redirect()->route('developer.assign-properties.index');
     }
 }

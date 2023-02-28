@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Property_Agency extends Model
+class Property_Assigned extends Model
 {
     use HasFactory;
 
-    protected $table = 'properties_agencies';
+    protected $table = 'properties_assigneds';
 
     protected $primaryKey = 'id';
 
@@ -21,9 +21,14 @@ class Property_Agency extends Model
         return $this->hasOne(Agency::class,'id','agency_id');
     }
 
+    public function employees() {
+        return $this->hasOne(Employee::class,'id','employee_id');
+    }
+
 
     protected $fillable = [
         'property_id',
-        'agency_id'
+        'agency_id',
+        'employee_id'
     ];
 }
