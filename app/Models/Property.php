@@ -13,6 +13,18 @@ class Property extends Model
 
     protected $primaryKey = "id";
 
+    public function countries() {
+        return $this->hasOne(country::class,'id','country_id');
+    }
+
+    public function states() {
+        return $this->hasOne(state::class,'id','state_id');
+    }
+
+    public function cities() {
+        return $this->hasOne(city::class,'id','city_id');
+    }
+
     protected $fillable = [
         'developer_id',
         'country_id',

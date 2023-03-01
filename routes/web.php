@@ -167,6 +167,9 @@ Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.'
     Route::middleware('agency')->group(function () {
         Route::get('/dashboard','AgencyController@dashboard')->name('dashboard');
         Route::post('/logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
+
+        Route::get('properties-assigned','AgencyController@properties_assigned')->name('properties-assigned');
+        Route::post('/properties-assigned/ajax', 'AgencyController@properties_assigned_ajax')->name('properties-assigned.ajax');
     });
 });
 

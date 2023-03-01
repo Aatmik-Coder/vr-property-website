@@ -58,27 +58,27 @@ class DeveloperController extends Controller{
             $dir = $request->input('order.0.dir');
         }
 
-        $properties_assigneds = new Property_Assigned;
-        $total_data = $properties_assigneds->count();
+        $assign_properties = new Property_Assigned;
+        $total_data = $assign_properties->count();
         $total_filter = $total_data;
         if($request->input('search.value') != "")
         {
             $search = $request->input('search.value');
-            $properties_assigneds = $properties_assigneds->orWhereHas('properties',function($q) use ($search){
+            $assign_properties = $assign_properties->orWhereHas('properties',function($q) use ($search){
                 $q->where('project_name','LIKE',"%{$search}%");
             })->orWhereHas('agencies',function($q) use ($search){
                 $q->where('agency_name','LIKE',"%{$search}%");
             })->orWhereHas('employees',function($q) use ($search) {
                 $q->where('person_name','LIKE',"%{$search}%");
             });
-            $total_filter = $properties_assigneds->count();
+            $total_filter = $assign_properties->count();
         }
-        $properties_assigneds = $properties_assigneds->offset($start)->limit($limit)->orderBy($order,$dir)->get();
+        $assign_properties = $assign_properties->offset($start)->limit($limit)->orderBy($order,$dir)->get();
 
         $data = array();
-        if(!empty($properties_assigneds))
+        if(!empty($assign_properties))
         {
-            foreach ($properties_assigneds as $property_assign)
+            foreach ($assign_properties as $property_assign)
             {
                 // dd($property_agency->properties);
                 // if($property_agency->property_id){
@@ -131,7 +131,9 @@ class DeveloperController extends Controller{
 
     public function assigned_properties_store(Request $request) {
         // dd($request->all());
-        $max_length = count($request->input('agency_id')) >= count($request->input('employee_id')) ? count($request->input('agency_id')) : count($request->input('employee_id'));
+        $agency = $request->input('agency_id') ?? 0 ;
+        $employee = $request->input('employee_id') ?? 0;
+        $max_length = max($agency,$employee);
         // dd($max_length);
         // foreach($request->input('agency_id') as $agency_id){
         //     foreach($request->input('employee_id') as $employee_id){
@@ -143,20 +145,22 @@ class DeveloperController extends Controller{
         // }
         
         // dd($request->input('employee_id')[2]);
-        for($i = 0; $i < $max_length; $i++) {
+        for($i = 0; $i < $max_length[0]; $i++) {
             $property_agency = new Property_Assigned;
             $property_agency->property_id = $request->input('property_id');
-            if(isset($request->input('agency_id')[$i])){
-                $property_agency->agency_id = $request->input('agency_id')[$i];
-            } else {
-                $property_agency->agency_id = NULL;
+            if(isset($request->input('agency_id')[$i]) || isset($request->input('employee_id')[$i])) {
+                if(isset($request->input('agency_id')[$i])){
+                    $property_agency->agency_id = $request->input('agency_id')[$i];
+                } else {
+                    $property_agency->agency_id = NULL;
+                }
+                if(isset($request->input('employee_id')[$i])) {
+                    $property_agency->employee_id = $request->input('employee_id')[$i];
+                } else {
+                    $property_agency->employee_id = NULL;
+                }
+                $property_agency->save();
             }
-            if(isset($request->input('employee_id')[$i])) {
-                $property_agency->employee_id = $request->input('employee_id')[$i];
-            } else {
-                $property_agency->employee_id = NULL;
-            }
-            $property_agency->save();
         }
         // Property_Assigned::create($request->all());
 

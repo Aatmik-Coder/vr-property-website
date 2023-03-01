@@ -2,6 +2,7 @@
 @section('content')
 <!-- Dashboard Counts Section-->
 <link rel="stylesheet" href="{!! asset('assets/common/css/jquery.multiselect.css') !!}">
+<link rel="stylesheet" href="{!! asset('assets/admin/css/my.css') !!}">
 <style>
     form.form-horizontal {
         display: flex;
@@ -16,6 +17,12 @@
     }
     form.form-horizontal .form-group:last-of-type {
         flex: 0 0 100%;
+    }
+    .card-body form.form-horizontal .form-group ul li input {
+        opacity: 1;
+        width: 15px;
+        left: 2px;
+        top: 0;
     }
 </style>
 <section class="forms">

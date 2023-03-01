@@ -65,9 +65,21 @@
                 <a href="{{ route('agency.dashboard') }}">Dashboard</a>
             </li>
 
+            <li>
+                <a href="{!! route('agency.properties-assigned') !!}">Properties Assigned</a>
+            </li>
+
+            <li>
+                <a href="#">Arrange Virtual Meet</a>
+            </li>
+
         @elseif(auth('employee')->check())
             <li>
                 <a href="{{ route('employee.dashboard') }}">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="#">Arrange Virtual Meet</a>
             </li>
         @endif
         
