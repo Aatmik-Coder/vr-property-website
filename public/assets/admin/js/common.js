@@ -1,8 +1,8 @@
 $('document').ready(function() {
-    $('select[multiple]').multiselect({
-        selectAll: true,
-        search:true
-    });
+    // $('select[multiple]').multiselect({
+    //     selectAll: true,
+    //     search:true
+    // });
 
     $('#country_id').on('change', function () {
         let val =  this.value;

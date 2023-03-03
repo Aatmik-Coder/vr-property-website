@@ -12,6 +12,8 @@ use App\Models\Agency;
 use App\Models\Employee;
 use App\Models\Property_Assigned;
 use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
 use Storage, File, Image;
@@ -27,17 +29,20 @@ class AgencyController extends Controller{
 
     public function properties_assigned() {
         // dd(Auth('agency')->user()->id);
-        $get_property_id = Property_Assigned::where('agency_id',Auth('agency')->user()->id)->first();
+        $countries = Country::all();
+        $get_property_id = Property_Assigned::where('agency_id',Auth('agency')->user()->id)->get();
         // dd($get_property_id);
-        $properties = Property::where('id',$get_property_id->property_id)->get();
-        if(!$properties) {
-            return "EMPTY";
-        }
+        // dd($get_property_id);
+        // $properties = Property::where('id',$get_property_id->property_id)->get();
+        // if(!$properties) {
+        //     return "EMPTY";
+        // }
         // dd($properties);
-        return view('admin.agencies.index');
+        return view('admin.agencies.index',compact('countries','get_property_id'));
     }
 
     public function properties_assigned_ajax(Request $request) {
+        // info($request->state);
         $columns = array('country_id','state_id','city_id','project_name','unit_type');
 
         $limit = $request->input('length');
@@ -51,13 +56,10 @@ class AgencyController extends Controller{
         }
 
         $properties = Property_Assigned::where('agency_id',auth('agency')->user()->id)->get();
-        // $properties = Property::where('id',$properties_122->property_id)->get();
-        // dd($properties_122);
         $total_data = $properties->count();
         $total_filter = $total_data;
-        // info($properties);
         if($request->input('search.value') != ""){
-            $search = $request->input('search.value');
+            $search = $request->input('search.value');    
             $properties = $properties->filter(function ($q) use ($search){
                 return stripos($q->properties->project_name, $search) !== false 
                 || stripos($q->properties->unit_type, $search) !== false
@@ -68,6 +70,52 @@ class AgencyController extends Controller{
             $total_filter = $properties->count();
         }
 
+        if($request->project_name) {
+            $project_name = $request->project_name;
+            $properties = $properties->filter(function($q) use ($project_name) {
+                return stripos($q->properties->project_name, $project_name) !== false;
+            });
+            $total_filter = $properties->count();
+        }
+
+        if($request->unit_type) {
+            $unit_type = $request->unit_type;
+            $properties = $properties->filter(function($q) use ($unit_type) {
+                return stripos($q->properties->unit_type, $unit_type) !== false;
+            });
+            $total_filter = $properties->count();
+        }
+
+        if($request->country) {
+            $country_id = Country::find($request->country);
+            $properties = $properties->filter(function($q) use ($country_id) {
+                return stripos($q->properties->countries->name, $country_id->name) !== false;
+            });
+            $total_filter = $properties->count();
+        }
+
+        if($request->state) {
+            $state_id = State::find($request->state);
+            info($state_id);
+            $properties = $properties->filter(function($q) use ($state_id) {
+                return stripos($q->properties->states->name, $state_id->name) !== false;
+            });
+            $total_filter = $properties->count();
+        }
+
+        if($request->city) {
+            $city_id = City::find($request->city);
+            info($city_id);
+            $properties = $properties->filter(function($q) use ($city_id) {
+                return stripos($q->properties->cities->name, $city_id->name) !== false;
+            });
+            $total_filter = $properties->count();
+        }
+
+        $properties = $properties->sortByDesc(function($item) use ($order){
+            return $item->properties->$order;
+        })->slice($start,$limit);
+
         $data = array();
         if(!empty($properties)) {
             foreach($properties as $property) {
@@ -77,6 +125,11 @@ class AgencyController extends Controller{
                 $nestedData['project_name'] = $property->properties->project_name;
                 $nestedData['unit_type'] = $property->properties->unit_type;
 
+                $action = '<a href="/agency/properties-assigned/book-demo/'.$property->properties->id.'" class="btn action-btn" role="button" aria-pressed="true" title="Book Demo">';
+                    $action .= '<i class="fa fa-handshake"></i>';
+                $action .= '</a>';
+
+                $nestedData['action'] = $action;
                 $data[] = $nestedData;
             }
         }
@@ -100,5 +153,14 @@ class AgencyController extends Controller{
 
     public function store(Request $request) {
         $agency = Agency::create($request->all());
+    }
+
+    public function book_demo($id) {
+        $countries = Country::get();
+        return view('admin.agencies.book-demo', compact('countries'));
+    }
+
+    public function save_demo($id) {
+        
     }
 }
