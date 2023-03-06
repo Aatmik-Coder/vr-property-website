@@ -14,23 +14,25 @@ use App\Models\Property_Assigned;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
+use App\Models\Client;
+use App\Models\Virtual_Meeting;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
 use Storage, File, Image;
 
 class AgencyController extends Controller{
     public function dashboard(Request $request): View {
-        $agency = auth('agency')->user();
+        $agency = auth($request->segment('1'))->user();
         return view('admin.agencies.dashboard',[
             'title' => "DashBoard",
             'agency' => $agency,
         ]);
     }
 
-    public function properties_assigned() {
+    public function properties_assigned(Request $request) {
         // dd(Auth('agency')->user()->id);
         $countries = Country::all();
-        $get_property_id = Property_Assigned::where('agency_id',Auth('agency')->user()->id)->get();
+        $get_property_id = Property_Assigned::where('agency_id',auth($request->segment('1'))->user()->id)->get();
         // dd($get_property_id);
         // dd($get_property_id);
         // $properties = Property::where('id',$get_property_id->property_id)->get();
@@ -55,7 +57,7 @@ class AgencyController extends Controller{
             $dir = $request->input('order.0.dir');
         }
 
-        $properties = Property_Assigned::where('agency_id',auth('agency')->user()->id)->get();
+        $properties = Property_Assigned::where('agency_id',auth($request->segment('1'))->user()->id)->get();
         $total_data = $properties->count();
         $total_filter = $total_data;
         if($request->input('search.value') != ""){
@@ -157,10 +159,26 @@ class AgencyController extends Controller{
 
     public function book_demo($id) {
         $countries = Country::get();
-        return view('admin.agencies.book-demo', compact('countries'));
+        return view('admin.agencies.book-demo', compact('countries','id'));
     }
 
-    public function save_demo($id) {
-        
+    public function save_demo(Request $request,$id) {
+        $document = $request->file('upload_document');
+        $document_name = time().'-'.$document.getClientOriginalName();
+        move_uploaded_file($_FILES['document_name']['tmp_name'], public_path().'/assets/admin/client_documents/'.$document_name);
+
+        $get_data = new Client;
+        $get_data->property_id = $id;
+        $get_data->type_of_admin = $request->segment('1');
+        $get_data->admin_id = auth($request->segment('1'))->user()->id;
+        $get_data->name = $request->input('name');
+        $get_data->email = $request->input('email');
+        $get_data->phone_number = $request->input('phone_number');
+        $get_data->country_id = $request->input('country_id');
+        $get_data->state_id = $request->input('state_id');
+        $get_data->city_id = $request->input('city_id');
+        $get_data->address = $request->input('address');
+        $get_data->upload_document = $document_name;
+        $get_data->save();
     }
 }

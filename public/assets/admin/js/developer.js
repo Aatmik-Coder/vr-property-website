@@ -1,6 +1,15 @@
 $(document).ready(function(){
     data_table();
     'use strict';
+    $('#agency_id').multiselect({
+        selectAll: true,
+        search:true
+    });
+
+    $('#employee_id').multiselect({
+        selectAll: true,
+        search:true
+    });
 });
 
 var dtTable;

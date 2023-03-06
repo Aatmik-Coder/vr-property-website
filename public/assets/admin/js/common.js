@@ -1,9 +1,4 @@
 $('document').ready(function() {
-    // $('select[multiple]').multiselect({
-    //     selectAll: true,
-    //     search:true
-    // });
-
     $('#country_id').on('change', function () {
         let val =  this.value;
         $('#state_id').html('');
@@ -47,4 +42,14 @@ $('document').ready(function() {
             }
         });
     });
+
+    // $('#agency_id').multiselect({
+    //     selectAll: true,
+    //     search:true
+    // });
+
+    // $('#employee_id').multiselect({
+    //     selectAll: true,
+    //     search:true
+    // });
 });

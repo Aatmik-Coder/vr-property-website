@@ -171,7 +171,7 @@ Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.'
         Route::get('properties-assigned','AgencyController@properties_assigned')->name('properties-assigned');
         Route::post('/properties-assigned/ajax', 'AgencyController@properties_assigned_ajax')->name('properties-assigned.ajax');
         Route::get('/properties-assigned/book-demo/{id}','AgencyController@book_demo');
-        Route::post('/properties-assigned/book-demo/{id}','AgencyController@save_demo')->name('agency.properties-assigned.book-demo');
+        Route::post('/properties-assigned/book-demo/{id}','AgencyController@save_demo')->name('properties-assigned.book-demo');
     });
 });
 

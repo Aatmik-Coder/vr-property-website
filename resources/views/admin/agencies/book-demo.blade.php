@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="" method="POST" class="form-horizonatal" enctype="multipart/form-data">
+                        <form action="{!! route('agency.properties-assigned.book-demo',$id) !!}" method="POST" class="form-horizonatal" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label" for="name">Name</label>
