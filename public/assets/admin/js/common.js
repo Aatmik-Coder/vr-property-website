@@ -42,14 +42,4 @@ $('document').ready(function() {
             }
         });
     });
-
-    // $('#agency_id').multiselect({
-    //     selectAll: true,
-    //     search:true
-    // });
-
-    // $('#employee_id').multiselect({
-    //     selectAll: true,
-    //     search:true
-    // });
 });
