@@ -83,6 +83,10 @@
             </li>
 
             <li>
+                <a href="{!! route('employee.properties-assigned') !!}">Properties Assigned</a>
+            </li>
+
+            <li>
                 <a href="#">Arrange Virtual Meet</a>
             </li>
         @endif

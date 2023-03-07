@@ -125,7 +125,7 @@
                                              <td class="pad" style="padding-left:35px;padding-right:10px;padding-top:25px;">
                                                 <div style="font-family: Tahoma, sans-serif">
                                                    <div class="" style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #444444; line-height: 1.2;">
-                                                      <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><span style="background-color:#93f5ed;font-size:14px;"><span style="font-size:24px;background-color:#93f5ed;"><span style="font-size:24px;background-color:#93f5ed;"> Your Login Details </span></span></span></p>
+                                                      <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><span style="background-color:#93f5ed;font-size:14px;"><span style="font-size:24px;background-color:#93f5ed;"><span style="font-size:24px;background-color:#93f5ed;"> Your Demo Details </span></span></span></p>
                                                    </div>
                                                 </div>
                                              </td>
@@ -140,7 +140,7 @@
                                                       <ul style="font-size: 14px; line-height: 1.8; mso-line-height-alt: 21.6px;">
                                                          <li><span style="font-size:16px;">Demo Date:-<strong>{!! $maildata->demo_date !!}</strong></span></li>
                                                          <li><span style="font-size:16px;">Demo time:-<strong>{!! $maildata->demo_time !!}</strong></span></li>
-                                                         <li><span style="font-size:16px;">link:-<strong><a href="{!! route('agency.timer') !!}">Click here</a></strong></span></li>
+                                                         <li><span style="font-size:16px;">link:-<strong><a href="{!! route(Request::segment('1').'.demo',$id) !!}">Click here</a></strong></span></li>
                                                       </ul>
                                                       <p style="margin: 0; mso-line-height-alt: 21.6px;"></p>
                                                    </div>

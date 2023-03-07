@@ -171,11 +171,13 @@ Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.'
         Route::post('/logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
 
         Route::get('properties-assigned','AgencyController@properties_assigned')->name('properties-assigned');
-        Route::post('/properties-assigned/ajax', 'AgencyController@properties_assigned_ajax')->name('properties-assigned.ajax');
+        Route::post('/properties-assigned/ajax', 'AgencyController@properties_assigned_ajax');
         Route::get('/properties-assigned/book-demo/{id}','AgencyController@book_demo');
         Route::post('/properties-assigned/book-demo/{id}','AgencyController@save_demo')->name('properties-assigned.book-demo');
 
-        Route::get('/timer','AgencyController@demo_url')->name('timer');
+        Route::get('/demo','AgencyController@demo_url')->name('demo');
+        Route::get('/not_started','AgencyController@meeting_not_started')->name('not-started');
+        Route::get('/ended','AgencyController@meeting_ended')->name('ended');
     });
 });
 
@@ -192,6 +194,16 @@ Route::prefix('employee')->namespace('App\Http\Controllers\Admin')->name('employ
     Route::middleware('employee')->group(function () {
         Route::get('/dashboard','EmployeeController@dashboard')->name('dashboard');
         Route::post('/logout', 'Auth\AuthenticatedSessionController@destroy')->name('logout');
+
+        Route::get('properties-assigned','EmployeeController@properties_assigned')->name('properties-assigned');
+        Route::post('/properties-assigned/ajax', 'EmployeeController@properties_assigned_ajax');
+        Route::get('/properties-assigned/book-demo/{id}','EmployeeController@book_demo');
+        Route::post('/properties-assigned/book-demo/{id}','EmployeeController@save_demo')->name('properties-assigned.book-demo');
+
+        Route::get('/demo/{id}','EmployeeController@demo_url')->name('demo');
+        Route::get('/not_started','EmployeeController@meeting_not_started')->name('not-started');
+        Route::get('/ended','EmployeeController@meeting_ended')->name('ended');
+
     });
 });
 

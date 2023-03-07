@@ -192,16 +192,20 @@ class AgencyController extends Controller{
     }
 
     public function demo_url(Request $request) {
-
-        
-
         $get_client_info = Client::where(['type_of_admin'=>'agency','admin_id'=>auth($request->segment('1'))->user()->id])->first();
         $tempLink = $request->segment(1);
         $get_virtual_info = Virtual_Meeting::where('client_id',$get_client_info->id)->first();
         $a_l = $get_virtual_info->actual_link;
-        if(Carbon::parse($get_virtual_info->demo_time)->format('Y-m-d H:i:s') <= now($get_virtual_info->timezone) && Carbon::parse($get_virtual_info->expiry_time)->format('Y-m-d H:i:s') > now($get_virtual_info->timezone)){
-            return redirect()->to($a_l);
-        }
-        return view('admin.timer');
+        // if(Carbon::parse($get_virtual_info->demo_time)->format('Y-m-d H:i:s') <= now($get_virtual_info->timezone) && Carbon::parse($get_virtual_info->expiry_time)->format('Y-m-d H:i:s') > now($get_virtual_info->timezone)){
+        return view('admin.temp-page',compact('get_virtual_info'));
+        // }
+    }
+
+    public function meeting_ended() {
+        return view('admin.meeting-ended');
+    }
+
+    public function meeting_not_started() {
+        return view('admin.meeting-not-started');
     }
 }
