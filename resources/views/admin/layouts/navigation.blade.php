@@ -52,7 +52,11 @@
             </li>
 
             <li>
-                <a href="{{ route('developer.assign-properties.index') }}">All Assigned properties</a>
+                <a href="{{ route('developer.assign-properties.agency.index') }}">Agency Assigned properties</a>
+            </li>
+
+            <li>
+                <a href="{{ route('developer.assign-properties.employee.index') }}">Employee Assigned properties</a>
             </li>
 
             <li>

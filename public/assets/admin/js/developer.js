@@ -1,21 +1,28 @@
 $(document).ready(function(){
     data_table();
     'use strict';
-    $('#agency_id').multiselect({
-        selectAll: true,
-        search:true
-    });
-
-    $('#employee_id').multiselect({
-        selectAll: true,
-        search:true
-    });
 });
 
 var dtTable;
 function data_table()
 {
     $.fn.dataTable.ext.errMode = 'none';
+    if (dtTable) {
+        dtTable.destroy();
+      }
+    var url = window.location.href;
+    var url_name = url.split('/');
+    var nam = url_name['5'];
+    
+    if(nam == 'agency'){
+        data_name = "";
+        data_name = 'agency_name';
+    } 
+    else if(nam == 'employee') {
+        data_name = "";
+        data_name = 'person_name';
+    }
+
     dtTable = $('#data-table').DataTable({
         processing: true,
         serverSide: true,
@@ -23,7 +30,7 @@ function data_table()
             headers: {
                 'X-CSRF-Token': _token
             },
-            url: "/developer/assign-properties/ajax",
+            url: baseUrl+segments[2]+"/ajax",
             type: "POST",
             complete: function (data) {
                 $(".loader").hide();
@@ -32,8 +39,7 @@ function data_table()
         "order": [],
         columns: [
             {data: 'project_name',name: 'project_name'},
-            {data: 'agency_name',name: 'agency_name'},
-            {data: 'person_name',name: 'person_name'},
+            {data: data_name,name: data_name},
         ],
         
 

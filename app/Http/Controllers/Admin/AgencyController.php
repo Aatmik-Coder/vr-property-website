@@ -10,7 +10,7 @@ use App\Models\Developer;
 use App\Models\Property;
 use App\Models\Agency;
 use App\Models\Employee;
-use App\Models\Property_Assigned;
+use App\Models\Property_Agency;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
@@ -18,11 +18,22 @@ use App\Models\Client;
 use App\Models\Virtual_Meeting;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestDemoMail;
 use Storage, File, Image;
 
 class AgencyController extends Controller{
     public function dashboard(Request $request): View {
         $agency = auth($request->segment('1'))->user();
+        $get_client_info = Client::where(['type_of_admin'=>'agency','admin_id'=>auth($request->segment('1'))->user()->id])->first();
+        $tempLink = $request->segment(1);
+        $get_virtual_info = Virtual_Meeting::where('client_id',$get_client_info->id)->first();
+        $a_l = $get_virtual_info->actual_link;
+        // dd($get_virtual_info->demo_time);
+        if($get_virtual_info->demo_time >= now()){
+            return Redirect::to($a_l)->send();
+        }
+
         return view('admin.agencies.dashboard',[
             'title' => "DashBoard",
             'agency' => $agency,
@@ -30,16 +41,9 @@ class AgencyController extends Controller{
     }
 
     public function properties_assigned(Request $request) {
-        // dd(Auth('agency')->user()->id);
         $countries = Country::all();
-        $get_property_id = Property_Assigned::where('agency_id',auth($request->segment('1'))->user()->id)->get();
-        // dd($get_property_id);
-        // dd($get_property_id);
-        // $properties = Property::where('id',$get_property_id->property_id)->get();
-        // if(!$properties) {
-        //     return "EMPTY";
-        // }
-        // dd($properties);
+        $get_property_id = Property_Agency::where('agency_id',auth($request->segment('1'))->user()->id)->get();
+
         return view('admin.agencies.index',compact('countries','get_property_id'));
     }
 
@@ -57,7 +61,7 @@ class AgencyController extends Controller{
             $dir = $request->input('order.0.dir');
         }
 
-        $properties = Property_Assigned::where('agency_id',auth($request->segment('1'))->user()->id)->get();
+        $properties = Property_Agency::where('agency_id',auth($request->segment('1'))->user()->id)->get();
         $total_data = $properties->count();
         $total_filter = $total_data;
         if($request->input('search.value') != ""){
@@ -144,9 +148,6 @@ class AgencyController extends Controller{
         );
         echo json_encode($json_data);
     }
-    // public function index() {
-    //     return view('admin.agencies.index');
-    // }
 
     public function create() {
         $countries = Country::get();
@@ -164,8 +165,8 @@ class AgencyController extends Controller{
 
     public function save_demo(Request $request,$id) {
         $document = $request->file('upload_document');
-        $document_name = time().'-'.$document.getClientOriginalName();
-        move_uploaded_file($_FILES['document_name']['tmp_name'], public_path().'/assets/admin/client_documents/'.$document_name);
+        $document_name = time().'-'.$document->getClientOriginalName();
+        move_uploaded_file($_FILES["upload_document"]["tmp_name"], public_path().'/assets/admin/client_documents/'.$document_name);
 
         $get_data = new Client;
         $get_data->property_id = $id;
@@ -180,5 +181,17 @@ class AgencyController extends Controller{
         $get_data->address = $request->input('address');
         $get_data->upload_document = $document_name;
         $get_data->save();
+
+        $get_demo_details = new Virtual_Meeting;
+        $get_demo_details->client_id = $get_data->id;
+        $get_demo_details->actual_link = "https://3d.thevrmakers.com/dev_parisar_v2/#meeting-key=7NHHvZ8Vc5cYFGrR";
+        $get_demo_details->demo_date = $request->input('demo_date');
+        $get_demo_details->demo_time = $request->input('demo_time');
+        $get_demo_details->timezone = $request->input('timezone');
+        $get_demo_details->save();
+
+        Mail::to($request->email)->send(new TestDemoMail($request));
+
+        return redirect()->route('agency.dashboard');
     }
 }

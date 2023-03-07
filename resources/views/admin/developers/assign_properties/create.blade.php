@@ -102,7 +102,7 @@
 @section('js')
 <script src="{!! asset('assets/common/js/jquery.multiselect.js') !!}"></script>
 <script src="{{ asset('assets/admin/js/auth.js') }}"></script>
-<script src="{{ asset('assets/admin/js/developer.js') }}"></script>
+<script src="{{ asset('assets/admin/js/developer_property_assign.js') }}"></script>
 <script src="{{ asset('assets/admin/js/common.js') }}"></script>
 @stop
 @endsection

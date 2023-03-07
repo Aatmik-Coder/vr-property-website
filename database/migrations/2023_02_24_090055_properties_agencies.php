@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('virtual__meetings', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('client_id');
-            $table->text('actual_link');
-            $table->date('demo_date');
-            $table->time('demo_time');
-            $table->string('timezone');
+        //
+        Schema::create('properties_agencies', function(Blueprint $table) {
+            $table->unsignedInteger('property_id');
+            $table->unsignedInteger('agency_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('virtual__meetings');
+        //
     }
 };
