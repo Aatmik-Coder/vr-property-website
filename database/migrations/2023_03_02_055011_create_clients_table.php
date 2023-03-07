@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->unsignedSmallInteger('country_id');
-            $table->unsignedInteger('state_id');
-            $table->unsignedInteger('city_id');
+            $table->unsignedInteger('state_id')->nullable();
+            $table->unsignedInteger('city_id')->nullable();
             $table->text('address');
             $table->string('upload_document');
             $table->timestamps();

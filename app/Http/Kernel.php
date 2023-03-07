@@ -68,4 +68,11 @@ class Kernel extends HttpKernel
         'agency' => \App\Http\Middleware\Agency::class,
         'employee' => \App\Http\Middleware\Employee::class,
     ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->call(function () {
+            Virtual_Meeting::where('expiry_time','<',now())->delete();
+        })->everyMinute();
+    }
 }

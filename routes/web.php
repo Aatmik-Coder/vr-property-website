@@ -174,6 +174,8 @@ Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.'
         Route::post('/properties-assigned/ajax', 'AgencyController@properties_assigned_ajax')->name('properties-assigned.ajax');
         Route::get('/properties-assigned/book-demo/{id}','AgencyController@book_demo');
         Route::post('/properties-assigned/book-demo/{id}','AgencyController@save_demo')->name('properties-assigned.book-demo');
+
+        Route::get('/timer','AgencyController@demo_url')->name('timer');
     });
 });
 

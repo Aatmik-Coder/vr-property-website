@@ -126,17 +126,17 @@
                                     </select>
                                 </div>
                             </div>
-                            {{-- <div class="form-group row mb-3">
+                            <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Expiry time</label>
                                 <div class="col-sm-5">
-                                    <input type="hours" name="expiry_time" id="expiry_time" class="form-control @error('expiry_time') is-invalid @enderror">
+                                    <input type="time" name="expiry_time" id="expiry_time" class="form-control @error('expiry_time') is-invalid @enderror">
                                     @error('expiry_time')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Upload Document (passport, national ID)</label>
                                 <div class="col-sm-5">

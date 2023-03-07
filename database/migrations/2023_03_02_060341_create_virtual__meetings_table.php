@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('actual_link');
             $table->date('demo_date');
             $table->time('demo_time');
+            $table->time('expiry_time');
             $table->string('timezone');
             $table->timestamps();
         });

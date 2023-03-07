@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
 use App\Models\Developer;
 use App\Models\Property;
 use App\Models\Agency;
@@ -25,14 +26,6 @@ use Storage, File, Image;
 class AgencyController extends Controller{
     public function dashboard(Request $request): View {
         $agency = auth($request->segment('1'))->user();
-        $get_client_info = Client::where(['type_of_admin'=>'agency','admin_id'=>auth($request->segment('1'))->user()->id])->first();
-        $tempLink = $request->segment(1);
-        $get_virtual_info = Virtual_Meeting::where('client_id',$get_client_info->id)->first();
-        $a_l = $get_virtual_info->actual_link;
-        // dd($get_virtual_info->demo_time);
-        if($get_virtual_info->demo_time >= now()){
-            return Redirect::to($a_l)->send();
-        }
 
         return view('admin.agencies.dashboard',[
             'title' => "DashBoard",
@@ -182,16 +175,33 @@ class AgencyController extends Controller{
         $get_data->upload_document = $document_name;
         $get_data->save();
 
+        // $time_according_to_zone = $request->input('demo_time');
+        // $zone = $request->input('timezone');
         $get_demo_details = new Virtual_Meeting;
         $get_demo_details->client_id = $get_data->id;
         $get_demo_details->actual_link = "https://3d.thevrmakers.com/dev_parisar_v2/#meeting-key=7NHHvZ8Vc5cYFGrR";
         $get_demo_details->demo_date = $request->input('demo_date');
         $get_demo_details->demo_time = $request->input('demo_time');
+        $get_demo_details->expiry_time = $request->input('expiry_time');
         $get_demo_details->timezone = $request->input('timezone');
         $get_demo_details->save();
 
         Mail::to($request->email)->send(new TestDemoMail($request));
 
         return redirect()->route('agency.dashboard');
+    }
+
+    public function demo_url(Request $request) {
+
+        
+
+        $get_client_info = Client::where(['type_of_admin'=>'agency','admin_id'=>auth($request->segment('1'))->user()->id])->first();
+        $tempLink = $request->segment(1);
+        $get_virtual_info = Virtual_Meeting::where('client_id',$get_client_info->id)->first();
+        $a_l = $get_virtual_info->actual_link;
+        if(Carbon::parse($get_virtual_info->demo_time)->format('Y-m-d H:i:s') <= now($get_virtual_info->timezone) && Carbon::parse($get_virtual_info->expiry_time)->format('Y-m-d H:i:s') > now($get_virtual_info->timezone)){
+            return redirect()->to($a_l);
+        }
+        return view('admin.timer');
     }
 }
