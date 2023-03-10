@@ -98,7 +98,7 @@
                                              <td class="pad" style="padding-left:30px;padding-right:30px;padding-top:10px;">
                                                 <div style="font-family: Tahoma, sans-serif">
                                                    <div class="" style="font-size: 12px; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #555555; line-height: 1.2;">
-                                                      <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><strong><span style="font-size:46px;">Hi, <span style="color:#3d3bee;font-size:46px;">{!! $maildata->name !!}</span>!</span></strong></p>
+                                                      <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><strong><span style="font-size:46px;">Hi, <span style="color:#3d3bee;font-size:46px;">{!! $client_name->name !!}</span>!</span></strong></p>
                                                    </div>
                                                 </div>
                                              </td>

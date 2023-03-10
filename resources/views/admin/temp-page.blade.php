@@ -8,6 +8,9 @@
 </head>
 <script src="{!! asset('assets/common/js/jquery.min.js') !!}"></script>
 <style>
+    html, body {
+        height: 100%;
+    }
     body{
         margin: 0;
         padding: 0;
@@ -15,7 +18,7 @@
     }
     #ext_link{
         width: 100%;
-        height:700px;
+        height:100%;
     }
 </style>
 <body>
