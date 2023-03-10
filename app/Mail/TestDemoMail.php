@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Virtual_Meeting;
 
 class TestDemoMail extends Mailable
 {
@@ -19,10 +20,9 @@ class TestDemoMail extends Mailable
      *
      * @return void
      */
-    public function __construct($maildata,$id)
+    public function __construct($id)
     {   
-        //
-        $this->maildata = $maildata;
+        $this->maildata = Virtual_Meeting::find($id);
         $this->id = $id;
     }
 

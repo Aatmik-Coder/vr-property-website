@@ -15,9 +15,10 @@ class Virtual_Meeting extends Model
 
     protected $fillable = [
         'client_id',
-        'temp_link',
         'actual_link',
         'demo_date',
-        'expiry_time'
+        'demo_time',
+        'expiry_time',
+        'timezone'
     ];
 }

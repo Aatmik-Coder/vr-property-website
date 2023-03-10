@@ -140,6 +140,7 @@
                                                       <ul style="font-size: 14px; line-height: 1.8; mso-line-height-alt: 21.6px;">
                                                          <li><span style="font-size:16px;">Demo Date:-<strong>{!! $maildata->demo_date !!}</strong></span></li>
                                                          <li><span style="font-size:16px;">Demo time:-<strong>{!! $maildata->demo_time !!}</strong></span></li>
+                                                         <li><span style="font-size:16px;">TimeZone:-<strong>{!! $maildata->timezone !!}</strong></span></li>
                                                          <li><span style="font-size:16px;">link:-<strong><a href="{!! route(Request::segment('1').'.demo',$id) !!}">Click here</a></strong></span></li>
                                                       </ul>
                                                       <p style="margin: 0; mso-line-height-alt: 21.6px;"></p>

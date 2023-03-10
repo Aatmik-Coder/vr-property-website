@@ -192,18 +192,23 @@ class EmployeeController extends Controller{
         $get_data->upload_document = $document_name;
         $get_data->save();
 
-        // $time_according_to_zone = $request->input('demo_time');
-        // $zone = $request->input('timezone');
+        $time_according_to_zone = $request->input('demo_time');
+        $zone = $request->input('timezone');
+
+        $demo_time = Carbon::parse($request->input('demo_time'))->tz($request->input('timezone'));
+        $expiry_time = Carbon::parse($request->input('expiry_time'))->tz($request->input('timezone'));
+        info($demo_time);
+        info($expiry_time);
         $get_demo_details = new Virtual_Meeting;
         $get_demo_details->client_id = $get_data->id;
         $get_demo_details->actual_link = "https://3d.thevrmakers.com/dev_parisar_v2/#meeting-key=7NHHvZ8Vc5cYFGrR";
         $get_demo_details->demo_date = $request->input('demo_date');
-        $get_demo_details->demo_time = $request->input('demo_time');
-        $get_demo_details->expiry_time = $request->input('expiry_time');
+        $get_demo_details->demo_time = $demo_time;
+        $get_demo_details->expiry_time = $expiry_time;
         $get_demo_details->timezone = $request->input('timezone');
         $get_demo_details->save();
 
-        Mail::to($request->email)->send(new TestDemoMail($request,$get_demo_details->id));
+        Mail::to($request->email)->send(new TestDemoMail($get_demo_details->id));
 
         return redirect()->route('employee.dashboard');
     }
@@ -213,7 +218,9 @@ class EmployeeController extends Controller{
         $get_client_info = Client::where(['type_of_admin'=>'employee','admin_id'=>auth($request->segment('1'))->user()->id])->first();
         $tempLink = $request->segment(1);
         $get_virtual_info = Virtual_Meeting::find($id);
-        $a_l = $get_virtual_info->actual_link;
+        // $total_meeting_time = Carbon::parse($get_virtual_info->demo_time)->addMinutes(number_format($get_virtual_info->expiry_time));
+        // dd($total_meeting_time);
+        // dd(Carbon::parse($get_virtual_info->demo_time)->format('Y-m-d H:i:s')->addMinutes(1));
         // if(Carbon::parse($get_virtual_info->demo_time)->format('Y-m-d H:i:s') <= now($get_virtual_info->timezone) && Carbon::parse($get_virtual_info->expiry_time)->format('Y-m-d H:i:s') > now($get_virtual_info->timezone)){
             return view('admin.temp-page',compact('get_virtual_info'));
         // }

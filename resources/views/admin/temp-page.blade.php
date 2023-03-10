@@ -29,15 +29,32 @@
             @else
                 {!! route(Request::segment('1').'.ended') !!}
             @endif
-        @endif" frameborder="0" id="ext_link"></iframe>
+        @endif" frameborder="0" id="ext_link" allow="camera; microphone"></iframe>
 </body>
 <script>
-    $(document).ready(function(){
-        let expiry_time = "{!! $get_virtual_info->expiry_time !!}";
-        // let demo_time = "{!! $get_virtual_info->demo_time !!}";
-        let refresh = setTimeout(() => {
-            $('#ext_link').load();
-        }, expiry_time);
-    });
+    $(document).ready(function() {
+        var demo_time = "{!! $get_virtual_info->demo_time !!}";
+        var expiry_time = "{!! $get_virtual_info->expiry_time !!}";
+
+        setInterval(() => {
+            function addZero(i) {
+                if (i < 10) {i = "0" + i}
+                return i;
+            }
+
+            const d = new Date();
+            let h = addZero(d.getHours());
+            let m = addZero(d.getMinutes());
+            let s = addZero(d.getSeconds());
+            let time = h + ":" + m + ":" + s;
+            
+            if(time == demo_time){
+               location.reload();
+            }
+            if(time == expiry_time) {
+                location.reload();
+            }
+        }, 1000);
+    })
 </script>
 </html>
