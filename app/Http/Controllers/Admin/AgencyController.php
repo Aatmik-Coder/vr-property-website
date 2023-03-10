@@ -177,25 +177,28 @@ class AgencyController extends Controller{
 
         // $time_according_to_zone = $request->input('demo_time');
         // $zone = $request->input('timezone');
+        $demo_time = Carbon::parse($request->input('demo_time'))->tz($request->input('timezone'));
+        $expiry_time = Carbon::parse($request->input('expiry_time'))->tz($request->input('timezone'));
+
+
         $get_demo_details = new Virtual_Meeting;
         $get_demo_details->client_id = $get_data->id;
-        $get_demo_details->actual_link = "https://3d.thevrmakers.com/dev_parisar_v2/#meeting-key=7NHHvZ8Vc5cYFGrR";
+        $get_demo_details->actual_link = "https://3d.thevrmakers.com/lower_floor_model/#meeting-key=lJ4jRML8Xf4IJomz";
         $get_demo_details->demo_date = $request->input('demo_date');
-        $get_demo_details->demo_time = $request->input('demo_time');
-        $get_demo_details->expiry_time = $request->input('expiry_time');
+        $get_demo_details->demo_time = $demo_time;
+        $get_demo_details->expiry_time = $expiry_time;
         $get_demo_details->timezone = $request->input('timezone');
         $get_demo_details->save();
 
-        Mail::to($request->email)->send(new TestDemoMail($request));
+        Mail::to($request->email)->send(new TestDemoMail($get_demo_details->id));
 
         return redirect()->route('agency.dashboard');
     }
 
-    public function demo_url(Request $request) {
+    public function demo_url(Request $request,$id) {
         $get_client_info = Client::where(['type_of_admin'=>'agency','admin_id'=>auth($request->segment('1'))->user()->id])->first();
         $tempLink = $request->segment(1);
-        $get_virtual_info = Virtual_Meeting::where('client_id',$get_client_info->id)->first();
-        $a_l = $get_virtual_info->actual_link;
+        $get_virtual_info = Virtual_Meeting::find($id);
         // if(Carbon::parse($get_virtual_info->demo_time)->format('Y-m-d H:i:s') <= now($get_virtual_info->timezone) && Carbon::parse($get_virtual_info->expiry_time)->format('Y-m-d H:i:s') > now($get_virtual_info->timezone)){
         return view('admin.temp-page',compact('get_virtual_info'));
         // }

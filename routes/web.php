@@ -175,7 +175,7 @@ Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.'
         Route::get('/properties-assigned/book-demo/{id}','AgencyController@book_demo');
         Route::post('/properties-assigned/book-demo/{id}','AgencyController@save_demo')->name('properties-assigned.book-demo');
 
-        Route::get('/demo','AgencyController@demo_url')->name('demo');
+        Route::get('/demo/{id}','AgencyController@demo_url')->name('demo');
         Route::get('/not_started','AgencyController@meeting_not_started')->name('not-started');
         Route::get('/ended','AgencyController@meeting_ended')->name('ended');
     });
