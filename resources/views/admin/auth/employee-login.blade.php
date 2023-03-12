@@ -73,6 +73,6 @@
 </div>
 <!-- JavaScript files-->
 @section('js')
-<script src="{{ asset('assets/admin/js/employee_auth.js') }}"></script>
+{{-- <script src="{{ asset('assets/admin/js/employee_auth.js') }}"></script> --}}
 @stop
 @endsection

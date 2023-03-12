@@ -9,6 +9,10 @@ class Client extends Model
 {
     use HasFactory;
 
+    // public function virtualmeetings() {
+    //     return $this->hasOne(Virtual_Meeting::class, 'client_id','id');
+    // }
+
     protected $table = 'clients';
 
     protected $primaryKey = 'id';

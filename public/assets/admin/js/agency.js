@@ -16,6 +16,7 @@ $(document).ready(function(){
         data_table();
     });
     data_table();
+    upcoming_meeting_table();
     'use strict';
 });
 
@@ -72,6 +73,44 @@ function data_table()
             sSearchPlaceholder: "Search",
             sEmptyTable: "No data found.",
             sProcessing: '<div class="loader"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>'
+        }
+    });
+    $('input[type=search]').addClass("form-control");
+}
+
+
+function upcoming_meeting_table() {
+    $.fn.dataTable.ext.errMode = "none";
+    if(dtTable) {
+        dtTable.destroy();
+    }
+    dtTable = $('#data-table-upcoming-meeting').DataTable({
+        processing: true,
+        serverside: true,
+        ajax:{
+            headers:{
+                'X-CSRF-TOKEN': _token
+            },
+            url: "/agency/upcoming-meeting/ajax",
+            type: "POST",
+            complete: function() {
+                $(".loader").hide();
+            },
+        },
+        "order":[],
+        columns:[
+            {data:'name', name: 'name'},
+            {data:'email', name: 'email'},
+            {data:'phone_number', name: 'phone_number'},
+            {data:'project_name', name: 'project_name'},
+            {data:'demo_date', name: 'demo_date'},
+            {data:'demo_time', name: 'demo_time'},
+        ],
+        oLanguage:{
+            sSearch:"",
+            sSearchPlaceholder: "Search",
+            sEmptyTable: "No data found.",
+            sProcessing: '<div class="loader"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div',
         }
     });
     $('input[type=search]').addClass("form-control");

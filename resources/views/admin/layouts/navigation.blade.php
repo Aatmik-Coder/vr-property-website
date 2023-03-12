@@ -74,7 +74,7 @@
             </li>
 
             <li>
-                <a href="#">Arrange Virtual Meet</a>
+                <a href="{!! route('agency.upcoming-meeting') !!}">Upcoming Meeting</a>
             </li>
 
         @elseif(auth('employee')->check())
@@ -87,7 +87,7 @@
             </li>
 
             <li>
-                <a href="#">Arrange Virtual Meet</a>
+                <a href="{!! route('employee.upcoming-meeting') !!}">Upcoming Meeting</a>
             </li>
         @endif
         

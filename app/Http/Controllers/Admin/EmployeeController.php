@@ -234,4 +234,87 @@ class EmployeeController extends Controller{
     public function meeting_not_started() {
         return view('admin.meeting-not-started');
     }
+
+    public function upcoming_meeting() {
+        return view('admin.employees.upcoming-meeting');
+    }
+
+    public function upcoming_meeting_ajax(Request $request) {
+        $columns = array('name','email','phone_number');
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = "created_at";
+        $dir = "desc";
+        if($request->input('order.0.column') != "" && $request->input('order.0.dir') != "")
+        {
+            $order = $columns[$request->input('order.0.column')];
+            $dir = $request->input('order.0.dir');
+        }
+
+        $users = new Client;
+        // $roles = new Role;
+        $total_data = $users->count();
+        $total_filter = $total_data;
+        if($request->input('search.value') != "")
+        {
+            $search = $request->input('search.value');
+            $users = $users->where('name','LIKE',"%{$search}%")
+                ->orWhere('email','like',"%{$search}%")
+                ->orWhere('phone_number','like',"%{$search}%");
+    $total_filter = $users->count();
+        }
+        $users = $users->skip($start)->take($limit)->orderBy($order,$dir)->get();
+
+        $data = array();
+        if(!empty($users))
+        {
+            foreach($users as $user)
+            {
+                // dd($user->developers->person_name);
+                // $nestedData['id'] = $user->id;
+                $nestedData['name'] = $user->name;
+                $nestedData['email'] = $user->email;
+                $nestedData['phone_number'] = $user->phone_number;
+                // if($user->is_developer){
+                //     $nestedData['person_name']=$user->developers->person_name;
+                //     $nestedData['person_email']=$user->developers->person_email;
+                //     $nestedData['person_mobile_number']=$user->developers->person_mobile_number;
+                // } else if($user->is_agency) {
+                //     $nestedData['person_name']=$user->agencies->person_name;
+                //     $nestedData['person_email']=$user->agencies->person_email;
+                //     $nestedData['person_mobile_number']=$user->agencies->person_mobile_number;
+                // } else if($user->is_employee){
+                //     $nestedData['person_name']=$user->employees->person_name;
+                //     $nestedData['person_email']=$user->employees->person_email;
+                //     $nestedData['person_mobile_number']=$user->employees->person_mobile_number;
+                // }
+
+                // $status = '<a href="javascript:void(0);" onclick="changeStatus('.$permission->id.')" class="btn action-btn" role="button" aria-pressed="true">';
+
+                // $action = '<a href="'.route("admin.roles.view",$user->id).'" class="btn action-btn" role="button" aria-pressed="true" title="View">';
+                //     $action .= '<i class="fa fa-eye green" aria-hidden="true"></i>';
+                // $action .= '</a>';
+
+                // $action .= '<a href="roles/'.$user->id.'/edit" class="btn action-btn" role="button" aria-pressed="true" title="Edit">';
+                //     $action .= '<i class="fa fa-pen green" aria-hidden="true"></i>';
+                // $action .= '</a>';
+
+                // $action .= '<a href="javascript:void(0);" onclick="deleteData('.$user->id.')" class="btn action-btn" title="Delete" role="button" aria-pressed="true">';
+                //     $action .= '<i class="fa fa-trash red" aria-hidden="true"></i>';
+                // $action .= '</a>';
+
+                // $nestedData['action'] = $action;
+
+                $data[] = $nestedData;
+            }
+        }
+
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($total_data),
+            "recordsFiltered" => intval($total_filter),
+            "data"            => $data
+        );
+        echo json_encode($json_data);
+    }
 }

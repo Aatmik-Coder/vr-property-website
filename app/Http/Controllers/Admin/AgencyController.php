@@ -211,4 +211,25 @@ class AgencyController extends Controller{
     public function meeting_not_started() {
         return view('admin.meeting-not-started');
     }
+
+    public function upcoming_meeting() {
+        return view('admin.agencies.upcoming-meeting');
+    }
+
+    public function upcoming_meeting_ajax(Request $request) {
+        $columns = array('name','email','phone_number','project_name','demo_date','demo_time');
+
+        $fetch_s = Client::where('admin_id',auth($request->segment('1'))->user()->id)->get();
+        info($fetch_s);
+
+        // $limit = $request->input('length');
+        // $start = $request->input('start');
+        // $order = "created_at";
+        // $dir = "desc";
+        
+        // if($request->input('order.0.column') != "" && $request->input('order.0.dir') != "") {
+        //     $order = $columns[$request->input('order.0.column')];
+        //     $dir = $request->input('order.0.dir');
+        // }
+    }
 }

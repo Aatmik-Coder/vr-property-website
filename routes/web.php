@@ -178,6 +178,9 @@ Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.'
         Route::get('/demo/{id}','AgencyController@demo_url')->name('demo');
         Route::get('/not_started','AgencyController@meeting_not_started')->name('not-started');
         Route::get('/ended','AgencyController@meeting_ended')->name('ended');
+
+        Route::get('upcoming-meeting','AgencyController@upcoming_meeting')->name('upcoming-meeting');
+        Route::post('/upcoming-meeting/ajax','AgencyController@upcoming_meeting_ajax');
     });
 });
 
@@ -204,6 +207,8 @@ Route::prefix('employee')->namespace('App\Http\Controllers\Admin')->name('employ
         Route::get('/not_started','EmployeeController@meeting_not_started')->name('not-started');
         Route::get('/ended','EmployeeController@meeting_ended')->name('ended');
 
+        Route::get('upcoming-meeting','EmployeeController@upcoming_meeting')->name('upcoming-meeting');
+        Route::post('/upcoming-meeting/ajax','EmployeeController@upcoming_meeting_ajax');
     });
 });
 
