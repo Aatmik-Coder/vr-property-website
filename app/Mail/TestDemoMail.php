@@ -25,7 +25,7 @@ class TestDemoMail extends Mailable
     public function __construct($id)
     {   
         $this->maildata = Virtual_Meeting::find($id);
-        $this->client_name = Client::where('id',$id)->first(); 
+        $this->client_name = Client::where('id',$this->maildata->client_id)->first(); 
         $this->id = $id;
     }
 
