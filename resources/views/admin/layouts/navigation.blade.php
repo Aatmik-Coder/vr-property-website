@@ -5,15 +5,34 @@
             <li>
                 <a href="{{ route('admin.dashboard') }}">Dashboard</a>
             </li>
+            {{-- -------------------------------------DEVELOPER-------------------------------------- --}}
             <li>
-                <a href="/admin/users">All User</a>
+                <a href="/admin/developers">All Developer</a>
             </li>
             
             <li>
-                <a href="/admin/users/create">Add user</a>
+                <a href="/admin/developer/create">Add Developer</a>
+            </li>
+
+            {{-- -------------------------------------AGEENCY----------------------------------------- --}}
+            <li>
+                <a href="/admin/agencies">All Agency</a>
             </li>
             
             <li>
+                <a href="/admin/agnecy/create">Add Agency</a>
+            </li>
+
+            {{-- -------------------------------------EMPLOYEE----------------------------------------- --}}
+            <li>
+                <a href="/admin/employees">All Employee</a>
+            </li>
+            
+            <li>
+                <a href="/admin/employee/create">Add Employee</a>
+            </li>
+            
+            {{-- <li>
                 <a href="/admin/roles">All Roles</a>
             </li>
             
@@ -27,8 +46,9 @@
 
             <li>
                 <a href="/admin/permissions/create">add permission</a>
-            </li>
+            </li> --}}
             
+            {{-- ---------------------------------------PROPERTIES-------------------------------------- --}}
             <li>
                 <a href="{{ route('admin.properties.index') }}">All properties</a>
             </li>

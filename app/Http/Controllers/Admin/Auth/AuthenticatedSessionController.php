@@ -28,17 +28,17 @@ class AuthenticatedSessionController extends Controller
         return view('admin.auth.login',compact('title'));
     }
 
-    public function developerCreate(): View
-    {
-        $title = "Admin developer Login";
-        return view('admin.auth.developer-login',compact('title'));
-    }
+    // public function developerCreate(): View
+    // {
+    //     $title = "Admin developer Login";
+    //     return view('admin.auth.developer-login',compact('title'));
+    // }
 
-    public function agencyCreate(): View
-    {
-        $title = "Admin Agency Login";
-        return view('admin.auth.agency-login', compact('title'));
-    }
+    // public function agencyCreate(): View
+    // {
+    //     $title = "Admin Agency Login";
+    //     return view('admin.auth.agency-login', compact('title'));
+    // }
 
     public function employeeCreate(): View
     {
@@ -50,11 +50,14 @@ class AuthenticatedSessionController extends Controller
     {
         if($this->request->segment(1) == 'admin') {
             return Auth::guard('admin');
-        } else if($this->request->segment(1) == 'developer'){
+        }
+        if($this->request->segment(1) == 'developer'){
             return Auth::guard('developer');
-        } else if($this->request->segment(1) == 'agency') {
+        } 
+        if($this->request->segment(1) == 'agency') {
             return Auth::guard('agency');
-        } else if($this->request->segment(1) == 'employee') {
+        }
+        if($this->request->segment(1) == 'employee') {
             return Auth::guard('employee');
         }
     }
@@ -67,7 +70,20 @@ class AuthenticatedSessionController extends Controller
         // dd($request->session());
         $request->authenticate();
         $user = auth('admin')->user();
-
+        // $developer = auth('developer')->user();
+        // $employee = auth('employee')->user();
+        // $agency = auth('agency')->user();
+        // // dd($user);
+        // if($developer) {
+        //     Auth::guard('developer');
+        // }
+        // if($employee) {
+        //     Auth::guard('employee');
+        // }
+        // if($agency) {
+        //     Auth::guard('agency');
+        // }
+            // dd($user);
         if(!$user->is_active)
         {
             $this->guard()->logout();
@@ -78,7 +94,6 @@ class AuthenticatedSessionController extends Controller
         }
 
         $request->session()->regenerate();
-
         return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
     }
 
@@ -86,14 +101,6 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $developer = auth('developer')->user();
-        // if(!$developer->is_active)
-        // {
-        //     $this->guard()->logout();
-        //     return redirect()->back()->withInput($request->only('person_email', 'remember'))
-        //         ->withErrors([
-        //             'person_email' => 'Your account is inactive. Please contact your administrator to get access!',
-        //         ]);
-        // }
 
         $request->session()->regenerate();
 
@@ -114,7 +121,6 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $employee = auth('employee')->user();
         $request->session()->regenerate();
-
         return redirect()->intended(RouteServiceProvider::EMPLOYEE_HOME);
     }
 

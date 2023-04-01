@@ -44,7 +44,7 @@ function data_table()
             {data: 'person_name',name: 'person_name'},
             {data: 'person_email',name: 'person_email'},
             {data: 'person_mobile_number',name: 'person_mobile_number'},
-            // {data: 'action',name: 'action',orderable: false},
+            {data: 'action',name: 'action',orderable: false},
         ],
         
 

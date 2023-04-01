@@ -13,7 +13,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile Number</th>
-                                {{-- <th>Action</th> --}}
+                                <th>Action</th>
                             </thead>
                         </table>
                     </div>

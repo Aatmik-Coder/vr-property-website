@@ -84,15 +84,11 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         //Users Routes
         Route::resource('users', UserController::class);
         Route::post('/users/ajax', 'UserController@ajax')->name('users.list.ajax');
-        // Route::get('/users/view/{id}', 'UserController@view')->name('users.view');
-        // Route::delete('delete_data/user/{id}', 'UserController@destroy');
-        // Route::resource('users')
-        // Route::get('/user/index','UserController@index')->name('users.index');
-        // Route::get('/user/create','UserController@create')->name('users.create');
-        Route::resource('roles', RoleController::class);
-        Route::post('/roles/ajax', 'RoleController@ajax')->name('roles.list.ajax');
-        Route::get('/roles/view/{id}', 'RoleController@view')->name('roles.view');
-        Route::delete('/roles/delete/{id}', 'RoleController@destroy')->name('roles.destroy');
+        Route::get('/users/view/{id}', 'UserController@show')->name('users.view');
+        
+        // DEVELOPER ROUTES
+        Route::get('/employees', [EmployeeController::class,'index']);
+        // Route::get('/admin/employees/create', EmployeeController@developer);
 
         //Properties Routes
         Route::resource('properties',PropertiesController::class);
@@ -101,24 +97,20 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
         Route::delete('/properties/delete/{id}', 'PropertiesController@destroy')->name('properties.destroy');
     
         Route::post('/properties/delete-files',[PropertiesController::class, 'delete_files'])->name('delete-files');
-
-        // Assign Routes
-        // Route::get('/')
-        
-        //Permissinos Routes 
-        Route::resource('permissions', PermissionController::class);
-        Route::post('/permissions/ajax', 'PermissionController@ajax')->name('permissions.list.ajax');
-        Route::get('/permissions/view/{id}', 'PermissionController@view')->name('permissions.view');
-        Route::delete('/permissions/delete/{id}', 'PermissionController@destroy')->name('permissions.destroy');
-    
-
-        Route::resource('developers', DeveloperController::class);
-
-        Route::resource('agencies', AgencyController::class);
-
     });
 });
+Route::resource('developers', DeveloperController::class);
 
+Route::resource('agencies', AgencyController::class);
+    // Route::resource('roles', RoleController::class);
+        // Route::post('/roles/ajax', 'RoleController@ajax')->name('roles.list.ajax');
+        // Route::get('/roles/view/{id}', 'RoleController@view')->name('roles.view');
+        // Route::delete('/roles/delete/{id}', 'RoleController@destroy')->name('roles.destroy');
+//Permissinos Routes 
+        // Route::resource('permissions', PermissionController::class);
+        // Route::post('/permissions/ajax', 'PermissionController@ajax')->name('permissions.list.ajax');
+        // Route::get('/permissions/view/{id}', 'PermissionController@view')->name('permissions.view');
+        // Route::delete('/permissions/delete/{id}', 'PermissionController@destroy')->name('permissions.destroy');
 Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('developer.')->group(function() {
     Route::get('/',function () {
         return redirect(route('developer.dashboard'));
@@ -188,11 +180,12 @@ Route::prefix('employee')->namespace('App\Http\Controllers\Admin')->name('employ
     Route::get('/',function () {
         return redirect(route('employee.dashboard'));
     })->name('home');
-
+    
     Route::namespace('Auth')->middleware('guest:employee')->group(function(){
         Route::get('/login','AuthenticatedSessionController@employeeCreate')->name('login');
         Route::post('/login','AuthenticatedSessionController@employeeStore');
-    });
+    }); 
+
 
     Route::middleware('employee')->group(function () {
         Route::get('/dashboard','EmployeeController@dashboard')->name('dashboard');

@@ -22,9 +22,10 @@ class EmployeeLoginRequest extends FormRequest {
     }
 
     public function authenticate() {
-        $this->ensureIsNotRateLimited();
 
-        if(!Auth::guard('employee')->attempt(['person_email'=>$this->input('person_email'), 'password'=>$this->input('person_password')], $this->boolean('remember'))) {
+        $this->ensureIsNotRateLimited();
+        if(!Auth::guard('employee')->attempt($this->only('person_email','person_password'), $this->boolean('remember'))) {
+        // if(!Auth::guard('employee')->attempt(['person_email'=>$this->input('email'), 'password'=>$this->input('password')], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

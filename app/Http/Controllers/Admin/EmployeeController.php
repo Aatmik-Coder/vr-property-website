@@ -34,6 +34,11 @@ class EmployeeController extends Controller{
         ]);
     }
 
+    // public function index() {
+    //     $all_employees = Employee::get();
+    //     dd($all_employees);
+    // }
+
     public function properties_assigned(Request $request) {
         $countries = Country::all();
         $get_property_id = Property_Employee::where('employee_id',auth($request->segment('1'))->user()->id)->get();
