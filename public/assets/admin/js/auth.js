@@ -3,6 +3,8 @@ $(document).on('change',"#image",function() {
 })
 $(document).ready(function () {
     'use strict';
+
+    
     $("#loginFrm").validate({
         errorElement: 'span',
         rules: {
@@ -22,6 +24,23 @@ $(document).ready(function () {
         }
     });
 
+    $('#dropDown').on('change', function() {
+        if(this.value == 'Admin'){
+            return $('#loginFrm').attr('action','/admin/login');           
+        }
+        if(this.value == 'Employee'){
+            var emp = '/employee/login';
+            return $('#loginFrm').attr('action',emp);           
+        }
+        if(this.value == 'Developer'){
+        
+        }
+        if(this.value == 'Agency'){
+            // window.location.href = '/agency/login';
+        }
+    });
+
+    
     $("#changeFrm").validate({
         errorElement: 'span',
         rules: {
@@ -120,5 +139,4 @@ $(document).ready(function () {
             email: "Please enter a valid email address"
         }
     });
-
 });

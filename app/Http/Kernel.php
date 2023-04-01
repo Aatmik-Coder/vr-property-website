@@ -64,5 +64,15 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\Admin::class,
+        'developer' => \App\Http\Middleware\Developer::class,
+        'agency' => \App\Http\Middleware\Agency::class,
+        'employee' => \App\Http\Middleware\Employee::class,
     ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->call(function () {
+            Virtual_Meeting::where('expiry_time','<',now())->delete();
+        })->everyMinute();
+    }
 }

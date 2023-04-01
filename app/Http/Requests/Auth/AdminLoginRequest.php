@@ -53,6 +53,14 @@ class AdminLoginRequest extends FormRequest
             ]);
         }
 
+        // if(! Auth::guard('developer')->attempt($this->only('person_email', 'person_password'), $this->boolean('remember'))){
+        //     RateLimiter::hit($this->throttleKey());
+
+        //     throw ValidationException::withMessages([
+        //         'person_email' => __('auth.failed'),
+        //     ]);
+        // }
+
         RateLimiter::clear($this->throttleKey());
     }
 

@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     $('#role_id').on('change', function() {
         let roleName = $(this).find(':selected').text();
-        if(roleName != 'Super Admin' && roleName != 'Select') {
+        if(roleName != 'Super Admin' && roleName != 'Select' && roleName != 'Employee') {
             $('#type_name').children('label').remove();
             $('#type_name').children('div').remove();
             $('#type_name').append(`
@@ -44,7 +44,7 @@ function data_table()
             {data: 'person_name',name: 'person_name'},
             {data: 'person_email',name: 'person_email'},
             {data: 'person_mobile_number',name: 'person_mobile_number'},
-            // {data: 'action',name: 'action',orderable: false},
+            {data: 'action',name: 'action',orderable: false},
         ],
         
 

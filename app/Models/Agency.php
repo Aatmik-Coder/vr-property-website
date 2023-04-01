@@ -4,15 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Storage;
 
-class Agency extends Model
+class Agency extends Authenticatable
 {
     use HasFactory;
+
+    protected $guard = 'agency';
+
+    public function getAuthPassword()
+    {
+        return $this->person_password;
+    }
 
     protected $fillable = [
         'agency_name',
         'person_name',
         'person_email',
+        'person_password',
         'person_phone_number',
         'address',
         'country_id',

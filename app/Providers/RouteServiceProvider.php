@@ -19,6 +19,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/dashboard';
     public const ADMIN_HOME = '/admin/dashboard';
+    public const DEVELOPER_HOME = '/developer/dashboard';
+    public const AGENCY_HOME = '/agency/dashboard';
+    public const EMPLOYEE_HOME = '/employee/dashboard';
 
     protected $namespace = 'App\\Http\\Controllers';
 

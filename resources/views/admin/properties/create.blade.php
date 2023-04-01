@@ -12,7 +12,8 @@
                                 margin-right: 5px;
                             }
                         </style>
-                        <form action="{!! route('admin.properties.store') !!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                        {{-- <p>{!! Request::segment(1) !!}</p> --}}
+                        <form action="{!! route(Request::segment(1).'.properties.store') !!}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Country</label>
@@ -90,7 +91,7 @@
                             <div class="form-group row mb-3">
                                 <label class="col-sm-3 form-control-label">Image</label>
                                 <div class="col-sm-5">
-                                    <input type="file" name="image_name" class="form-control">
+                                    <input type="file" name="image_name[]" class="form-control" multiple>
                                 </div>
                             </div>
                             <div class="line"> </div>

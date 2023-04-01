@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+    
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <link rel="stylesheet" href="{{ asset('assets/common/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css') }}?v={{time()}}" id="theme-stylesheet">
+    
     {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css') }}" --}}
 
     <!-- Tweaks for older IEs-->
@@ -26,7 +27,7 @@
 
 <body>
     <div class="loader" style="display:none"><span class="loader-image"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></span></div>
-    @if(auth('admin')->check())
+    @if(auth(Request::segment(1))->check())
     <div class="page">
         <!-- Main Navbar-->
         <header class="header">
@@ -46,7 +47,7 @@
                                 </div>
                             </a>
                             <div>
-                                <img src="{{ auth('admin')->user()->avatar_url }}" class="user-img" />
+                                {{-- <img src="{{ auth('admin')->user()->avatar_url }}" class="user-img" /> --}}
                                 <a id="toggle-btn" href="#" class="menu-btn">
                                     <img src="{{ asset('assets/common/images/menu-icon.png') }}" class="menu-icon" />
                                 </a>
@@ -74,7 +75,7 @@
                                 <a href="#" onclick="logout()" class="nav-link logout">
                                 <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a>
                             </li>
-                            <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route(Request::segment(1).'.logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                         </ul>
@@ -112,12 +113,12 @@
     @yield('content')
     @endif
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/common/js/all.js') }}"></script>
     
+    <script src="{{ asset('assets/common/js/all.js') }}"></script>
     <!-- Main File-->
     <script>
     var _token = $("input[name='_token']").val();
-    var baseUrl = "{{ url('admin').'/' }}";
+    var baseUrl = "{{ url(Request::segment(1)).'/' }}";
     var emsg = "";
     var ecls = "success";
     @if(session('message') || session('status'))

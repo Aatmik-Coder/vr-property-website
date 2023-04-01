@@ -3863,12 +3863,12 @@ input[type='checkbox'] {
   height: 100%;
 }
 
-.form-check-label{
+.form-check-label {
   display: block;
-    min-height: 1.5rem;
-    padding-left: 1.5em;
-    margin-bottom: 0.125rem;
-    position: relative;
+  min-height: 1.5rem;
+  padding-left: 1.5em;
+  margin-bottom: 0.125rem;
+  position: relative;
 }
 
 input[type='checkbox']:checked+span::after {
@@ -4236,4 +4236,12 @@ div.jqi .jqititle {
   border-width: 0 0 2px 0;
   border-color: var(--theme-color);
   border-radius: 0;
+}
+
+.dropDown {
+  width: 100%;
+  border: 1px solid var(--theme-color);
+  padding: 7px;
+  margin: 0;
+  border-radius: 5px;
 }

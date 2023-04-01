@@ -373,7 +373,7 @@ function logout() {
                         console.log(data);
                         if (data.success == "1") {
                             event.preventDefault();
-                            document.getElementById('admin-logout-form').submit();
+                            document.getElementById('logout-form').submit();
                             location.reload();
                         } else {
                             location.reload();

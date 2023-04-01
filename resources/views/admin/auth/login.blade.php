@@ -10,8 +10,18 @@
                     <div class="form d-flex align-items-center">
                         <div class="content">
                             <h1 class="mb-5">Login</h1>
-                            <form id="loginFrm" name="loginFrm" method="POST" action="{{ route('admin.login') }}">
+                            <form id="loginFrm" name="loginFrm" method="POST" action="">
                                 @csrf
+                                <div class="form-group">
+                                    <label for="dropDown" class="label-material">{{ __('Login as') }}</label>
+                                    <select name="dropDown" id="dropDown" @error('email') is-invalid @enderror" class="form-control dropDown">
+                                        <option value="">Select Login</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="Developer">Developer</option>
+                                        <option value="Agency">Agency</option>
+                                        <option value="Employee">Employee</option>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="email" class="label-material">{{ __('E-Mail Address') }}</label>
                                     <input id="email" type="email"
