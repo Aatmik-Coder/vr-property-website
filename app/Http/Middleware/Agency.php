@@ -8,7 +8,7 @@ use Auth;
 class Agency{
     public function handle(Request $request, Closure $next) {
         if(!Auth::guard('agency')->check()) {
-            return redirect()->route('agency.login');
+            return redirect()->route('admin.login');
         }
         return $next($request);
     }

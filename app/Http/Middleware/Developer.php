@@ -17,7 +17,7 @@ class Developer
     public function handle(Request $request, Closure $next)
     {
         if(!Auth::guard('developer')->check()) {
-            return redirect()->route('developer.login');
+            return redirect()->route('admin.login');
         }
         return $next($request);
     }

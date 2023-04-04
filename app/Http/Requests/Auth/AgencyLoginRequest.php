@@ -16,15 +16,16 @@ class AgencyLoginRequest extends FormRequest {
 
     public function rules() {
         return [
-            'person_email' => ['required','string','email'],
-            'person_password' => ['required','string']
+            'email' => ['required','string','email'],
+            'password' => ['required','string']
         ];
     }
 
     public function authenticate() {
+        info('this is the agency authenticate');
         $this->ensureIsNotRateLimited();
 
-        if(!Auth::guard('agency')->attempt(['person_email'=>$this->input('person_email'), 'password'=>$this->input('person_password')], $this->boolean('remember'))) {
+        if(!Auth::guard('agency')->attempt(['person_email'=>$this->input('email'), 'password'=>$this->input('password')], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
             
             throw ValidationException::withMessages([
