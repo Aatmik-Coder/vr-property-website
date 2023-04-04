@@ -29,14 +29,13 @@ $(document).ready(function () {
             return $('#loginFrm').attr('action','/admin/login');           
         }
         if(this.value == 'Employee'){
-            var emp = '/employee/login';
-            return $('#loginFrm').attr('action',emp);           
+            return $('#loginFrm').attr('action','/employee/login');           
         }
         if(this.value == 'Developer'){
-        
+            return $('#loginFrm').attr('action','/developer/login');           
         }
         if(this.value == 'Agency'){
-            // window.location.href = '/agency/login';
+            return $('#loginFrm').attr('action','/agency/login');           
         }
     });
 

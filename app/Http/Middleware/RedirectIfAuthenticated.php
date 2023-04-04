@@ -22,16 +22,20 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
+            info("this is the check ".Auth::guard($guard)->check());
+            info($guard);
             if (Auth::guard($guard)->check()) {
+                if($guard == 'employee') {
+                    return redirect(RouteServiceProvider::EMPLOYEE_HOME);
+                }
                 if($guard == "admin") {
                     return redirect(RouteServiceProvider::ADMIN_HOME);
                 }
-                else if($guard == 'developer') {
+                if($guard == 'developer') {
                     return redirect(RouteServiceProvider::DEVELOPER_HOME);
-                } else if($guard == 'agency') {
+                } 
+                if($guard == 'agency') {
                     return redirect(RouteServiceProvider::AGENCY_HOME);
-                } else if($guard == 'employee') {
-                    return redirect(RouteServiceProvider::EMPLOYEE_HOME);
                 }
                 return redirect(RouteServiceProvider::HOME);
             }

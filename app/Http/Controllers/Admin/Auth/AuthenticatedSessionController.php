@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthenticatedSessionController extends Controller
 {
     public function __construct(Request $request) {
+        // dd($request);
         $this->request = $request;
     }
     /**
@@ -43,12 +44,14 @@ class AuthenticatedSessionController extends Controller
     public function employeeCreate(): View
     {
         $title = 'Admin Employee Login';
-        return view('admin.auth.employee-login', compact('title'));
+        return view('admin.auth.login', compact('title'));
     }
 
     protected function guard()
     {
+        // info($this->request->segment(1));
         if($this->request->segment(1) == 'admin') {
+            info('admin');
             return Auth::guard('admin');
         }
         if($this->request->segment(1) == 'developer'){
@@ -58,6 +61,7 @@ class AuthenticatedSessionController extends Controller
             return Auth::guard('agency');
         }
         if($this->request->segment(1) == 'employee') {
+            info('this will return employee guard');
             return Auth::guard('employee');
         }
     }
@@ -67,7 +71,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(AdminLoginRequest $request): RedirectResponse
     {
-        // dd($request->session());
+        info("admin");
         $request->authenticate();
         $user = auth('admin')->user();
         // $developer = auth('developer')->user();
@@ -99,6 +103,7 @@ class AuthenticatedSessionController extends Controller
 
     public function developerStore(DeveloperLoginRequest $request): RedirectResponse
     {
+        info("developer");
         $request->authenticate();
         $developer = auth('developer')->user();
 
@@ -109,6 +114,7 @@ class AuthenticatedSessionController extends Controller
 
     public function agencyStore(AgencyLoginRequest $request): RedirectResponse
     {
+        info("agency");
         $request->authenticate();
         $agency = auth('agency')->user();
         $request->session()->regenerate();
@@ -118,6 +124,7 @@ class AuthenticatedSessionController extends Controller
 
     public function employeeStore(EmployeeLoginRequest $request): RedirectResponse
     {
+        info("employee");
         $request->authenticate();
         $employee = auth('employee')->user();
         $request->session()->regenerate();
@@ -130,17 +137,21 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $this->guard()->logout();
+        info('logout');
+        info($request->session()->all());
         foreach (array_keys($request->session()->all()) as $key) {
-            
+            info($key);
+            info(strpos($key, 'login_$request->segment(1)_'));
             //If the key is found in your string, set $found to true
             if (strpos($key, 'login_$request->segment(1)_') !== false) {
                 $request->session($key)->forget();
                 break;
             }
+            info('ended');
         }
 
         $request->session()->regenerateToken();
-
-        return redirect()->to(RouteServiceProvider::ADMIN_HOME);
+        info('return back');
+        return redirect('/admin/login');
     }
 }

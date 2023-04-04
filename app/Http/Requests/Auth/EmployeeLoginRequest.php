@@ -16,16 +16,17 @@ class EmployeeLoginRequest extends FormRequest {
 
     public function rules() {
         return [
-            'person_email' => ['required','string','email'],
-            'person_password' => ['required','string']
+            'email' => ['required','string','email'],
+            'password' => ['required','string']
         ];
     }
 
     public function authenticate() {
 
+        info('this is the employee authenticate');
         $this->ensureIsNotRateLimited();
-        if(!Auth::guard('employee')->attempt($this->only('person_email','person_password'), $this->boolean('remember'))) {
-        // if(!Auth::guard('employee')->attempt(['person_email'=>$this->input('email'), 'password'=>$this->input('password')], $this->boolean('remember'))) {
+        // if(!Auth::guard('employee')->attempt($this->only('person_email','person_password'), $this->boolean('remember'))) {
+        if(!Auth::guard('employee')->attempt(['person_email'=>$this->input('email'), 'password'=>$this->input('password')], $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

@@ -48,9 +48,14 @@ Route::namespace('App\Http\Controllers')->group(function() {
     });
 });
 
-
-
 require __DIR__.'/auth.php';
+
+// Route::namespace('App\Http\Controllers\Admin\Auth')->middleware('guest')->group(function(){
+//     //Login Routes
+//     Route::get('/admin/login','AuthenticatedSessionController@create')->name('login');
+//     Route::post('/admin/login','AuthenticatedSessionController@store');
+// });
+
 
 Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')->group(function() {
     Route::get('/',function () {
@@ -59,8 +64,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin.')-
 
     Route::namespace('Auth')->middleware('guest:admin')->group(function(){
         //Login Routes
-        Route::get('/login','AuthenticatedSessionController@create')->name('login');
-        Route::post('/login','AuthenticatedSessionController@store');
+    Route::get('/login','AuthenticatedSessionController@create')->name('login');
+    Route::post('/login','AuthenticatedSessionController@store');
 
         //Forgot Password Routes
         Route::get('/forgot-password', 'PasswordResetLinkController@create')->name('password.request');
@@ -117,8 +122,8 @@ Route::prefix('developer')->namespace('App\Http\Controllers\Admin')->name('devel
     })->name('home');
 
     Route::namespace('Auth')->middleware('guest:developer')->group(function(){
-        Route::get('/login','AuthenticatedSessionController@developerCreate')->name('login');
-        Route::post('/login','AuthenticatedSessionController@developerStore');
+        // Route::get('/login','AuthenticatedSessionController@developerCreate');
+        Route::post('/login','AuthenticatedSessionController@developerStore')->name('login');
     });
 
     Route::middleware('developer')->group(function () {
@@ -154,8 +159,8 @@ Route::prefix('agency')->namespace('App\Http\Controllers\Admin')->name('agency.'
     })->name('home');
 
     Route::namespace('Auth')->middleware('guest:agency')->group(function(){
-        Route::get('/login','AuthenticatedSessionController@agencyCreate')->name('login');
-        Route::post('/login','AuthenticatedSessionController@agencyStore');
+        // Route::get('/login','AuthenticatedSessionController@agencyCreate');
+        Route::post('/login','AuthenticatedSessionController@agencyStore')->name('login');
     });
 
     Route::middleware('agency')->group(function () {
@@ -182,8 +187,8 @@ Route::prefix('employee')->namespace('App\Http\Controllers\Admin')->name('employ
     })->name('home');
     
     Route::namespace('Auth')->middleware('guest:employee')->group(function(){
-        Route::get('/login','AuthenticatedSessionController@employeeCreate')->name('login');
-        Route::post('/login','AuthenticatedSessionController@employeeStore');
+        // Route::get('/login','AuthenticatedSessionController@employeeCreate')->name('login');
+        Route::post('/login','AuthenticatedSessionController@employeeStore')->name('login');
     }); 
 
 
